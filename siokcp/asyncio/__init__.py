@@ -1,4 +1,2 @@
 # -*- coding: utf-8 -*-
-"""
-Copyright (c) 2008-2024 synodriver <diguohuangjiajinweijun@gmail.com>
-"""
+from siokcp.asyncio.server import create_kcp_server, start_kcp_server

@@ -1,16 +1,24 @@
 # -*- coding: utf-8 -*-
 import asyncio
+import time
 from functools import partial
-from typing import Any, Awaitable, Callable, Dict, Optional, Tuple, Union
+from typing import Any, Awaitable, Callable, Dict, Optional, Set, Tuple, Union
 
 from siokcp._kcp import KCPConnection, getconv
 from siokcp.asyncio.transport import KCPTransport
 from siokcp.asyncio.utils import feed_protocol
 
 
-# todo updater: 定期调用connection.check 和 connection.update, 把state==-1的kcptransport关闭，掉用他们的protocol.connection_lost，从kcp_transports中删除
-class BaseKCPUDPServerProtocol(asyncio.DatagramProtocol):
-    def __init__(self, protocol_factory, log: Callable[[str], Any], loop=None):
+# todo updater: 定期调用connection.check 和 connection.update,
+# 把state==-1的kcptransport关闭，掉用他们的protocol.connection_lost，从kcp_transports中删除
+# 一段时间没活动的connection也需要删除
+class KCPUDPServerProtocol(asyncio.DatagramProtocol):
+    def __init__(
+        self,
+        protocol_factory: Callable[[], asyncio.Protocol],
+        log: Callable[[str], Any],
+        loop: Optional[asyncio.AbstractEventLoop] = None,
+    ):
         self.protocol_factory = protocol_factory
         self.kcp_transports = {}  # type: Dict[int, KCPTransport]
         self._log = log
@@ -18,6 +26,7 @@ class BaseKCPUDPServerProtocol(asyncio.DatagramProtocol):
         self._close_waiter = self._loop.create_future()
         self._drain_waiter = asyncio.Event()
         self._drain_waiter.set()
+        self._update_tasks = set()  # type: Set[asyncio.Task]
 
     def connection_made(self, transport: asyncio.DatagramTransport) -> None:
         self.transport = transport
@@ -62,6 +71,10 @@ class BaseKCPUDPServerProtocol(asyncio.DatagramProtocol):
                 connection, self.transport, protocol, self._loop
             )  # 虚拟层 会调用protocol.connection_made
             self.kcp_transports[conv] = kcp_transport
+            # looping update connection
+            task = self._loop.create_task(self._update(kcp_transport))
+            self._update_tasks.add(task)  # keep a strong ref
+            task.add_done_callback(self._update_tasks.discard)
         else:
             kcp_transport = self.kcp_transports[conv]
             if kcp_transport.read_paused:
@@ -95,6 +108,16 @@ class BaseKCPUDPServerProtocol(asyncio.DatagramProtocol):
     def _send(self, data: bytes, addr):
         self.transport.sendto(data, addr)
 
+    async def _update(self, transport: KCPTransport):
+        connection = transport.connection
+        while connection.state != -1:
+            now = time.perf_counter_ns() // 1000000  # ms
+            connection.update(now)
+            next_call = connection.check(now)
+            await asyncio.sleep((next_call - now) / 1000)
+        transport.get_protocol().connection_lost(None)
+        del self.kcp_transports[connection.conv]
+
     # async def send(self, conv: int, data: bytes):
     #     kcp_transport = self.kcp_transports.get(conv, None)
     #     if kcp_transport is None:
@@ -117,22 +140,20 @@ async def create_kcp_server(
     family: int = 0,
     proto: int = 0,
     flags: int = 0,
-    reuse_address: Optional[bool] = None,
     reuse_port: Optional[bool] = None,
     allow_broadcast: Optional[bool] = None,
     sock=None,
 ):
-    await loop.create_datagram_endpoint(
-        lambda: BaseKCPUDPServerProtocol(protocol_factory, log, loop),
+    return await loop.create_datagram_endpoint(
+        lambda: KCPUDPServerProtocol(protocol_factory, log, loop),
         local_addr,
         remote_addr,
-        family,
-        proto,
-        flags,
-        reuse_address,
-        reuse_port,
-        allow_broadcast,
-        sock,
+        family=family,
+        proto=proto,
+        flags=flags,
+        reuse_port=reuse_port,
+        allow_broadcast=allow_broadcast,
+        sock=sock,
     )
 
 
