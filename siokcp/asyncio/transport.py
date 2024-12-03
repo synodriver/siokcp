@@ -15,10 +15,12 @@ class KCPTransport(asyncio.Transport):
         loop=None,
     ):
         self.connection = connection
+        self.read_paused = False
         self._transport = transport
         self._loop = loop or asyncio.get_running_loop()
         self._protocol = protocol
         self._loop.call_soon(self._protocol.connection_made, self)
+        # 用call_soon是防止connection_made中调用了transport.pause_reading，无论如何先把这次数据读了再说
         self._closing = False
 
     def __getattr__(self, item):
@@ -28,16 +30,10 @@ class KCPTransport(asyncio.Transport):
         return True
 
     def pause_reading(self):
-        try:
-            self._transport.pause_reading()
-        except AttributeError:
-            pass
+        self.read_paused = True
 
     def resume_reading(self):
-        try:
-            self._transport.resume_reading()
-        except AttributeError:
-            pass
+        self.read_paused = False
 
     def set_write_buffer_limits(self, high=None, low=None):
         pass  # todo self.connection.wndsize
@@ -47,6 +43,7 @@ class KCPTransport(asyncio.Transport):
 
     def write(self, data):
         self.connection.send(data)
+        self.connection.flush()
 
     def writelines(self, list_of_data):
         data = b"".join(list_of_data)

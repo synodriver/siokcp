@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 import asyncio
 from functools import partial
-from typing import Any, Callable, Dict, Optional
+from typing import Any, Awaitable, Callable, Dict, Optional, Tuple, Union
 
 from siokcp._kcp import KCPConnection, getconv
 from siokcp.asyncio.transport import KCPTransport
+from siokcp.asyncio.utils import feed_protocol
+
 
 # todo updater: 定期调用connection.check 和 connection.update, 把state==-1的kcptransport关闭，掉用他们的protocol.connection_lost，从kcp_transports中删除
-class BaseKCPServerProtocol(asyncio.DatagramProtocol):
+class BaseKCPUDPServerProtocol(asyncio.DatagramProtocol):
     def __init__(self, protocol_factory, log: Callable[[str], Any], loop=None):
         self.protocol_factory = protocol_factory
         self.kcp_transports = {}  # type: Dict[int, KCPTransport]
@@ -35,6 +37,8 @@ class BaseKCPServerProtocol(asyncio.DatagramProtocol):
             self.transport.pause_reading()
         except AttributeError:
             pass
+        for kcp_transport in self.kcp_transports.values():
+            kcp_transport.get_protocol().pause_writing()
         self._drain_waiter.clear()
 
     def resume_writing(self) -> None:
@@ -42,6 +46,8 @@ class BaseKCPServerProtocol(asyncio.DatagramProtocol):
             self.transport.resume_reading()
         except AttributeError:
             pass
+        for kcp_transport in self.kcp_transports.values():
+            kcp_transport.get_protocol().resume_writing()
         self._drain_waiter.set()
 
     def datagram_received(self, data: bytes, addr):
@@ -51,39 +57,33 @@ class BaseKCPServerProtocol(asyncio.DatagramProtocol):
             protocol = (
                 self.protocol_factory()
             )  # 对于每个新虚拟连接 调用一次protocol_factory
-
             connection = KCPConnection(conv, partial(self._send, addr=addr), self._log)
             kcp_transport = KCPTransport(
                 connection, self.transport, protocol, self._loop
-            )  # 虚拟层
+            )  # 虚拟层 会调用protocol.connection_made
             self.kcp_transports[conv] = kcp_transport
-
-            connection.receive_data(data)
-            packet: bytes = connection.next_event()
-            connection.flush()
-
-            protocol.data_received(packet)
         else:
             kcp_transport = self.kcp_transports[conv]
+            if kcp_transport.read_paused:
+                return
             protocol = kcp_transport.get_protocol()
-            kcp_transport.connection.receive_data(data)
-            packet: bytes = kcp_transport.connection.next_event()
-            kcp_transport.connection.flush()
-            protocol.data_received(packet)
-        # kcp_transport._connection.receive_data(data)
-        # packet: bytes = kcp_transport._connection.next_event()
-        # kcp_transport._connection.flush()
-        # self.packet_received(conv, packet)
+            connection = kcp_transport.connection
+        connection.receive_data(data)
+        self._loop.call_soon(feed_protocol, protocol, connection)
+        # 同样call_soon，保证先connection_made再data_received，事关asyncio状态机，顺序很重要
 
     def error_received(self, exc):
         """Called when a send or receive operation raises an OSError.
 
         (Other than BlockingIOError or InterruptedError.)
         """
-        # todo close all connections
+        for kcp_transport in self.kcp_transports.values():
+            con = kcp_transport.connection
+            con.log(con.logmask, f"error_received: {exc}")
+        # todo should we close all virtual connections?
 
     async def aclose(self):
-        for conv, kcp_transport in self.kcp_transports.items():
+        for kcp_transport in self.kcp_transports.values():
             kcp_transport.close()
         await self.drain()
         self.transport.close()
@@ -95,35 +95,35 @@ class BaseKCPServerProtocol(asyncio.DatagramProtocol):
     def _send(self, data: bytes, addr):
         self.transport.sendto(data, addr)
 
-    async def send(self, conv: int, data: bytes):
-        kcp_transport = self.kcp_transports.get(conv, None)
-        if kcp_transport is None:
-            raise ValueError(f"connection {conv} not found")
-        kcp_transport.connection.send(data)
-        kcp_transport.connection.flush()
-        await self.drain()
+    # async def send(self, conv: int, data: bytes):
+    #     kcp_transport = self.kcp_transports.get(conv, None)
+    #     if kcp_transport is None:
+    #         raise ValueError(f"connection {conv} not found")
+    #     kcp_transport.connection.send(data)
+    #     kcp_transport.connection.flush()
+    #     await self.drain()
 
 
 _DEFAULT_LIMIT = 2**16  # 64 KiB
 
 
 async def create_kcp_server(
-    loop,
-    protocol_factory,
-    local_addr,
+    loop: asyncio.AbstractEventLoop,
+    protocol_factory: Callable[[], asyncio.Protocol],
+    local_addr: Optional[Union[Tuple[str, int], str]],
     log: Callable[[str], Any],
-    remote_addr: tuple[str, int] | str | None = None,
+    remote_addr: Optional[Union[Tuple[str, int], str]] = None,
     *,
     family: int = 0,
     proto: int = 0,
     flags: int = 0,
-    reuse_address: bool | None = None,
-    reuse_port: bool | None = None,
-    allow_broadcast: bool | None = None,
+    reuse_address: Optional[bool] = None,
+    reuse_port: Optional[bool] = None,
+    allow_broadcast: Optional[bool] = None,
     sock=None,
 ):
     await loop.create_datagram_endpoint(
-        lambda: BaseKCPServerProtocol(protocol_factory, log, loop),
+        lambda: BaseKCPUDPServerProtocol(protocol_factory, log, loop),
         local_addr,
         remote_addr,
         family,
@@ -137,7 +137,14 @@ async def create_kcp_server(
 
 
 async def start_kcp_server(
-    client_connected_cb, local_addr, log: Callable[[str], Any], *, limit=_DEFAULT_LIMIT, **kwds
+    client_connected_cb: Callable[
+        [asyncio.StreamReader, asyncio.StreamWriter], Union[Any, Awaitable[Any]]
+    ],
+    local_addr: Optional[Union[Tuple[str, int], str]],
+    log: Callable[[str], Any],
+    *,
+    limit: int = _DEFAULT_LIMIT,
+    **kwds,
 ):
     loop = asyncio.get_running_loop()
 
