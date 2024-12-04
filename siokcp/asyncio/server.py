@@ -17,11 +17,20 @@ class KCPUDPServerProtocol(asyncio.DatagramProtocol):
         self,
         protocol_factory: Callable[[], asyncio.Protocol],
         log: Callable[[str], Any],
+        pre_processor: Optional[Callable[[bytes], Tuple[int, bytes]]] = None,
+        post_processor: Optional[Callable[[bytes], bytes]] = None,
         loop: Optional[asyncio.AbstractEventLoop] = None,
     ):
         self.protocol_factory = protocol_factory
         self.kcp_transports = {}  # type: Dict[int, KCPTransport]
         self._log = log
+        if pre_processor is None:
+            self._pre_processor = lambda data: (getconv(data), data)
+        else:
+            self._pre_processor = (
+                pre_processor
+            )  # type: Callable[[bytes], Tuple[int, bytes]]
+        self._post_processor = post_processor  # type: Callable[[bytes], bytes]
         self._loop = loop or asyncio.get_running_loop()
         self._close_waiter = self._loop.create_future()
         self._drain_waiter = asyncio.Event()
@@ -61,7 +70,9 @@ class KCPUDPServerProtocol(asyncio.DatagramProtocol):
 
     def datagram_received(self, data: bytes, addr):
         """Called when some datagram is received."""
-        conv: int = getconv(data)
+        conv, data = self._pre_processor(data)
+        if conv is None:
+            return
         if conv not in self.kcp_transports:
             protocol = (
                 self.protocol_factory()
@@ -106,6 +117,8 @@ class KCPUDPServerProtocol(asyncio.DatagramProtocol):
         await self._drain_waiter.wait()
 
     def _send(self, data: bytes, addr):
+        if self._post_processor is not None:
+            data = self._post_processor(data)
         self.transport.sendto(data, addr)
 
     async def _update(self, transport: KCPTransport):
@@ -135,6 +148,8 @@ async def create_kcp_server(
     protocol_factory: Callable[[], asyncio.Protocol],
     local_addr: Optional[Union[Tuple[str, int], str]],
     log: Callable[[str], Any],
+    pre_processor: Optional[Callable[[bytes], Tuple[int, bytes]]] = None,
+    post_processor: Optional[Callable[[bytes], bytes]] = None,
     remote_addr: Optional[Union[Tuple[str, int], str]] = None,
     *,
     family: int = 0,
@@ -145,7 +160,9 @@ async def create_kcp_server(
     sock=None,
 ):
     return await loop.create_datagram_endpoint(
-        lambda: KCPUDPServerProtocol(protocol_factory, log, loop),
+        lambda: KCPUDPServerProtocol(
+            protocol_factory, log, pre_processor, post_processor, loop
+        ),
         local_addr,
         remote_addr,
         family=family,
@@ -163,6 +180,8 @@ async def start_kcp_server(
     ],
     local_addr: Optional[Union[Tuple[str, int], str]],
     log: Callable[[str], Any],
+    pre_processor: Optional[Callable[[bytes], Tuple[int, bytes]]] = None,
+    post_processor: Optional[Callable[[bytes], bytes]] = None,
     *,
     limit: int = _DEFAULT_LIMIT,
     **kwds,
@@ -174,4 +193,6 @@ async def start_kcp_server(
         protocol = asyncio.StreamReaderProtocol(reader, client_connected_cb, loop=loop)
         return protocol
 
-    return await create_kcp_server(loop, factory, local_addr, log, **kwds)
+    return await create_kcp_server(
+        loop, factory, local_addr, log, pre_processor, post_processor, **kwds
+    )
