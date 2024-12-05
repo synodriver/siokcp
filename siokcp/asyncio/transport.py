@@ -4,7 +4,7 @@ import asyncio
 from siokcp._kcp import KCPConnection
 
 
-class KCPTransport(asyncio.Transport):
+class KCPTransport(asyncio.transports._FlowControlMixin):
     """Virtual transport based on KCPConnection."""
 
     def __init__(
@@ -14,13 +14,13 @@ class KCPTransport(asyncio.Transport):
         protocol,
         loop=None,
     ):
+        super().__init__(None, loop or asyncio.get_running_loop())
         self.connection = connection
         self.read_paused = False
         self._transport = transport
-        self._loop = loop or asyncio.get_running_loop()
         self._protocol = protocol
         self._loop.call_soon(self._protocol.connection_made, self)
-        # 用call_soon是防止connection_made中调用了transport.pause_reading，无论如何先把这次数据读了再说
+        # 用call_soon是防止connection_made中调用了transport.pause_reading，无论如何先把这次数据读了再说，而且transport还没准备好
         self._closing = False
 
     def __getattr__(self, item):
@@ -35,15 +35,13 @@ class KCPTransport(asyncio.Transport):
     def resume_reading(self):
         self.read_paused = False
 
-    def set_write_buffer_limits(self, high=None, low=None):
-        pass  # todo self.connection.wndsize
-
-    def get_write_buffer_size(self):
-        return 0  # todo self.connection.wndsize
-
     def write(self, data):
         self.connection.send(data)
-        self.connection.flush()
+        self._maybe_pause_protocol()
+        # 此处可以检查connection的阻塞状态  调用protocol.pause_writing
+
+    def get_write_buffer_size(self):
+        return self.connection.waitsnd()  # todo 是你吗
 
     def writelines(self, list_of_data):
         data = b"".join(list_of_data)

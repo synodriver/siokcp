@@ -110,3 +110,16 @@ cdef extern from "ikcp.h" nogil:
 
     # read conv
     uint32_t ikcp_getconv(const void *ptr)
+
+    int IKCP_LOG_OUTPUT_C         "IKCP_LOG_OUTPUT"
+    int IKCP_LOG_INPUT_C         "IKCP_LOG_INPUT"
+    int IKCP_LOG_SEND_C           "IKCP_LOG_SEND"
+    int IKCP_LOG_RECV_C           "IKCP_LOG_RECV"
+    int IKCP_LOG_IN_DATA_C        "IKCP_LOG_IN_DATA"
+    int IKCP_LOG_IN_ACK_C         "IKCP_LOG_IN_ACK"
+    int IKCP_LOG_IN_PROBE_C       "IKCP_LOG_IN_PROBE"
+    int IKCP_LOG_IN_WINS_C        "IKCP_LOG_IN_WINS"
+    int IKCP_LOG_OUT_DATA_C       "IKCP_LOG_OUT_DATA"
+    int IKCP_LOG_OUT_ACK_C        "IKCP_LOG_OUT_ACK"
+    int IKCP_LOG_OUT_PROBE_C      "IKCP_LOG_OUT_PROBE"
+    int IKCP_LOG_OUT_WINS_C       "IKCP_LOG_OUT_WINS"

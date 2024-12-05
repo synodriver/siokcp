@@ -1435,7 +1435,7 @@ struct __pyx_MemviewEnum_obj;
 struct __pyx_memoryview_obj;
 struct __pyx_memoryviewslice_obj;
 
-/* "siokcp/_kcp.pyx":24
+/* "siokcp/_kcp.pyx":44
  *     con.log_cb(data)
  * 
  * @cython.no_gc             # <<<<<<<<<<<<<<
@@ -1528,7 +1528,7 @@ struct __pyx_memoryviewslice_obj {
 
 
 
-/* "siokcp/_kcp.pyx":24
+/* "siokcp/_kcp.pyx":44
  *     con.log_cb(data)
  * 
  * @cython.no_gc             # <<<<<<<<<<<<<<
@@ -2507,12 +2507,6 @@ static CYTHON_INLINE int __pyx_sub_acquisition_count_locked(
 static CYTHON_INLINE void __Pyx_INC_MEMVIEW(__Pyx_memviewslice *, int, int);
 static CYTHON_INLINE void __Pyx_XCLEAR_MEMVIEW(__Pyx_memviewslice *, int, int);
 
-/* CIntFromPy.proto */
-static CYTHON_INLINE uint32_t __Pyx_PyLong_As_uint32_t(PyObject *);
-
-/* CIntFromPy.proto */
-static CYTHON_INLINE int __Pyx_PyLong_As_int(PyObject *);
-
 /* PyObjectVectorCallKwBuilder.proto */
 CYTHON_UNUSED static int __Pyx_VectorcallBuilder_AddArg_Check(PyObject *key, PyObject *value, PyObject *builder, PyObject **args, int n);
 #if CYTHON_VECTORCALL
@@ -2532,10 +2526,16 @@ static int __Pyx_VectorcallBuilder_AddArgStr(const char *key, PyObject *value, P
 #endif
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyLong_From_uint32_t(uint32_t value);
+static CYTHON_INLINE PyObject* __Pyx_PyLong_From_int(int value);
+
+/* CIntFromPy.proto */
+static CYTHON_INLINE uint32_t __Pyx_PyLong_As_uint32_t(PyObject *);
+
+/* CIntFromPy.proto */
+static CYTHON_INLINE int __Pyx_PyLong_As_int(PyObject *);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyLong_From_int(int value);
+static CYTHON_INLINE PyObject* __Pyx_PyLong_From_uint32_t(uint32_t value);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE long __Pyx_PyLong_As_long(PyObject *);
@@ -2794,7 +2794,7 @@ static const char __pyx_k_send_cb[] = "send_cb";
 static const char __pyx_k_waitsnd[] = "waitsnd";
 static const char __pyx_k_wndsize[] = "wndsize";
 static const char __pyx_k_Ellipsis[] = "Ellipsis";
-static const char __pyx_k_Q_l_1D_1[] = "\320\000\035\230Q\340\t\n\330\010\016\210l\230!\2301\230D\240\001\240\021\330\004\013\2101";
+static const char __pyx_k_Q_l_1D_1[] = "\320\000\035\230Q\360\014\000\n\013\330\010\016\210l\230!\2301\230D\240\001\240\021\330\004\013\2101";
 static const char __pyx_k_Sequence[] = "Sequence";
 static const char __pyx_k_add_note[] = "add_note";
 static const char __pyx_k_getstate[] = "__getstate__";
@@ -2824,14 +2824,19 @@ static const char __pyx_k_is_coroutine[] = "_is_coroutine";
 static const char __pyx_k_pyx_checksum[] = "__pyx_checksum";
 static const char __pyx_k_receive_data[] = "receive_data";
 static const char __pyx_k_stringsource[] = "<stringsource>";
+static const char __pyx_k_IKCP_LOG_RECV[] = "IKCP_LOG_RECV";
+static const char __pyx_k_IKCP_LOG_SEND[] = "IKCP_LOG_SEND";
 static const char __pyx_k_KCPConnection[] = "KCPConnection";
 static const char __pyx_k_MemoryView_of[] = "<MemoryView of ";
 static const char __pyx_k_class_getitem[] = "__class_getitem__";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
 static const char __pyx_k_A_AT_q_AT_t6_q[] = "\200A\340\r\016\330\014\022\220*\230A\230T\240\027\250\007\250q\260\004\260A\260T\270\026\270t\3006\310\021\310!\330\010\017\210q";
 static const char __pyx_k_AssertionError[] = "AssertionError";
+static const char __pyx_k_IKCP_LOG_INPUT[] = "IKCP_LOG_INPUT";
 static const char __pyx_k_kcp_send_error[] = "kcp send error: ";
 static const char __pyx_k_A_4whavQd_fAQ_q[] = "\200A\360\014\000\016\017\330\014\021\220\031\230!\2304\230w\240h\250a\250v\260Q\260d\270&\300\006\300f\310A\310Q\330\010\017\210q";
+static const char __pyx_k_IKCP_LOG_IN_ACK[] = "IKCP_LOG_IN_ACK";
+static const char __pyx_k_IKCP_LOG_OUTPUT[] = "IKCP_LOG_OUTPUT";
 static const char __pyx_k_View_MemoryView[] = "View.MemoryView";
 static const char __pyx_k_allocate_buffer[] = "allocate_buffer";
 static const char __pyx_k_collections_abc[] = "collections.abc";
@@ -2839,8 +2844,15 @@ static const char __pyx_k_dtype_is_object[] = "dtype_is_object";
 static const char __pyx_k_next_event_into[] = "next_event_into";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
 static const char __pyx_k_siokcp__kcp_pyx[] = "siokcp/_kcp.pyx";
+static const char __pyx_k_IKCP_LOG_IN_DATA[] = "IKCP_LOG_IN_DATA";
+static const char __pyx_k_IKCP_LOG_IN_WINS[] = "IKCP_LOG_IN_WINS";
+static const char __pyx_k_IKCP_LOG_OUT_ACK[] = "IKCP_LOG_OUT_ACK";
+static const char __pyx_k_IKCP_LOG_IN_PROBE[] = "IKCP_LOG_IN_PROBE";
+static const char __pyx_k_IKCP_LOG_OUT_DATA[] = "IKCP_LOG_OUT_DATA";
+static const char __pyx_k_IKCP_LOG_OUT_WINS[] = "IKCP_LOG_OUT_WINS";
 static const char __pyx_k_KCPConnection_log[] = "KCPConnection.log";
 static const char __pyx_k_pyx_unpickle_Enum[] = "__pyx_unpickle_Enum";
+static const char __pyx_k_IKCP_LOG_OUT_PROBE[] = "IKCP_LOG_OUT_PROBE";
 static const char __pyx_k_KCPConnection_send[] = "KCPConnection.send";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
@@ -2938,7 +2950,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_3mtu_2__set__(struct __pyx_obj
 static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_3mss___get__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self); /* proto */
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_3mss_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value); /* proto */
 static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_5state___get__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self); /* proto */
-static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_5state_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value); /* proto */
+static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_5state_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, int __pyx_v_value); /* proto */
 static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7snd_una___get__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self); /* proto */
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7snd_una_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value); /* proto */
 static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7snd_nxt___get__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self); /* proto */
@@ -3020,6 +3032,9 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_22wndsize(struct __pyx_o
 static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_24waitsnd(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_26nodelay(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, int __pyx_v_nodelay, int __pyx_v_interval, int __pyx_v_resend, int __pyx_v_nc); /* proto */
 static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_28log(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, int __pyx_v_mask, PyObject *__pyx_v_data); /* proto */
+static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7send_cb___get__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self); /* proto */
+static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7send_cb_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
+static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7send_cb_4__del__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_30__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_32__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_6siokcp_4_kcp_getconv(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_data); /* proto */
@@ -3080,7 +3095,7 @@ typedef struct {
   PyObject *__pyx_slice[1];
   PyObject *__pyx_tuple[8];
   PyObject *__pyx_codeobj_tab[16];
-  PyObject *__pyx_string_tab[162];
+  PyObject *__pyx_string_tab[174];
   PyObject *__pyx_int_0;
   PyObject *__pyx_int_1;
   PyObject *__pyx_int_112105877;
@@ -3136,155 +3151,167 @@ static __pyx_mstatetype *__pyx_mstate_global = &__pyx_mstate_global_static;
 #define __pyx_kp_u_Dimension_d_is_not_direct __pyx_string_tab[10]
 #define __pyx_n_u_Ellipsis __pyx_string_tab[11]
 #define __pyx_kp_u_Empty_shape_tuple_for_cython_arr __pyx_string_tab[12]
-#define __pyx_kp_u_Incompatible_checksums_0x_x_vs_0 __pyx_string_tab[13]
-#define __pyx_n_u_IndexError __pyx_string_tab[14]
-#define __pyx_kp_u_Index_out_of_bounds_axis_d __pyx_string_tab[15]
-#define __pyx_kp_u_Indirect_dimensions_not_supporte __pyx_string_tab[16]
-#define __pyx_kp_u_Invalid_mode_expected_c_or_fortr __pyx_string_tab[17]
-#define __pyx_kp_u_Invalid_shape_in_axis __pyx_string_tab[18]
-#define __pyx_n_u_KCPConnection __pyx_string_tab[19]
-#define __pyx_n_u_KCPConnection___reduce_cython __pyx_string_tab[20]
-#define __pyx_n_u_KCPConnection___setstate_cython __pyx_string_tab[21]
-#define __pyx_n_u_KCPConnection_check __pyx_string_tab[22]
-#define __pyx_n_u_KCPConnection_flush __pyx_string_tab[23]
-#define __pyx_n_u_KCPConnection_log __pyx_string_tab[24]
-#define __pyx_n_u_KCPConnection_next_event __pyx_string_tab[25]
-#define __pyx_n_u_KCPConnection_next_event_into __pyx_string_tab[26]
-#define __pyx_n_u_KCPConnection_nodelay __pyx_string_tab[27]
-#define __pyx_n_u_KCPConnection_peeksize __pyx_string_tab[28]
-#define __pyx_n_u_KCPConnection_receive_data __pyx_string_tab[29]
-#define __pyx_n_u_KCPConnection_send __pyx_string_tab[30]
-#define __pyx_n_u_KCPConnection_setmtu __pyx_string_tab[31]
-#define __pyx_n_u_KCPConnection_update __pyx_string_tab[32]
-#define __pyx_n_u_KCPConnection_waitsnd __pyx_string_tab[33]
-#define __pyx_n_u_KCPConnection_wndsize __pyx_string_tab[34]
-#define __pyx_n_u_MemoryError __pyx_string_tab[35]
-#define __pyx_kp_u_MemoryView_of __pyx_string_tab[36]
-#define __pyx_kp_u_Note_that_Cython_is_deliberately __pyx_string_tab[37]
-#define __pyx_n_b_O __pyx_string_tab[38]
-#define __pyx_kp_u_Out_of_bounds_on_buffer_access_a __pyx_string_tab[39]
-#define __pyx_n_u_PickleError __pyx_string_tab[40]
-#define __pyx_n_u_Sequence __pyx_string_tab[41]
-#define __pyx_kp_u_Step_may_not_be_zero_axis_d __pyx_string_tab[42]
-#define __pyx_n_u_TypeError __pyx_string_tab[43]
-#define __pyx_kp_u_Unable_to_convert_item_to_object __pyx_string_tab[44]
-#define __pyx_n_u_ValueError __pyx_string_tab[45]
-#define __pyx_n_u_View_MemoryView __pyx_string_tab[46]
-#define __pyx_kp_u__2 __pyx_string_tab[47]
-#define __pyx_kp_u__3 __pyx_string_tab[48]
-#define __pyx_kp_u__4 __pyx_string_tab[49]
-#define __pyx_kp_u__5 __pyx_string_tab[50]
-#define __pyx_kp_u__6 __pyx_string_tab[51]
-#define __pyx_n_u_abc __pyx_string_tab[52]
-#define __pyx_kp_u_add_note __pyx_string_tab[53]
-#define __pyx_n_u_allocate_buffer __pyx_string_tab[54]
-#define __pyx_kp_u_and __pyx_string_tab[55]
-#define __pyx_n_u_asyncio_coroutines __pyx_string_tab[56]
-#define __pyx_kp_u_at_0x __pyx_string_tab[57]
-#define __pyx_n_u_base __pyx_string_tab[58]
-#define __pyx_n_u_buffer __pyx_string_tab[59]
-#define __pyx_n_u_c __pyx_string_tab[60]
-#define __pyx_n_u_check __pyx_string_tab[61]
-#define __pyx_n_u_class __pyx_string_tab[62]
-#define __pyx_n_u_class_getitem __pyx_string_tab[63]
-#define __pyx_n_u_cline_in_traceback __pyx_string_tab[64]
-#define __pyx_kp_u_collections_abc __pyx_string_tab[65]
-#define __pyx_kp_u_contiguous_and_direct __pyx_string_tab[66]
-#define __pyx_kp_u_contiguous_and_indirect __pyx_string_tab[67]
-#define __pyx_n_u_conv __pyx_string_tab[68]
-#define __pyx_n_u_count __pyx_string_tab[69]
-#define __pyx_n_u_current __pyx_string_tab[70]
-#define __pyx_n_u_data __pyx_string_tab[71]
-#define __pyx_n_u_dict __pyx_string_tab[72]
-#define __pyx_kp_u_disable __pyx_string_tab[73]
-#define __pyx_n_u_dtype_is_object __pyx_string_tab[74]
-#define __pyx_kp_u_enable __pyx_string_tab[75]
-#define __pyx_n_u_encode __pyx_string_tab[76]
-#define __pyx_n_u_enumerate __pyx_string_tab[77]
-#define __pyx_n_u_error __pyx_string_tab[78]
-#define __pyx_n_u_flags __pyx_string_tab[79]
-#define __pyx_n_u_flush __pyx_string_tab[80]
-#define __pyx_n_u_format __pyx_string_tab[81]
-#define __pyx_n_u_fortran __pyx_string_tab[82]
-#define __pyx_n_u_func __pyx_string_tab[83]
-#define __pyx_kp_u_gc __pyx_string_tab[84]
-#define __pyx_n_u_getconv __pyx_string_tab[85]
-#define __pyx_n_u_getstate __pyx_string_tab[86]
-#define __pyx_kp_u_got __pyx_string_tab[87]
-#define __pyx_kp_u_got_differing_extents_in_dimensi __pyx_string_tab[88]
-#define __pyx_n_u_id __pyx_string_tab[89]
-#define __pyx_n_u_import __pyx_string_tab[90]
-#define __pyx_n_u_index __pyx_string_tab[91]
-#define __pyx_n_u_initializing __pyx_string_tab[92]
-#define __pyx_n_u_interval __pyx_string_tab[93]
-#define __pyx_n_u_is_coroutine __pyx_string_tab[94]
-#define __pyx_kp_u_isenabled __pyx_string_tab[95]
-#define __pyx_n_u_itemsize __pyx_string_tab[96]
-#define __pyx_kp_u_itemsize_0_for_cython_array __pyx_string_tab[97]
-#define __pyx_kp_u_kcp_send_error __pyx_string_tab[98]
-#define __pyx_n_u_log __pyx_string_tab[99]
-#define __pyx_n_u_log_cb __pyx_string_tab[100]
-#define __pyx_n_u_main __pyx_string_tab[101]
-#define __pyx_n_u_mask __pyx_string_tab[102]
-#define __pyx_n_u_memview __pyx_string_tab[103]
-#define __pyx_n_u_mode __pyx_string_tab[104]
-#define __pyx_n_u_mtu __pyx_string_tab[105]
-#define __pyx_n_u_name __pyx_string_tab[106]
-#define __pyx_n_u_name_2 __pyx_string_tab[107]
-#define __pyx_n_u_nc __pyx_string_tab[108]
-#define __pyx_n_u_ndim __pyx_string_tab[109]
-#define __pyx_n_u_new __pyx_string_tab[110]
-#define __pyx_n_u_next_event __pyx_string_tab[111]
-#define __pyx_n_u_next_event_into __pyx_string_tab[112]
-#define __pyx_kp_u_no_default___reduce___due_to_non __pyx_string_tab[113]
-#define __pyx_n_u_nodelay __pyx_string_tab[114]
-#define __pyx_n_u_obj __pyx_string_tab[115]
-#define __pyx_kp_u_object __pyx_string_tab[116]
-#define __pyx_n_u_pack __pyx_string_tab[117]
-#define __pyx_n_u_peeksize __pyx_string_tab[118]
-#define __pyx_n_u_pickle __pyx_string_tab[119]
-#define __pyx_n_u_pyx_checksum __pyx_string_tab[120]
-#define __pyx_n_u_pyx_state __pyx_string_tab[121]
-#define __pyx_n_u_pyx_type __pyx_string_tab[122]
-#define __pyx_n_u_pyx_unpickle_Enum __pyx_string_tab[123]
-#define __pyx_n_u_pyx_vtable __pyx_string_tab[124]
-#define __pyx_n_u_range __pyx_string_tab[125]
-#define __pyx_n_u_rcvwnd __pyx_string_tab[126]
-#define __pyx_n_u_receive_data __pyx_string_tab[127]
-#define __pyx_n_u_reduce __pyx_string_tab[128]
-#define __pyx_n_u_reduce_cython __pyx_string_tab[129]
-#define __pyx_n_u_reduce_ex __pyx_string_tab[130]
-#define __pyx_n_u_register __pyx_string_tab[131]
-#define __pyx_n_u_resend __pyx_string_tab[132]
-#define __pyx_n_u_self __pyx_string_tab[133]
-#define __pyx_n_u_send __pyx_string_tab[134]
-#define __pyx_n_u_send_cb __pyx_string_tab[135]
-#define __pyx_n_u_set_name __pyx_string_tab[136]
-#define __pyx_n_u_setmtu __pyx_string_tab[137]
-#define __pyx_n_u_setstate __pyx_string_tab[138]
-#define __pyx_n_u_setstate_cython __pyx_string_tab[139]
-#define __pyx_n_u_shape __pyx_string_tab[140]
-#define __pyx_n_u_siokcp__kcp __pyx_string_tab[141]
-#define __pyx_kp_u_siokcp__kcp_pyx __pyx_string_tab[142]
-#define __pyx_n_u_size __pyx_string_tab[143]
-#define __pyx_n_u_sndwnd __pyx_string_tab[144]
-#define __pyx_n_u_spec __pyx_string_tab[145]
-#define __pyx_n_u_start __pyx_string_tab[146]
-#define __pyx_n_u_step __pyx_string_tab[147]
-#define __pyx_n_u_stop __pyx_string_tab[148]
-#define __pyx_kp_u_strided_and_direct __pyx_string_tab[149]
-#define __pyx_kp_u_strided_and_direct_or_indirect __pyx_string_tab[150]
-#define __pyx_kp_u_strided_and_indirect __pyx_string_tab[151]
-#define __pyx_kp_u_stringsource __pyx_string_tab[152]
-#define __pyx_n_u_struct __pyx_string_tab[153]
-#define __pyx_n_u_test __pyx_string_tab[154]
-#define __pyx_kp_u_unable_to_allocate_array_data __pyx_string_tab[155]
-#define __pyx_kp_u_unable_to_allocate_shape_and_str __pyx_string_tab[156]
-#define __pyx_n_u_unpack __pyx_string_tab[157]
-#define __pyx_n_u_update __pyx_string_tab[158]
-#define __pyx_n_u_waitsnd __pyx_string_tab[159]
-#define __pyx_n_u_wndsize __pyx_string_tab[160]
-#define __pyx_n_u_x __pyx_string_tab[161]
+#define __pyx_n_u_IKCP_LOG_INPUT __pyx_string_tab[13]
+#define __pyx_n_u_IKCP_LOG_IN_ACK __pyx_string_tab[14]
+#define __pyx_n_u_IKCP_LOG_IN_DATA __pyx_string_tab[15]
+#define __pyx_n_u_IKCP_LOG_IN_PROBE __pyx_string_tab[16]
+#define __pyx_n_u_IKCP_LOG_IN_WINS __pyx_string_tab[17]
+#define __pyx_n_u_IKCP_LOG_OUTPUT __pyx_string_tab[18]
+#define __pyx_n_u_IKCP_LOG_OUT_ACK __pyx_string_tab[19]
+#define __pyx_n_u_IKCP_LOG_OUT_DATA __pyx_string_tab[20]
+#define __pyx_n_u_IKCP_LOG_OUT_PROBE __pyx_string_tab[21]
+#define __pyx_n_u_IKCP_LOG_OUT_WINS __pyx_string_tab[22]
+#define __pyx_n_u_IKCP_LOG_RECV __pyx_string_tab[23]
+#define __pyx_n_u_IKCP_LOG_SEND __pyx_string_tab[24]
+#define __pyx_kp_u_Incompatible_checksums_0x_x_vs_0 __pyx_string_tab[25]
+#define __pyx_n_u_IndexError __pyx_string_tab[26]
+#define __pyx_kp_u_Index_out_of_bounds_axis_d __pyx_string_tab[27]
+#define __pyx_kp_u_Indirect_dimensions_not_supporte __pyx_string_tab[28]
+#define __pyx_kp_u_Invalid_mode_expected_c_or_fortr __pyx_string_tab[29]
+#define __pyx_kp_u_Invalid_shape_in_axis __pyx_string_tab[30]
+#define __pyx_n_u_KCPConnection __pyx_string_tab[31]
+#define __pyx_n_u_KCPConnection___reduce_cython __pyx_string_tab[32]
+#define __pyx_n_u_KCPConnection___setstate_cython __pyx_string_tab[33]
+#define __pyx_n_u_KCPConnection_check __pyx_string_tab[34]
+#define __pyx_n_u_KCPConnection_flush __pyx_string_tab[35]
+#define __pyx_n_u_KCPConnection_log __pyx_string_tab[36]
+#define __pyx_n_u_KCPConnection_next_event __pyx_string_tab[37]
+#define __pyx_n_u_KCPConnection_next_event_into __pyx_string_tab[38]
+#define __pyx_n_u_KCPConnection_nodelay __pyx_string_tab[39]
+#define __pyx_n_u_KCPConnection_peeksize __pyx_string_tab[40]
+#define __pyx_n_u_KCPConnection_receive_data __pyx_string_tab[41]
+#define __pyx_n_u_KCPConnection_send __pyx_string_tab[42]
+#define __pyx_n_u_KCPConnection_setmtu __pyx_string_tab[43]
+#define __pyx_n_u_KCPConnection_update __pyx_string_tab[44]
+#define __pyx_n_u_KCPConnection_waitsnd __pyx_string_tab[45]
+#define __pyx_n_u_KCPConnection_wndsize __pyx_string_tab[46]
+#define __pyx_n_u_MemoryError __pyx_string_tab[47]
+#define __pyx_kp_u_MemoryView_of __pyx_string_tab[48]
+#define __pyx_kp_u_Note_that_Cython_is_deliberately __pyx_string_tab[49]
+#define __pyx_n_b_O __pyx_string_tab[50]
+#define __pyx_kp_u_Out_of_bounds_on_buffer_access_a __pyx_string_tab[51]
+#define __pyx_n_u_PickleError __pyx_string_tab[52]
+#define __pyx_n_u_Sequence __pyx_string_tab[53]
+#define __pyx_kp_u_Step_may_not_be_zero_axis_d __pyx_string_tab[54]
+#define __pyx_n_u_TypeError __pyx_string_tab[55]
+#define __pyx_kp_u_Unable_to_convert_item_to_object __pyx_string_tab[56]
+#define __pyx_n_u_ValueError __pyx_string_tab[57]
+#define __pyx_n_u_View_MemoryView __pyx_string_tab[58]
+#define __pyx_kp_u__2 __pyx_string_tab[59]
+#define __pyx_kp_u__3 __pyx_string_tab[60]
+#define __pyx_kp_u__4 __pyx_string_tab[61]
+#define __pyx_kp_u__5 __pyx_string_tab[62]
+#define __pyx_kp_u__6 __pyx_string_tab[63]
+#define __pyx_n_u_abc __pyx_string_tab[64]
+#define __pyx_kp_u_add_note __pyx_string_tab[65]
+#define __pyx_n_u_allocate_buffer __pyx_string_tab[66]
+#define __pyx_kp_u_and __pyx_string_tab[67]
+#define __pyx_n_u_asyncio_coroutines __pyx_string_tab[68]
+#define __pyx_kp_u_at_0x __pyx_string_tab[69]
+#define __pyx_n_u_base __pyx_string_tab[70]
+#define __pyx_n_u_buffer __pyx_string_tab[71]
+#define __pyx_n_u_c __pyx_string_tab[72]
+#define __pyx_n_u_check __pyx_string_tab[73]
+#define __pyx_n_u_class __pyx_string_tab[74]
+#define __pyx_n_u_class_getitem __pyx_string_tab[75]
+#define __pyx_n_u_cline_in_traceback __pyx_string_tab[76]
+#define __pyx_kp_u_collections_abc __pyx_string_tab[77]
+#define __pyx_kp_u_contiguous_and_direct __pyx_string_tab[78]
+#define __pyx_kp_u_contiguous_and_indirect __pyx_string_tab[79]
+#define __pyx_n_u_conv __pyx_string_tab[80]
+#define __pyx_n_u_count __pyx_string_tab[81]
+#define __pyx_n_u_current __pyx_string_tab[82]
+#define __pyx_n_u_data __pyx_string_tab[83]
+#define __pyx_n_u_dict __pyx_string_tab[84]
+#define __pyx_kp_u_disable __pyx_string_tab[85]
+#define __pyx_n_u_dtype_is_object __pyx_string_tab[86]
+#define __pyx_kp_u_enable __pyx_string_tab[87]
+#define __pyx_n_u_encode __pyx_string_tab[88]
+#define __pyx_n_u_enumerate __pyx_string_tab[89]
+#define __pyx_n_u_error __pyx_string_tab[90]
+#define __pyx_n_u_flags __pyx_string_tab[91]
+#define __pyx_n_u_flush __pyx_string_tab[92]
+#define __pyx_n_u_format __pyx_string_tab[93]
+#define __pyx_n_u_fortran __pyx_string_tab[94]
+#define __pyx_n_u_func __pyx_string_tab[95]
+#define __pyx_kp_u_gc __pyx_string_tab[96]
+#define __pyx_n_u_getconv __pyx_string_tab[97]
+#define __pyx_n_u_getstate __pyx_string_tab[98]
+#define __pyx_kp_u_got __pyx_string_tab[99]
+#define __pyx_kp_u_got_differing_extents_in_dimensi __pyx_string_tab[100]
+#define __pyx_n_u_id __pyx_string_tab[101]
+#define __pyx_n_u_import __pyx_string_tab[102]
+#define __pyx_n_u_index __pyx_string_tab[103]
+#define __pyx_n_u_initializing __pyx_string_tab[104]
+#define __pyx_n_u_interval __pyx_string_tab[105]
+#define __pyx_n_u_is_coroutine __pyx_string_tab[106]
+#define __pyx_kp_u_isenabled __pyx_string_tab[107]
+#define __pyx_n_u_itemsize __pyx_string_tab[108]
+#define __pyx_kp_u_itemsize_0_for_cython_array __pyx_string_tab[109]
+#define __pyx_kp_u_kcp_send_error __pyx_string_tab[110]
+#define __pyx_n_u_log __pyx_string_tab[111]
+#define __pyx_n_u_log_cb __pyx_string_tab[112]
+#define __pyx_n_u_main __pyx_string_tab[113]
+#define __pyx_n_u_mask __pyx_string_tab[114]
+#define __pyx_n_u_memview __pyx_string_tab[115]
+#define __pyx_n_u_mode __pyx_string_tab[116]
+#define __pyx_n_u_mtu __pyx_string_tab[117]
+#define __pyx_n_u_name __pyx_string_tab[118]
+#define __pyx_n_u_name_2 __pyx_string_tab[119]
+#define __pyx_n_u_nc __pyx_string_tab[120]
+#define __pyx_n_u_ndim __pyx_string_tab[121]
+#define __pyx_n_u_new __pyx_string_tab[122]
+#define __pyx_n_u_next_event __pyx_string_tab[123]
+#define __pyx_n_u_next_event_into __pyx_string_tab[124]
+#define __pyx_kp_u_no_default___reduce___due_to_non __pyx_string_tab[125]
+#define __pyx_n_u_nodelay __pyx_string_tab[126]
+#define __pyx_n_u_obj __pyx_string_tab[127]
+#define __pyx_kp_u_object __pyx_string_tab[128]
+#define __pyx_n_u_pack __pyx_string_tab[129]
+#define __pyx_n_u_peeksize __pyx_string_tab[130]
+#define __pyx_n_u_pickle __pyx_string_tab[131]
+#define __pyx_n_u_pyx_checksum __pyx_string_tab[132]
+#define __pyx_n_u_pyx_state __pyx_string_tab[133]
+#define __pyx_n_u_pyx_type __pyx_string_tab[134]
+#define __pyx_n_u_pyx_unpickle_Enum __pyx_string_tab[135]
+#define __pyx_n_u_pyx_vtable __pyx_string_tab[136]
+#define __pyx_n_u_range __pyx_string_tab[137]
+#define __pyx_n_u_rcvwnd __pyx_string_tab[138]
+#define __pyx_n_u_receive_data __pyx_string_tab[139]
+#define __pyx_n_u_reduce __pyx_string_tab[140]
+#define __pyx_n_u_reduce_cython __pyx_string_tab[141]
+#define __pyx_n_u_reduce_ex __pyx_string_tab[142]
+#define __pyx_n_u_register __pyx_string_tab[143]
+#define __pyx_n_u_resend __pyx_string_tab[144]
+#define __pyx_n_u_self __pyx_string_tab[145]
+#define __pyx_n_u_send __pyx_string_tab[146]
+#define __pyx_n_u_send_cb __pyx_string_tab[147]
+#define __pyx_n_u_set_name __pyx_string_tab[148]
+#define __pyx_n_u_setmtu __pyx_string_tab[149]
+#define __pyx_n_u_setstate __pyx_string_tab[150]
+#define __pyx_n_u_setstate_cython __pyx_string_tab[151]
+#define __pyx_n_u_shape __pyx_string_tab[152]
+#define __pyx_n_u_siokcp__kcp __pyx_string_tab[153]
+#define __pyx_kp_u_siokcp__kcp_pyx __pyx_string_tab[154]
+#define __pyx_n_u_size __pyx_string_tab[155]
+#define __pyx_n_u_sndwnd __pyx_string_tab[156]
+#define __pyx_n_u_spec __pyx_string_tab[157]
+#define __pyx_n_u_start __pyx_string_tab[158]
+#define __pyx_n_u_step __pyx_string_tab[159]
+#define __pyx_n_u_stop __pyx_string_tab[160]
+#define __pyx_kp_u_strided_and_direct __pyx_string_tab[161]
+#define __pyx_kp_u_strided_and_direct_or_indirect __pyx_string_tab[162]
+#define __pyx_kp_u_strided_and_indirect __pyx_string_tab[163]
+#define __pyx_kp_u_stringsource __pyx_string_tab[164]
+#define __pyx_n_u_struct __pyx_string_tab[165]
+#define __pyx_n_u_test __pyx_string_tab[166]
+#define __pyx_kp_u_unable_to_allocate_array_data __pyx_string_tab[167]
+#define __pyx_kp_u_unable_to_allocate_shape_and_str __pyx_string_tab[168]
+#define __pyx_n_u_unpack __pyx_string_tab[169]
+#define __pyx_n_u_update __pyx_string_tab[170]
+#define __pyx_n_u_waitsnd __pyx_string_tab[171]
+#define __pyx_n_u_wndsize __pyx_string_tab[172]
+#define __pyx_n_u_x __pyx_string_tab[173]
 /* #### Code section: module_state_clear ### */
 #if CYTHON_USE_MODULE_STATE
 static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
@@ -3316,7 +3343,7 @@ static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
   for (int i=0; i<1; ++i) { Py_CLEAR(clear_module_state->__pyx_slice[i]); }
   for (int i=0; i<8; ++i) { Py_CLEAR(clear_module_state->__pyx_tuple[i]); }
   for (int i=0; i<16; ++i) { Py_CLEAR(clear_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<162; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<174; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
   Py_CLEAR(clear_module_state->__pyx_int_0);
   Py_CLEAR(clear_module_state->__pyx_int_1);
   Py_CLEAR(clear_module_state->__pyx_int_112105877);
@@ -3357,7 +3384,7 @@ static CYTHON_SMALL_CODE int __pyx_m_traverse(PyObject *m, visitproc visit, void
   for (int i=0; i<1; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_slice[i]); }
   for (int i=0; i<8; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_tuple[i]); }
   for (int i=0; i<16; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<162; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<174; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_int_0);
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_int_1);
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_int_112105877);
@@ -16942,7 +16969,7 @@ static PyObject *__pyx_unpickle_Enum__set_state(struct __pyx_MemviewEnum_obj *__
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":14
+/* "siokcp/_kcp.pyx":34
  * 
  * 
  * cdef int kcp_output_cb(const char *buf, int len,  ikcpcb *kcp, void *user) with gil:             # <<<<<<<<<<<<<<
@@ -16966,19 +16993,19 @@ static int __pyx_f_6siokcp_4_kcp_kcp_output_cb(char const *__pyx_v_buf, int __py
   PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
   __Pyx_RefNannySetupContext("kcp_output_cb", 0);
 
-  /* "siokcp/_kcp.pyx":15
+  /* "siokcp/_kcp.pyx":35
  * 
  * cdef int kcp_output_cb(const char *buf, int len,  ikcpcb *kcp, void *user) with gil:
  *     cdef bytes data = PyBytes_FromStringAndSize(buf, len)             # <<<<<<<<<<<<<<
  *     cdef KCPConnection con = <KCPConnection>user
  *     return con.send_cb(data)
 */
-  __pyx_t_1 = PyBytes_FromStringAndSize(__pyx_v_buf, __pyx_v_len); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __pyx_t_1 = PyBytes_FromStringAndSize(__pyx_v_buf, __pyx_v_len); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_data = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "siokcp/_kcp.pyx":16
+  /* "siokcp/_kcp.pyx":36
  * cdef int kcp_output_cb(const char *buf, int len,  ikcpcb *kcp, void *user) with gil:
  *     cdef bytes data = PyBytes_FromStringAndSize(buf, len)
  *     cdef KCPConnection con = <KCPConnection>user             # <<<<<<<<<<<<<<
@@ -16990,7 +17017,7 @@ static int __pyx_f_6siokcp_4_kcp_kcp_output_cb(char const *__pyx_v_buf, int __py
   __pyx_v_con = ((struct __pyx_obj_6siokcp_4_kcp_KCPConnection *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "siokcp/_kcp.pyx":17
+  /* "siokcp/_kcp.pyx":37
  *     cdef bytes data = PyBytes_FromStringAndSize(buf, len)
  *     cdef KCPConnection con = <KCPConnection>user
  *     return con.send_cb(data)             # <<<<<<<<<<<<<<
@@ -17015,16 +17042,16 @@ static int __pyx_f_6siokcp_4_kcp_kcp_output_cb(char const *__pyx_v_buf, int __py
     PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_v_data};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  __pyx_t_5 = __Pyx_PyLong_As_int(__pyx_t_1); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyLong_As_int(__pyx_t_1); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_5;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":14
+  /* "siokcp/_kcp.pyx":34
  * 
  * 
  * cdef int kcp_output_cb(const char *buf, int len,  ikcpcb *kcp, void *user) with gil:             # <<<<<<<<<<<<<<
@@ -17047,7 +17074,7 @@ static int __pyx_f_6siokcp_4_kcp_kcp_output_cb(char const *__pyx_v_buf, int __py
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":19
+/* "siokcp/_kcp.pyx":39
  *     return con.send_cb(data)
  * 
  * cdef void kcp_writelog_cb(const char *log, ikcpcb *kcp, void *user) with gil:             # <<<<<<<<<<<<<<
@@ -17069,19 +17096,19 @@ static void __pyx_f_6siokcp_4_kcp_kcp_writelog_cb(char const *__pyx_v_log, CYTHO
   PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
   __Pyx_RefNannySetupContext("kcp_writelog_cb", 0);
 
-  /* "siokcp/_kcp.pyx":20
+  /* "siokcp/_kcp.pyx":40
  * 
  * cdef void kcp_writelog_cb(const char *log, ikcpcb *kcp, void *user) with gil:
  *     cdef str data = PyUnicode_FromString(log)             # <<<<<<<<<<<<<<
  *     cdef KCPConnection con = <KCPConnection> user
  *     con.log_cb(data)
 */
-  __pyx_t_1 = PyUnicode_FromString(__pyx_v_log); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_1 = PyUnicode_FromString(__pyx_v_log); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_data = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "siokcp/_kcp.pyx":21
+  /* "siokcp/_kcp.pyx":41
  * cdef void kcp_writelog_cb(const char *log, ikcpcb *kcp, void *user) with gil:
  *     cdef str data = PyUnicode_FromString(log)
  *     cdef KCPConnection con = <KCPConnection> user             # <<<<<<<<<<<<<<
@@ -17093,7 +17120,7 @@ static void __pyx_f_6siokcp_4_kcp_kcp_writelog_cb(char const *__pyx_v_log, CYTHO
   __pyx_v_con = ((struct __pyx_obj_6siokcp_4_kcp_KCPConnection *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "siokcp/_kcp.pyx":22
+  /* "siokcp/_kcp.pyx":42
  *     cdef str data = PyUnicode_FromString(log)
  *     cdef KCPConnection con = <KCPConnection> user
  *     con.log_cb(data)             # <<<<<<<<<<<<<<
@@ -17118,13 +17145,13 @@ static void __pyx_f_6siokcp_4_kcp_kcp_writelog_cb(char const *__pyx_v_log, CYTHO
     PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_v_data};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "siokcp/_kcp.pyx":19
+  /* "siokcp/_kcp.pyx":39
  *     return con.send_cb(data)
  * 
  * cdef void kcp_writelog_cb(const char *log, ikcpcb *kcp, void *user) with gil:             # <<<<<<<<<<<<<<
@@ -17146,7 +17173,7 @@ static void __pyx_f_6siokcp_4_kcp_kcp_writelog_cb(char const *__pyx_v_log, CYTHO
   __Pyx_PyGILState_Release(__pyx_gilstate_save);
 }
 
-/* "siokcp/_kcp.pyx":34
+/* "siokcp/_kcp.pyx":54
  * 
  * 
  *     def __cinit__(self, uint32_t conv, object send_cb, object log_cb):             # <<<<<<<<<<<<<<
@@ -17199,7 +17226,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_1__cinit__(PyObject *__pyx_v_s
           (void)__Pyx_Arg_NewRef_VARARGS(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 34, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 54, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -17207,9 +17234,9 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_1__cinit__(PyObject *__pyx_v_s
           (void)__Pyx_Arg_NewRef_VARARGS(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 34, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 54, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 3, 3, 1); __PYX_ERR(0, 34, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 3, 3, 1); __PYX_ERR(0, 54, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -17217,14 +17244,14 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_1__cinit__(PyObject *__pyx_v_s
           (void)__Pyx_Arg_NewRef_VARARGS(values[2]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 34, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 54, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 3, 3, 2); __PYX_ERR(0, 34, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 3, 3, 2); __PYX_ERR(0, 54, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__cinit__") < 0)) __PYX_ERR(0, 34, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__cinit__") < 0)) __PYX_ERR(0, 54, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 3)) {
       goto __pyx_L5_argtuple_error;
@@ -17233,13 +17260,13 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_1__cinit__(PyObject *__pyx_v_s
       values[1] = __Pyx_Arg_VARARGS(__pyx_args, 1);
       values[2] = __Pyx_Arg_VARARGS(__pyx_args, 2);
     }
-    __pyx_v_conv = __Pyx_PyLong_As_uint32_t(values[0]); if (unlikely((__pyx_v_conv == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 34, __pyx_L3_error)
+    __pyx_v_conv = __Pyx_PyLong_As_uint32_t(values[0]); if (unlikely((__pyx_v_conv == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 54, __pyx_L3_error)
     __pyx_v_send_cb = values[1];
     __pyx_v_log_cb = values[2];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 34, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 54, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -17275,7 +17302,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection___cinit__(struct __pyx_obj_6si
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "siokcp/_kcp.pyx":35
+  /* "siokcp/_kcp.pyx":55
  * 
  *     def __cinit__(self, uint32_t conv, object send_cb, object log_cb):
  *         self.send_cb = send_cb             # <<<<<<<<<<<<<<
@@ -17288,7 +17315,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection___cinit__(struct __pyx_obj_6si
   __Pyx_DECREF(__pyx_v_self->send_cb);
   __pyx_v_self->send_cb = __pyx_v_send_cb;
 
-  /* "siokcp/_kcp.pyx":36
+  /* "siokcp/_kcp.pyx":56
  *     def __cinit__(self, uint32_t conv, object send_cb, object log_cb):
  *         self.send_cb = send_cb
  *         self.log_cb = log_cb             # <<<<<<<<<<<<<<
@@ -17301,7 +17328,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection___cinit__(struct __pyx_obj_6si
   __Pyx_DECREF(__pyx_v_self->log_cb);
   __pyx_v_self->log_cb = __pyx_v_log_cb;
 
-  /* "siokcp/_kcp.pyx":37
+  /* "siokcp/_kcp.pyx":57
  *         self.send_cb = send_cb
  *         self.log_cb = log_cb
  *         self._kcp = ikcp_create(conv, <void *>self)             # <<<<<<<<<<<<<<
@@ -17310,7 +17337,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection___cinit__(struct __pyx_obj_6si
 */
   __pyx_v_self->_kcp = ikcp_create(__pyx_v_conv, ((void *)__pyx_v_self));
 
-  /* "siokcp/_kcp.pyx":38
+  /* "siokcp/_kcp.pyx":58
  *         self.log_cb = log_cb
  *         self._kcp = ikcp_create(conv, <void *>self)
  *         if self._kcp == NULL:             # <<<<<<<<<<<<<<
@@ -17320,16 +17347,16 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection___cinit__(struct __pyx_obj_6si
   __pyx_t_1 = (__pyx_v_self->_kcp == NULL);
   if (unlikely(__pyx_t_1)) {
 
-    /* "siokcp/_kcp.pyx":39
+    /* "siokcp/_kcp.pyx":59
  *         self._kcp = ikcp_create(conv, <void *>self)
  *         if self._kcp == NULL:
  *             raise MemoryError             # <<<<<<<<<<<<<<
  *         ikcp_setoutput(self._kcp, kcp_output_cb)
  *         self._kcp.writelog = kcp_writelog_cb
 */
-    PyErr_NoMemory(); __PYX_ERR(0, 39, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 59, __pyx_L1_error)
 
-    /* "siokcp/_kcp.pyx":38
+    /* "siokcp/_kcp.pyx":58
  *         self.log_cb = log_cb
  *         self._kcp = ikcp_create(conv, <void *>self)
  *         if self._kcp == NULL:             # <<<<<<<<<<<<<<
@@ -17338,7 +17365,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection___cinit__(struct __pyx_obj_6si
 */
   }
 
-  /* "siokcp/_kcp.pyx":40
+  /* "siokcp/_kcp.pyx":60
  *         if self._kcp == NULL:
  *             raise MemoryError
  *         ikcp_setoutput(self._kcp, kcp_output_cb)             # <<<<<<<<<<<<<<
@@ -17347,7 +17374,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection___cinit__(struct __pyx_obj_6si
 */
   ikcp_setoutput(__pyx_v_self->_kcp, __pyx_f_6siokcp_4_kcp_kcp_output_cb);
 
-  /* "siokcp/_kcp.pyx":41
+  /* "siokcp/_kcp.pyx":61
  *             raise MemoryError
  *         ikcp_setoutput(self._kcp, kcp_output_cb)
  *         self._kcp.writelog = kcp_writelog_cb             # <<<<<<<<<<<<<<
@@ -17356,7 +17383,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection___cinit__(struct __pyx_obj_6si
 */
   __pyx_v_self->_kcp->writelog = __pyx_f_6siokcp_4_kcp_kcp_writelog_cb;
 
-  /* "siokcp/_kcp.pyx":34
+  /* "siokcp/_kcp.pyx":54
  * 
  * 
  *     def __cinit__(self, uint32_t conv, object send_cb, object log_cb):             # <<<<<<<<<<<<<<
@@ -17375,7 +17402,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection___cinit__(struct __pyx_obj_6si
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":43
+/* "siokcp/_kcp.pyx":63
  *         self._kcp.writelog = kcp_writelog_cb
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -17398,7 +17425,7 @@ static void __pyx_pw_6siokcp_4_kcp_13KCPConnection_3__dealloc__(PyObject *__pyx_
 
 static void __pyx_pf_6siokcp_4_kcp_13KCPConnection_2__dealloc__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self) {
 
-  /* "siokcp/_kcp.pyx":44
+  /* "siokcp/_kcp.pyx":64
  * 
  *     def __dealloc__(self):
  *         ikcp_release(self._kcp)             # <<<<<<<<<<<<<<
@@ -17407,7 +17434,7 @@ static void __pyx_pf_6siokcp_4_kcp_13KCPConnection_2__dealloc__(struct __pyx_obj
 */
   ikcp_release(__pyx_v_self->_kcp);
 
-  /* "siokcp/_kcp.pyx":45
+  /* "siokcp/_kcp.pyx":65
  *     def __dealloc__(self):
  *         ikcp_release(self._kcp)
  *         self._kcp = NULL             # <<<<<<<<<<<<<<
@@ -17416,7 +17443,7 @@ static void __pyx_pf_6siokcp_4_kcp_13KCPConnection_2__dealloc__(struct __pyx_obj
 */
   __pyx_v_self->_kcp = NULL;
 
-  /* "siokcp/_kcp.pyx":43
+  /* "siokcp/_kcp.pyx":63
  *         self._kcp.writelog = kcp_writelog_cb
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -17427,7 +17454,7 @@ static void __pyx_pf_6siokcp_4_kcp_13KCPConnection_2__dealloc__(struct __pyx_obj
   /* function exit code */
 }
 
-/* "siokcp/_kcp.pyx":47
+/* "siokcp/_kcp.pyx":67
  *         self._kcp = NULL
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -17459,7 +17486,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_4conv___get__(struct __p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":49
+  /* "siokcp/_kcp.pyx":69
  *     @property
  *     def conv(self):
  *         return self._kcp.conv             # <<<<<<<<<<<<<<
@@ -17467,13 +17494,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_4conv___get__(struct __p
  *     @conv.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->conv); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->conv); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":47
+  /* "siokcp/_kcp.pyx":67
  *         self._kcp = NULL
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -17492,7 +17519,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_4conv___get__(struct __p
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":51
+/* "siokcp/_kcp.pyx":71
  *         return self._kcp.conv
  * 
  *     @conv.setter             # <<<<<<<<<<<<<<
@@ -17513,7 +17540,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_4conv_3__set__(PyObject *__pyx
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 52, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 72, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -17531,7 +17558,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_4conv_3__set__(PyObject *__pyx
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_4conv_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":53
+  /* "siokcp/_kcp.pyx":73
  *     @conv.setter
  *     def conv(self, uint32_t value):
  *         self._kcp.conv = value             # <<<<<<<<<<<<<<
@@ -17540,7 +17567,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_4conv_2__set__(struct __pyx_ob
 */
   __pyx_v_self->_kcp->conv = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":51
+  /* "siokcp/_kcp.pyx":71
  *         return self._kcp.conv
  * 
  *     @conv.setter             # <<<<<<<<<<<<<<
@@ -17553,7 +17580,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_4conv_2__set__(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":55
+/* "siokcp/_kcp.pyx":75
  *         self._kcp.conv = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -17585,7 +17612,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_3mtu___get__(struct __py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":57
+  /* "siokcp/_kcp.pyx":77
  *     @property
  *     def mtu(self):
  *         return self._kcp.mtu             # <<<<<<<<<<<<<<
@@ -17593,13 +17620,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_3mtu___get__(struct __py
  *     @mtu.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->mtu); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->mtu); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":55
+  /* "siokcp/_kcp.pyx":75
  *         self._kcp.conv = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -17618,7 +17645,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_3mtu___get__(struct __py
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":59
+/* "siokcp/_kcp.pyx":79
  *         return self._kcp.mtu
  * 
  *     @mtu.setter             # <<<<<<<<<<<<<<
@@ -17639,7 +17666,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_3mtu_3__set__(PyObject *__pyx_
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 60, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 80, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -17657,7 +17684,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_3mtu_3__set__(PyObject *__pyx_
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_3mtu_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":61
+  /* "siokcp/_kcp.pyx":81
  *     @mtu.setter
  *     def mtu(self, uint32_t value):
  *         self._kcp.mtu = value             # <<<<<<<<<<<<<<
@@ -17666,7 +17693,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_3mtu_2__set__(struct __pyx_obj
 */
   __pyx_v_self->_kcp->mtu = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":59
+  /* "siokcp/_kcp.pyx":79
  *         return self._kcp.mtu
  * 
  *     @mtu.setter             # <<<<<<<<<<<<<<
@@ -17679,7 +17706,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_3mtu_2__set__(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":63
+/* "siokcp/_kcp.pyx":83
  *         self._kcp.mtu = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -17711,7 +17738,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_3mss___get__(struct __py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":65
+  /* "siokcp/_kcp.pyx":85
  *     @property
  *     def mss(self):
  *         return self._kcp.mss             # <<<<<<<<<<<<<<
@@ -17719,13 +17746,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_3mss___get__(struct __py
  *     @mss.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->mss); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->mss); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 85, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":63
+  /* "siokcp/_kcp.pyx":83
  *         self._kcp.mtu = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -17744,7 +17771,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_3mss___get__(struct __py
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":67
+/* "siokcp/_kcp.pyx":87
  *         return self._kcp.mss
  * 
  *     @mss.setter             # <<<<<<<<<<<<<<
@@ -17765,7 +17792,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_3mss_3__set__(PyObject *__pyx_
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 68, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 88, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -17783,7 +17810,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_3mss_3__set__(PyObject *__pyx_
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_3mss_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":69
+  /* "siokcp/_kcp.pyx":89
  *     @mss.setter
  *     def mss(self, uint32_t value):
  *         self._kcp.mss = value             # <<<<<<<<<<<<<<
@@ -17792,7 +17819,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_3mss_2__set__(struct __pyx_obj
 */
   __pyx_v_self->_kcp->mss = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":67
+  /* "siokcp/_kcp.pyx":87
  *         return self._kcp.mss
  * 
  *     @mss.setter             # <<<<<<<<<<<<<<
@@ -17805,12 +17832,12 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_3mss_2__set__(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":71
+/* "siokcp/_kcp.pyx":91
  *         self._kcp.mss = value
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def state(self):
- *         return self._kcp.state
+ *         return <int>self._kcp.state
 */
 
 /* Python wrapper */
@@ -17837,26 +17864,26 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_5state___get__(struct __
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":73
+  /* "siokcp/_kcp.pyx":93
  *     @property
  *     def state(self):
- *         return self._kcp.state             # <<<<<<<<<<<<<<
+ *         return <int>self._kcp.state             # <<<<<<<<<<<<<<
  * 
  *     @state.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->state); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_int(((int)__pyx_v_self->_kcp->state)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":71
+  /* "siokcp/_kcp.pyx":91
  *         self._kcp.mss = value
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def state(self):
- *         return self._kcp.state
+ *         return <int>self._kcp.state
 */
 
   /* function exit code */
@@ -17870,18 +17897,18 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_5state___get__(struct __
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":75
- *         return self._kcp.state
+/* "siokcp/_kcp.pyx":95
+ *         return <int>self._kcp.state
  * 
  *     @state.setter             # <<<<<<<<<<<<<<
- *     def state(self, uint32_t value):
- *         self._kcp.state = value
+ *     def state(self, int value):
+ *         self._kcp.state = <uint32_t>value
 */
 
 /* Python wrapper */
 static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_5state_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_arg_value); /*proto*/
 static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_5state_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_arg_value) {
-  uint32_t __pyx_v_value;
+  int __pyx_v_value;
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
@@ -17891,7 +17918,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_5state_3__set__(PyObject *__py
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 76, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_int(__pyx_arg_value); if (unlikely((__pyx_v_value == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 96, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -17899,31 +17926,31 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_5state_3__set__(PyObject *__py
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_6siokcp_4_kcp_13KCPConnection_5state_2__set__(((struct __pyx_obj_6siokcp_4_kcp_KCPConnection *)__pyx_v_self), ((uint32_t)__pyx_v_value));
+  __pyx_r = __pyx_pf_6siokcp_4_kcp_13KCPConnection_5state_2__set__(((struct __pyx_obj_6siokcp_4_kcp_KCPConnection *)__pyx_v_self), ((int)__pyx_v_value));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_5state_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
+static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_5state_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, int __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":77
+  /* "siokcp/_kcp.pyx":97
  *     @state.setter
- *     def state(self, uint32_t value):
- *         self._kcp.state = value             # <<<<<<<<<<<<<<
+ *     def state(self, int value):
+ *         self._kcp.state = <uint32_t>value             # <<<<<<<<<<<<<<
  * 
  *     @property
 */
-  __pyx_v_self->_kcp->state = __pyx_v_value;
+  __pyx_v_self->_kcp->state = ((uint32_t)__pyx_v_value);
 
-  /* "siokcp/_kcp.pyx":75
- *         return self._kcp.state
+  /* "siokcp/_kcp.pyx":95
+ *         return <int>self._kcp.state
  * 
  *     @state.setter             # <<<<<<<<<<<<<<
- *     def state(self, uint32_t value):
- *         self._kcp.state = value
+ *     def state(self, int value):
+ *         self._kcp.state = <uint32_t>value
 */
 
   /* function exit code */
@@ -17931,8 +17958,8 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_5state_2__set__(struct __pyx_o
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":79
- *         self._kcp.state = value
+/* "siokcp/_kcp.pyx":99
+ *         self._kcp.state = <uint32_t>value
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def snd_una(self):
@@ -17963,7 +17990,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7snd_una___get__(struct 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":81
+  /* "siokcp/_kcp.pyx":101
  *     @property
  *     def snd_una(self):
  *         return self._kcp.snd_una             # <<<<<<<<<<<<<<
@@ -17971,14 +17998,14 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7snd_una___get__(struct 
  *     @snd_una.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->snd_una); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 81, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->snd_una); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 101, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":79
- *         self._kcp.state = value
+  /* "siokcp/_kcp.pyx":99
+ *         self._kcp.state = <uint32_t>value
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def snd_una(self):
@@ -17996,7 +18023,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7snd_una___get__(struct 
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":83
+/* "siokcp/_kcp.pyx":103
  *         return self._kcp.snd_una
  * 
  *     @snd_una.setter             # <<<<<<<<<<<<<<
@@ -18017,7 +18044,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7snd_una_3__set__(PyObject *__
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 84, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 104, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -18035,7 +18062,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7snd_una_3__set__(PyObject *__
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7snd_una_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":85
+  /* "siokcp/_kcp.pyx":105
  *     @snd_una.setter
  *     def snd_una(self, uint32_t value):
  *         self._kcp.snd_una = value             # <<<<<<<<<<<<<<
@@ -18044,7 +18071,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7snd_una_2__set__(struct __pyx
 */
   __pyx_v_self->_kcp->snd_una = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":83
+  /* "siokcp/_kcp.pyx":103
  *         return self._kcp.snd_una
  * 
  *     @snd_una.setter             # <<<<<<<<<<<<<<
@@ -18057,7 +18084,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7snd_una_2__set__(struct __pyx
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":87
+/* "siokcp/_kcp.pyx":107
  *         self._kcp.snd_una = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -18089,7 +18116,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7snd_nxt___get__(struct 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":89
+  /* "siokcp/_kcp.pyx":109
  *     @property
  *     def snd_nxt(self):
  *         return self._kcp.snd_nxt             # <<<<<<<<<<<<<<
@@ -18097,13 +18124,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7snd_nxt___get__(struct 
  *     @snd_nxt.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->snd_nxt); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->snd_nxt); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":87
+  /* "siokcp/_kcp.pyx":107
  *         self._kcp.snd_una = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -18122,7 +18149,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7snd_nxt___get__(struct 
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":91
+/* "siokcp/_kcp.pyx":111
  *         return self._kcp.snd_nxt
  * 
  *     @snd_nxt.setter             # <<<<<<<<<<<<<<
@@ -18143,7 +18170,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7snd_nxt_3__set__(PyObject *__
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 92, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 112, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -18161,7 +18188,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7snd_nxt_3__set__(PyObject *__
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7snd_nxt_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":93
+  /* "siokcp/_kcp.pyx":113
  *     @snd_nxt.setter
  *     def snd_nxt(self, uint32_t value):
  *         self._kcp.snd_nxt = value             # <<<<<<<<<<<<<<
@@ -18170,7 +18197,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7snd_nxt_2__set__(struct __pyx
 */
   __pyx_v_self->_kcp->snd_nxt = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":91
+  /* "siokcp/_kcp.pyx":111
  *         return self._kcp.snd_nxt
  * 
  *     @snd_nxt.setter             # <<<<<<<<<<<<<<
@@ -18183,7 +18210,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7snd_nxt_2__set__(struct __pyx
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":95
+/* "siokcp/_kcp.pyx":115
  *         self._kcp.snd_nxt = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -18215,7 +18242,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7rcv_nxt___get__(struct 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":97
+  /* "siokcp/_kcp.pyx":117
  *     @property
  *     def rcv_nxt(self):
  *         return self._kcp.rcv_nxt             # <<<<<<<<<<<<<<
@@ -18223,13 +18250,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7rcv_nxt___get__(struct 
  *     @rcv_nxt.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->rcv_nxt); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 97, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->rcv_nxt); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 117, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":95
+  /* "siokcp/_kcp.pyx":115
  *         self._kcp.snd_nxt = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -18248,7 +18275,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7rcv_nxt___get__(struct 
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":99
+/* "siokcp/_kcp.pyx":119
  *         return self._kcp.rcv_nxt
  * 
  *     @rcv_nxt.setter             # <<<<<<<<<<<<<<
@@ -18269,7 +18296,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7rcv_nxt_3__set__(PyObject *__
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 100, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 120, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -18287,7 +18314,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7rcv_nxt_3__set__(PyObject *__
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7rcv_nxt_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":101
+  /* "siokcp/_kcp.pyx":121
  *     @rcv_nxt.setter
  *     def rcv_nxt(self, uint32_t value):
  *         self._kcp.rcv_nxt = value             # <<<<<<<<<<<<<<
@@ -18296,7 +18323,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7rcv_nxt_2__set__(struct __pyx
 */
   __pyx_v_self->_kcp->rcv_nxt = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":99
+  /* "siokcp/_kcp.pyx":119
  *         return self._kcp.rcv_nxt
  * 
  *     @rcv_nxt.setter             # <<<<<<<<<<<<<<
@@ -18309,7 +18336,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7rcv_nxt_2__set__(struct __pyx
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":103
+/* "siokcp/_kcp.pyx":123
  *         self._kcp.rcv_nxt = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -18341,7 +18368,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_9ts_recent___get__(struc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":105
+  /* "siokcp/_kcp.pyx":125
  *     @property
  *     def ts_recent(self):
  *         return self._kcp.ts_recent             # <<<<<<<<<<<<<<
@@ -18349,13 +18376,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_9ts_recent___get__(struc
  *     @ts_recent.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->ts_recent); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->ts_recent); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":103
+  /* "siokcp/_kcp.pyx":123
  *         self._kcp.rcv_nxt = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -18374,7 +18401,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_9ts_recent___get__(struc
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":107
+/* "siokcp/_kcp.pyx":127
  *         return self._kcp.ts_recent
  * 
  *     @ts_recent.setter             # <<<<<<<<<<<<<<
@@ -18395,7 +18422,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_9ts_recent_3__set__(PyObject *
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 108, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 128, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -18413,7 +18440,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_9ts_recent_3__set__(PyObject *
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_9ts_recent_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":109
+  /* "siokcp/_kcp.pyx":129
  *     @ts_recent.setter
  *     def ts_recent(self, uint32_t value):
  *         self._kcp.ts_recent = value             # <<<<<<<<<<<<<<
@@ -18422,7 +18449,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_9ts_recent_2__set__(struct __p
 */
   __pyx_v_self->_kcp->ts_recent = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":107
+  /* "siokcp/_kcp.pyx":127
  *         return self._kcp.ts_recent
  * 
  *     @ts_recent.setter             # <<<<<<<<<<<<<<
@@ -18435,7 +18462,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_9ts_recent_2__set__(struct __p
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":111
+/* "siokcp/_kcp.pyx":131
  *         self._kcp.ts_recent = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -18467,7 +18494,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_10ts_lastack___get__(str
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":113
+  /* "siokcp/_kcp.pyx":133
  *     @property
  *     def ts_lastack(self):
  *         return self._kcp.ts_lastack             # <<<<<<<<<<<<<<
@@ -18475,13 +18502,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_10ts_lastack___get__(str
  *     @ts_lastack.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->ts_lastack); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 113, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->ts_lastack); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 133, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":111
+  /* "siokcp/_kcp.pyx":131
  *         self._kcp.ts_recent = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -18500,7 +18527,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_10ts_lastack___get__(str
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":115
+/* "siokcp/_kcp.pyx":135
  *         return self._kcp.ts_lastack
  * 
  *     @ts_lastack.setter             # <<<<<<<<<<<<<<
@@ -18521,7 +18548,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_10ts_lastack_3__set__(PyObject
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 116, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 136, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -18539,7 +18566,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_10ts_lastack_3__set__(PyObject
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_10ts_lastack_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":117
+  /* "siokcp/_kcp.pyx":137
  *     @ts_lastack.setter
  *     def ts_lastack(self, uint32_t value):
  *         self._kcp.ts_lastack = value             # <<<<<<<<<<<<<<
@@ -18548,7 +18575,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_10ts_lastack_2__set__(struct _
 */
   __pyx_v_self->_kcp->ts_lastack = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":115
+  /* "siokcp/_kcp.pyx":135
  *         return self._kcp.ts_lastack
  * 
  *     @ts_lastack.setter             # <<<<<<<<<<<<<<
@@ -18561,7 +18588,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_10ts_lastack_2__set__(struct _
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":119
+/* "siokcp/_kcp.pyx":139
  *         self._kcp.ts_lastack = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -18593,7 +18620,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8ssthresh___get__(struct
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":121
+  /* "siokcp/_kcp.pyx":141
  *     @property
  *     def ssthresh(self):
  *         return self._kcp.ssthresh             # <<<<<<<<<<<<<<
@@ -18601,13 +18628,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8ssthresh___get__(struct
  *     @ssthresh.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->ssthresh); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 121, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->ssthresh); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 141, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":119
+  /* "siokcp/_kcp.pyx":139
  *         self._kcp.ts_lastack = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -18626,7 +18653,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8ssthresh___get__(struct
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":123
+/* "siokcp/_kcp.pyx":143
  *         return self._kcp.ssthresh
  * 
  *     @ssthresh.setter             # <<<<<<<<<<<<<<
@@ -18647,7 +18674,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_8ssthresh_3__set__(PyObject *_
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 124, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 144, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -18665,7 +18692,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_8ssthresh_3__set__(PyObject *_
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8ssthresh_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":125
+  /* "siokcp/_kcp.pyx":145
  *     @ssthresh.setter
  *     def ssthresh(self, uint32_t value):
  *         self._kcp.ssthresh = value             # <<<<<<<<<<<<<<
@@ -18674,7 +18701,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8ssthresh_2__set__(struct __py
 */
   __pyx_v_self->_kcp->ssthresh = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":123
+  /* "siokcp/_kcp.pyx":143
  *         return self._kcp.ssthresh
  * 
  *     @ssthresh.setter             # <<<<<<<<<<<<<<
@@ -18687,7 +18714,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8ssthresh_2__set__(struct __py
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":127
+/* "siokcp/_kcp.pyx":147
  *         self._kcp.ssthresh = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -18719,7 +18746,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_9rx_rttval___get__(struc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":129
+  /* "siokcp/_kcp.pyx":149
  *     @property
  *     def rx_rttval(self):
  *         return self._kcp.rx_rttval             # <<<<<<<<<<<<<<
@@ -18727,13 +18754,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_9rx_rttval___get__(struc
  *     @rx_rttval.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->rx_rttval); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 129, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->rx_rttval); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 149, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":127
+  /* "siokcp/_kcp.pyx":147
  *         self._kcp.ssthresh = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -18752,7 +18779,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_9rx_rttval___get__(struc
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":131
+/* "siokcp/_kcp.pyx":151
  *         return self._kcp.rx_rttval
  * 
  *     @rx_rttval.setter             # <<<<<<<<<<<<<<
@@ -18773,7 +18800,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_9rx_rttval_3__set__(PyObject *
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 132, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 152, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -18791,7 +18818,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_9rx_rttval_3__set__(PyObject *
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_9rx_rttval_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":133
+  /* "siokcp/_kcp.pyx":153
  *     @rx_rttval.setter
  *     def rx_rttval(self, uint32_t value):
  *         self._kcp.rx_rttval = value             # <<<<<<<<<<<<<<
@@ -18800,7 +18827,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_9rx_rttval_2__set__(struct __p
 */
   __pyx_v_self->_kcp->rx_rttval = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":131
+  /* "siokcp/_kcp.pyx":151
  *         return self._kcp.rx_rttval
  * 
  *     @rx_rttval.setter             # <<<<<<<<<<<<<<
@@ -18813,7 +18840,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_9rx_rttval_2__set__(struct __p
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":135
+/* "siokcp/_kcp.pyx":155
  *         self._kcp.rx_rttval = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -18845,7 +18872,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7rx_srtt___get__(struct 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":137
+  /* "siokcp/_kcp.pyx":157
  *     @property
  *     def rx_srtt(self):
  *         return self._kcp.rx_srtt             # <<<<<<<<<<<<<<
@@ -18853,13 +18880,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7rx_srtt___get__(struct 
  *     @rx_srtt.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->rx_srtt); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->rx_srtt); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":135
+  /* "siokcp/_kcp.pyx":155
  *         self._kcp.rx_rttval = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -18878,7 +18905,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7rx_srtt___get__(struct 
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":139
+/* "siokcp/_kcp.pyx":159
  *         return self._kcp.rx_srtt
  * 
  *     @rx_srtt.setter             # <<<<<<<<<<<<<<
@@ -18899,7 +18926,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7rx_srtt_3__set__(PyObject *__
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 140, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 160, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -18917,7 +18944,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7rx_srtt_3__set__(PyObject *__
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7rx_srtt_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":141
+  /* "siokcp/_kcp.pyx":161
  *     @rx_srtt.setter
  *     def rx_srtt(self, uint32_t value):
  *         self._kcp.rx_srtt = value             # <<<<<<<<<<<<<<
@@ -18926,7 +18953,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7rx_srtt_2__set__(struct __pyx
 */
   __pyx_v_self->_kcp->rx_srtt = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":139
+  /* "siokcp/_kcp.pyx":159
  *         return self._kcp.rx_srtt
  * 
  *     @rx_srtt.setter             # <<<<<<<<<<<<<<
@@ -18939,7 +18966,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7rx_srtt_2__set__(struct __pyx
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":143
+/* "siokcp/_kcp.pyx":163
  *         self._kcp.rx_srtt = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -18971,7 +18998,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_6rx_rto___get__(struct _
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":145
+  /* "siokcp/_kcp.pyx":165
  *     @property
  *     def rx_rto(self):
  *         return self._kcp.rx_rto             # <<<<<<<<<<<<<<
@@ -18979,13 +19006,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_6rx_rto___get__(struct _
  *     @rx_rto.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->rx_rto); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->rx_rto); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 165, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":143
+  /* "siokcp/_kcp.pyx":163
  *         self._kcp.rx_srtt = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -19004,7 +19031,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_6rx_rto___get__(struct _
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":147
+/* "siokcp/_kcp.pyx":167
  *         return self._kcp.rx_rto
  * 
  *     @rx_rto.setter             # <<<<<<<<<<<<<<
@@ -19025,7 +19052,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_6rx_rto_3__set__(PyObject *__p
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 148, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 168, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -19043,7 +19070,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_6rx_rto_3__set__(PyObject *__p
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_6rx_rto_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":149
+  /* "siokcp/_kcp.pyx":169
  *     @rx_rto.setter
  *     def rx_rto(self, uint32_t value):
  *         self._kcp.rx_rto = value             # <<<<<<<<<<<<<<
@@ -19052,7 +19079,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_6rx_rto_2__set__(struct __pyx_
 */
   __pyx_v_self->_kcp->rx_rto = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":147
+  /* "siokcp/_kcp.pyx":167
  *         return self._kcp.rx_rto
  * 
  *     @rx_rto.setter             # <<<<<<<<<<<<<<
@@ -19065,7 +19092,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_6rx_rto_2__set__(struct __pyx_
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":151
+/* "siokcp/_kcp.pyx":171
  *         self._kcp.rx_rto = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -19097,7 +19124,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_9rx_minrto___get__(struc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":153
+  /* "siokcp/_kcp.pyx":173
  *     @property
  *     def rx_minrto(self):
  *         return self._kcp.rx_minrto             # <<<<<<<<<<<<<<
@@ -19105,13 +19132,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_9rx_minrto___get__(struc
  *     @rx_minrto.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->rx_minrto); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 153, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->rx_minrto); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 173, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":151
+  /* "siokcp/_kcp.pyx":171
  *         self._kcp.rx_rto = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -19130,7 +19157,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_9rx_minrto___get__(struc
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":155
+/* "siokcp/_kcp.pyx":175
  *         return self._kcp.rx_minrto
  * 
  *     @rx_minrto.setter             # <<<<<<<<<<<<<<
@@ -19151,7 +19178,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_9rx_minrto_3__set__(PyObject *
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 156, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 176, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -19169,7 +19196,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_9rx_minrto_3__set__(PyObject *
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_9rx_minrto_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":157
+  /* "siokcp/_kcp.pyx":177
  *     @rx_minrto.setter
  *     def rx_minrto(self, uint32_t value):
  *         self._kcp.rx_minrto = value             # <<<<<<<<<<<<<<
@@ -19178,7 +19205,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_9rx_minrto_2__set__(struct __p
 */
   __pyx_v_self->_kcp->rx_minrto = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":155
+  /* "siokcp/_kcp.pyx":175
  *         return self._kcp.rx_minrto
  * 
  *     @rx_minrto.setter             # <<<<<<<<<<<<<<
@@ -19191,7 +19218,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_9rx_minrto_2__set__(struct __p
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":159
+/* "siokcp/_kcp.pyx":179
  *         self._kcp.rx_minrto = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -19223,7 +19250,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7snd_wnd___get__(struct 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":161
+  /* "siokcp/_kcp.pyx":181
  *     @property
  *     def snd_wnd(self):
  *         return self._kcp.snd_wnd             # <<<<<<<<<<<<<<
@@ -19231,13 +19258,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7snd_wnd___get__(struct 
  *     @snd_wnd.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->snd_wnd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->snd_wnd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 181, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":159
+  /* "siokcp/_kcp.pyx":179
  *         self._kcp.rx_minrto = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -19256,7 +19283,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7snd_wnd___get__(struct 
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":163
+/* "siokcp/_kcp.pyx":183
  *         return self._kcp.snd_wnd
  * 
  *     @snd_wnd.setter             # <<<<<<<<<<<<<<
@@ -19277,7 +19304,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7snd_wnd_3__set__(PyObject *__
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 164, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 184, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -19295,7 +19322,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7snd_wnd_3__set__(PyObject *__
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7snd_wnd_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":165
+  /* "siokcp/_kcp.pyx":185
  *     @snd_wnd.setter
  *     def snd_wnd(self, uint32_t value):
  *         self._kcp.snd_wnd = value             # <<<<<<<<<<<<<<
@@ -19304,7 +19331,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7snd_wnd_2__set__(struct __pyx
 */
   __pyx_v_self->_kcp->snd_wnd = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":163
+  /* "siokcp/_kcp.pyx":183
  *         return self._kcp.snd_wnd
  * 
  *     @snd_wnd.setter             # <<<<<<<<<<<<<<
@@ -19317,7 +19344,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7snd_wnd_2__set__(struct __pyx
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":167
+/* "siokcp/_kcp.pyx":187
  *         self._kcp.snd_wnd = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -19349,7 +19376,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7rcv_wnd___get__(struct 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":169
+  /* "siokcp/_kcp.pyx":189
  *     @property
  *     def rcv_wnd(self):
  *         return self._kcp.rcv_wnd             # <<<<<<<<<<<<<<
@@ -19357,13 +19384,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7rcv_wnd___get__(struct 
  *     @rcv_wnd.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->rcv_wnd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 169, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->rcv_wnd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 189, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":167
+  /* "siokcp/_kcp.pyx":187
  *         self._kcp.snd_wnd = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -19382,7 +19409,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7rcv_wnd___get__(struct 
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":171
+/* "siokcp/_kcp.pyx":191
  *         return self._kcp.rcv_wnd
  * 
  *     @rcv_wnd.setter             # <<<<<<<<<<<<<<
@@ -19403,7 +19430,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7rcv_wnd_3__set__(PyObject *__
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 172, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 192, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -19421,7 +19448,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7rcv_wnd_3__set__(PyObject *__
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7rcv_wnd_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":173
+  /* "siokcp/_kcp.pyx":193
  *     @rcv_wnd.setter
  *     def rcv_wnd(self, uint32_t value):
  *         self._kcp.rcv_wnd = value             # <<<<<<<<<<<<<<
@@ -19430,7 +19457,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7rcv_wnd_2__set__(struct __pyx
 */
   __pyx_v_self->_kcp->rcv_wnd = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":171
+  /* "siokcp/_kcp.pyx":191
  *         return self._kcp.rcv_wnd
  * 
  *     @rcv_wnd.setter             # <<<<<<<<<<<<<<
@@ -19443,7 +19470,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7rcv_wnd_2__set__(struct __pyx
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":175
+/* "siokcp/_kcp.pyx":195
  *         self._kcp.rcv_wnd = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -19475,7 +19502,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7rmt_wnd___get__(struct 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":177
+  /* "siokcp/_kcp.pyx":197
  *     @property
  *     def rmt_wnd(self):
  *         return self._kcp.rmt_wnd             # <<<<<<<<<<<<<<
@@ -19483,13 +19510,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7rmt_wnd___get__(struct 
  *     @rmt_wnd.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->rmt_wnd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 177, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->rmt_wnd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":175
+  /* "siokcp/_kcp.pyx":195
  *         self._kcp.rcv_wnd = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -19508,7 +19535,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7rmt_wnd___get__(struct 
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":179
+/* "siokcp/_kcp.pyx":199
  *         return self._kcp.rmt_wnd
  * 
  *     @rmt_wnd.setter             # <<<<<<<<<<<<<<
@@ -19529,7 +19556,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7rmt_wnd_3__set__(PyObject *__
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 180, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 200, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -19547,7 +19574,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7rmt_wnd_3__set__(PyObject *__
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7rmt_wnd_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":181
+  /* "siokcp/_kcp.pyx":201
  *     @rmt_wnd.setter
  *     def rmt_wnd(self, uint32_t value):
  *         self._kcp.rmt_wnd = value             # <<<<<<<<<<<<<<
@@ -19556,7 +19583,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7rmt_wnd_2__set__(struct __pyx
 */
   __pyx_v_self->_kcp->rmt_wnd = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":179
+  /* "siokcp/_kcp.pyx":199
  *         return self._kcp.rmt_wnd
  * 
  *     @rmt_wnd.setter             # <<<<<<<<<<<<<<
@@ -19569,7 +19596,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7rmt_wnd_2__set__(struct __pyx
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":183
+/* "siokcp/_kcp.pyx":203
  *         self._kcp.rmt_wnd = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -19601,7 +19628,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_4cwnd___get__(struct __p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":185
+  /* "siokcp/_kcp.pyx":205
  *     @property
  *     def cwnd(self):
  *         return self._kcp.cwnd             # <<<<<<<<<<<<<<
@@ -19609,13 +19636,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_4cwnd___get__(struct __p
  *     @cwnd.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->cwnd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->cwnd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 205, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":183
+  /* "siokcp/_kcp.pyx":203
  *         self._kcp.rmt_wnd = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -19634,7 +19661,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_4cwnd___get__(struct __p
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":187
+/* "siokcp/_kcp.pyx":207
  *         return self._kcp.cwnd
  * 
  *     @cwnd.setter             # <<<<<<<<<<<<<<
@@ -19655,7 +19682,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_4cwnd_3__set__(PyObject *__pyx
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 188, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 208, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -19673,7 +19700,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_4cwnd_3__set__(PyObject *__pyx
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_4cwnd_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":189
+  /* "siokcp/_kcp.pyx":209
  *     @cwnd.setter
  *     def cwnd(self, uint32_t value):
  *         self._kcp.cwnd = value             # <<<<<<<<<<<<<<
@@ -19682,7 +19709,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_4cwnd_2__set__(struct __pyx_ob
 */
   __pyx_v_self->_kcp->cwnd = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":187
+  /* "siokcp/_kcp.pyx":207
  *         return self._kcp.cwnd
  * 
  *     @cwnd.setter             # <<<<<<<<<<<<<<
@@ -19695,7 +19722,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_4cwnd_2__set__(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":191
+/* "siokcp/_kcp.pyx":211
  *         self._kcp.cwnd = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -19727,7 +19754,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_5probe___get__(struct __
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":193
+  /* "siokcp/_kcp.pyx":213
  *     @property
  *     def probe(self):
  *         return self._kcp.probe             # <<<<<<<<<<<<<<
@@ -19735,13 +19762,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_5probe___get__(struct __
  *     @probe.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->probe); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->probe); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 213, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":191
+  /* "siokcp/_kcp.pyx":211
  *         self._kcp.cwnd = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -19760,7 +19787,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_5probe___get__(struct __
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":195
+/* "siokcp/_kcp.pyx":215
  *         return self._kcp.probe
  * 
  *     @probe.setter             # <<<<<<<<<<<<<<
@@ -19781,7 +19808,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_5probe_3__set__(PyObject *__py
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 196, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 216, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -19799,7 +19826,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_5probe_3__set__(PyObject *__py
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_5probe_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":197
+  /* "siokcp/_kcp.pyx":217
  *     @probe.setter
  *     def probe(self, uint32_t value):
  *         self._kcp.probe = value             # <<<<<<<<<<<<<<
@@ -19808,7 +19835,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_5probe_2__set__(struct __pyx_o
 */
   __pyx_v_self->_kcp->probe = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":195
+  /* "siokcp/_kcp.pyx":215
  *         return self._kcp.probe
  * 
  *     @probe.setter             # <<<<<<<<<<<<<<
@@ -19821,7 +19848,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_5probe_2__set__(struct __pyx_o
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":199
+/* "siokcp/_kcp.pyx":219
  *         self._kcp.probe = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -19853,7 +19880,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7current___get__(struct 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":201
+  /* "siokcp/_kcp.pyx":221
  *     @property
  *     def current(self):
  *         return self._kcp.current             # <<<<<<<<<<<<<<
@@ -19861,13 +19888,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7current___get__(struct 
  *     @current.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->current); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 201, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->current); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 221, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":199
+  /* "siokcp/_kcp.pyx":219
  *         self._kcp.probe = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -19886,7 +19913,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7current___get__(struct 
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":203
+/* "siokcp/_kcp.pyx":223
  *         return self._kcp.current
  * 
  *     @current.setter             # <<<<<<<<<<<<<<
@@ -19907,7 +19934,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7current_3__set__(PyObject *__
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 204, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 224, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -19925,7 +19952,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7current_3__set__(PyObject *__
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7current_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":205
+  /* "siokcp/_kcp.pyx":225
  *     @current.setter
  *     def current(self, uint32_t value):
  *         self._kcp.current = value             # <<<<<<<<<<<<<<
@@ -19934,7 +19961,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7current_2__set__(struct __pyx
 */
   __pyx_v_self->_kcp->current = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":203
+  /* "siokcp/_kcp.pyx":223
  *         return self._kcp.current
  * 
  *     @current.setter             # <<<<<<<<<<<<<<
@@ -19947,7 +19974,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7current_2__set__(struct __pyx
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":207
+/* "siokcp/_kcp.pyx":227
  *         self._kcp.current = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -19979,7 +20006,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8interval___get__(struct
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":209
+  /* "siokcp/_kcp.pyx":229
  *     @property
  *     def interval(self):
  *         return self._kcp.interval             # <<<<<<<<<<<<<<
@@ -19987,13 +20014,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8interval___get__(struct
  *     @interval.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->interval); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 209, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->interval); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":207
+  /* "siokcp/_kcp.pyx":227
  *         self._kcp.current = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -20012,7 +20039,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8interval___get__(struct
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":211
+/* "siokcp/_kcp.pyx":231
  *         return self._kcp.interval
  * 
  *     @interval.setter             # <<<<<<<<<<<<<<
@@ -20033,7 +20060,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_8interval_3__set__(PyObject *_
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 212, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 232, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -20051,7 +20078,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_8interval_3__set__(PyObject *_
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8interval_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":213
+  /* "siokcp/_kcp.pyx":233
  *     @interval.setter
  *     def interval(self, uint32_t value):
  *         self._kcp.interval = value             # <<<<<<<<<<<<<<
@@ -20060,7 +20087,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8interval_2__set__(struct __py
 */
   __pyx_v_self->_kcp->interval = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":211
+  /* "siokcp/_kcp.pyx":231
  *         return self._kcp.interval
  * 
  *     @interval.setter             # <<<<<<<<<<<<<<
@@ -20073,7 +20100,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8interval_2__set__(struct __py
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":215
+/* "siokcp/_kcp.pyx":235
  *         self._kcp.interval = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -20105,7 +20132,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8ts_flush___get__(struct
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":217
+  /* "siokcp/_kcp.pyx":237
  *     @property
  *     def ts_flush(self):
  *         return self._kcp.ts_flush             # <<<<<<<<<<<<<<
@@ -20113,13 +20140,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8ts_flush___get__(struct
  *     @ts_flush.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->ts_flush); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 217, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->ts_flush); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 237, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":215
+  /* "siokcp/_kcp.pyx":235
  *         self._kcp.interval = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -20138,7 +20165,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8ts_flush___get__(struct
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":219
+/* "siokcp/_kcp.pyx":239
  *         return self._kcp.ts_flush
  * 
  *     @ts_flush.setter             # <<<<<<<<<<<<<<
@@ -20159,7 +20186,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_8ts_flush_3__set__(PyObject *_
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 220, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 240, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -20177,7 +20204,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_8ts_flush_3__set__(PyObject *_
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8ts_flush_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":221
+  /* "siokcp/_kcp.pyx":241
  *     @ts_flush.setter
  *     def ts_flush(self, uint32_t value):
  *         self._kcp.ts_flush = value             # <<<<<<<<<<<<<<
@@ -20186,7 +20213,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8ts_flush_2__set__(struct __py
 */
   __pyx_v_self->_kcp->ts_flush = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":219
+  /* "siokcp/_kcp.pyx":239
  *         return self._kcp.ts_flush
  * 
  *     @ts_flush.setter             # <<<<<<<<<<<<<<
@@ -20199,7 +20226,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8ts_flush_2__set__(struct __py
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":223
+/* "siokcp/_kcp.pyx":243
  *         self._kcp.ts_flush = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -20231,7 +20258,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_4xmit___get__(struct __p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":225
+  /* "siokcp/_kcp.pyx":245
  *     @property
  *     def xmit(self):
  *         return self._kcp.xmit             # <<<<<<<<<<<<<<
@@ -20239,13 +20266,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_4xmit___get__(struct __p
  *     @xmit.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->xmit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 225, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->xmit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 245, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":223
+  /* "siokcp/_kcp.pyx":243
  *         self._kcp.ts_flush = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -20264,7 +20291,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_4xmit___get__(struct __p
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":227
+/* "siokcp/_kcp.pyx":247
  *         return self._kcp.xmit
  * 
  *     @xmit.setter             # <<<<<<<<<<<<<<
@@ -20285,7 +20312,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_4xmit_3__set__(PyObject *__pyx
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 228, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 248, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -20303,7 +20330,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_4xmit_3__set__(PyObject *__pyx
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_4xmit_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":229
+  /* "siokcp/_kcp.pyx":249
  *     @xmit.setter
  *     def xmit(self, uint32_t value):
  *         self._kcp.xmit = value             # <<<<<<<<<<<<<<
@@ -20312,7 +20339,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_4xmit_2__set__(struct __pyx_ob
 */
   __pyx_v_self->_kcp->xmit = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":227
+  /* "siokcp/_kcp.pyx":247
  *         return self._kcp.xmit
  * 
  *     @xmit.setter             # <<<<<<<<<<<<<<
@@ -20325,7 +20352,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_4xmit_2__set__(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":231
+/* "siokcp/_kcp.pyx":251
  *         self._kcp.xmit = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -20357,7 +20384,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8nrcv_buf___get__(struct
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":233
+  /* "siokcp/_kcp.pyx":253
  *     @property
  *     def nrcv_buf(self):
  *         return self._kcp.nrcv_buf             # <<<<<<<<<<<<<<
@@ -20365,13 +20392,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8nrcv_buf___get__(struct
  *     @nrcv_buf.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->nrcv_buf); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 233, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->nrcv_buf); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 253, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":231
+  /* "siokcp/_kcp.pyx":251
  *         self._kcp.xmit = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -20390,7 +20417,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8nrcv_buf___get__(struct
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":235
+/* "siokcp/_kcp.pyx":255
  *         return self._kcp.nrcv_buf
  * 
  *     @nrcv_buf.setter             # <<<<<<<<<<<<<<
@@ -20411,7 +20438,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_8nrcv_buf_3__set__(PyObject *_
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 236, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 256, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -20429,7 +20456,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_8nrcv_buf_3__set__(PyObject *_
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8nrcv_buf_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":237
+  /* "siokcp/_kcp.pyx":257
  *     @nrcv_buf.setter
  *     def nrcv_buf(self, uint32_t value):
  *         self._kcp.nrcv_buf = value             # <<<<<<<<<<<<<<
@@ -20438,7 +20465,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8nrcv_buf_2__set__(struct __py
 */
   __pyx_v_self->_kcp->nrcv_buf = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":235
+  /* "siokcp/_kcp.pyx":255
  *         return self._kcp.nrcv_buf
  * 
  *     @nrcv_buf.setter             # <<<<<<<<<<<<<<
@@ -20451,7 +20478,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8nrcv_buf_2__set__(struct __py
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":239
+/* "siokcp/_kcp.pyx":259
  *         self._kcp.nrcv_buf = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -20483,7 +20510,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8nsnd_buf___get__(struct
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":241
+  /* "siokcp/_kcp.pyx":261
  *     @property
  *     def nsnd_buf(self):
  *         return self._kcp.nsnd_buf             # <<<<<<<<<<<<<<
@@ -20491,13 +20518,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8nsnd_buf___get__(struct
  *     @nsnd_buf.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->nsnd_buf); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 241, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->nsnd_buf); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 261, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":239
+  /* "siokcp/_kcp.pyx":259
  *         self._kcp.nrcv_buf = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -20516,7 +20543,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8nsnd_buf___get__(struct
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":243
+/* "siokcp/_kcp.pyx":263
  *         return self._kcp.nsnd_buf
  * 
  *     @nsnd_buf.setter             # <<<<<<<<<<<<<<
@@ -20537,7 +20564,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_8nsnd_buf_3__set__(PyObject *_
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 244, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 264, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -20555,7 +20582,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_8nsnd_buf_3__set__(PyObject *_
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8nsnd_buf_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":245
+  /* "siokcp/_kcp.pyx":265
  *     @nsnd_buf.setter
  *     def nsnd_buf(self, uint32_t value):
  *         self._kcp.nsnd_buf = value             # <<<<<<<<<<<<<<
@@ -20564,7 +20591,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8nsnd_buf_2__set__(struct __py
 */
   __pyx_v_self->_kcp->nsnd_buf = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":243
+  /* "siokcp/_kcp.pyx":263
  *         return self._kcp.nsnd_buf
  * 
  *     @nsnd_buf.setter             # <<<<<<<<<<<<<<
@@ -20577,7 +20604,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8nsnd_buf_2__set__(struct __py
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":247
+/* "siokcp/_kcp.pyx":267
  *         self._kcp.nsnd_buf = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -20609,7 +20636,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8nrcv_que___get__(struct
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":249
+  /* "siokcp/_kcp.pyx":269
  *     @property
  *     def nrcv_que(self):
  *         return self._kcp.nrcv_que             # <<<<<<<<<<<<<<
@@ -20617,13 +20644,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8nrcv_que___get__(struct
  *     @nrcv_que.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->nrcv_que); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->nrcv_que); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 269, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":247
+  /* "siokcp/_kcp.pyx":267
  *         self._kcp.nsnd_buf = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -20642,7 +20669,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8nrcv_que___get__(struct
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":251
+/* "siokcp/_kcp.pyx":271
  *         return self._kcp.nrcv_que
  * 
  *     @nrcv_que.setter             # <<<<<<<<<<<<<<
@@ -20663,7 +20690,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_8nrcv_que_3__set__(PyObject *_
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 252, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 272, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -20681,7 +20708,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_8nrcv_que_3__set__(PyObject *_
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8nrcv_que_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":253
+  /* "siokcp/_kcp.pyx":273
  *     @nrcv_que.setter
  *     def nrcv_que(self, uint32_t value):
  *         self._kcp.nrcv_que = value             # <<<<<<<<<<<<<<
@@ -20690,7 +20717,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8nrcv_que_2__set__(struct __py
 */
   __pyx_v_self->_kcp->nrcv_que = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":251
+  /* "siokcp/_kcp.pyx":271
  *         return self._kcp.nrcv_que
  * 
  *     @nrcv_que.setter             # <<<<<<<<<<<<<<
@@ -20703,7 +20730,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8nrcv_que_2__set__(struct __py
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":255
+/* "siokcp/_kcp.pyx":275
  *         self._kcp.nrcv_que = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -20735,7 +20762,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8nsnd_que___get__(struct
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":257
+  /* "siokcp/_kcp.pyx":277
  *     @property
  *     def nsnd_que(self):
  *         return self._kcp.nsnd_que             # <<<<<<<<<<<<<<
@@ -20743,13 +20770,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8nsnd_que___get__(struct
  *     @nsnd_que.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->nsnd_que); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 257, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->nsnd_que); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 277, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":255
+  /* "siokcp/_kcp.pyx":275
  *         self._kcp.nrcv_que = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -20768,7 +20795,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8nsnd_que___get__(struct
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":259
+/* "siokcp/_kcp.pyx":279
  *         return self._kcp.nsnd_que
  * 
  *     @nsnd_que.setter             # <<<<<<<<<<<<<<
@@ -20789,7 +20816,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_8nsnd_que_3__set__(PyObject *_
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 260, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 280, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -20807,7 +20834,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_8nsnd_que_3__set__(PyObject *_
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8nsnd_que_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":261
+  /* "siokcp/_kcp.pyx":281
  *     @nsnd_que.setter
  *     def nsnd_que(self, uint32_t value):
  *         self._kcp.nsnd_que = value             # <<<<<<<<<<<<<<
@@ -20816,7 +20843,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8nsnd_que_2__set__(struct __py
 */
   __pyx_v_self->_kcp->nsnd_que = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":259
+  /* "siokcp/_kcp.pyx":279
  *         return self._kcp.nsnd_que
  * 
  *     @nsnd_que.setter             # <<<<<<<<<<<<<<
@@ -20829,7 +20856,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8nsnd_que_2__set__(struct __py
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":263
+/* "siokcp/_kcp.pyx":283
  *         self._kcp.nsnd_que = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -20861,7 +20888,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8nodelay____get__(struct
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":265
+  /* "siokcp/_kcp.pyx":285
  *     @property
  *     def nodelay_(self):
  *         return self._kcp.nodelay             # <<<<<<<<<<<<<<
@@ -20869,13 +20896,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8nodelay____get__(struct
  *     @nodelay_.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->nodelay); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 265, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->nodelay); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 285, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":263
+  /* "siokcp/_kcp.pyx":283
  *         self._kcp.nsnd_que = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -20894,7 +20921,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8nodelay____get__(struct
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":267
+/* "siokcp/_kcp.pyx":287
  *         return self._kcp.nodelay
  * 
  *     @nodelay_.setter             # <<<<<<<<<<<<<<
@@ -20915,7 +20942,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_8nodelay__3__set__(PyObject *_
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 268, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 288, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -20933,7 +20960,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_8nodelay__3__set__(PyObject *_
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8nodelay__2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":269
+  /* "siokcp/_kcp.pyx":289
  *     @nodelay_.setter
  *     def nodelay_(self, uint32_t value):
  *         self._kcp.nodelay = value             # <<<<<<<<<<<<<<
@@ -20942,7 +20969,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8nodelay__2__set__(struct __py
 */
   __pyx_v_self->_kcp->nodelay = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":267
+  /* "siokcp/_kcp.pyx":287
  *         return self._kcp.nodelay
  * 
  *     @nodelay_.setter             # <<<<<<<<<<<<<<
@@ -20955,7 +20982,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8nodelay__2__set__(struct __py
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":271
+/* "siokcp/_kcp.pyx":291
  *         self._kcp.nodelay = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -20987,7 +21014,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7updated___get__(struct 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":273
+  /* "siokcp/_kcp.pyx":293
  *     @property
  *     def updated(self):
  *         return self._kcp.updated             # <<<<<<<<<<<<<<
@@ -20995,13 +21022,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7updated___get__(struct 
  *     @updated.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->updated); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 273, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->updated); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 293, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":271
+  /* "siokcp/_kcp.pyx":291
  *         self._kcp.nodelay = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -21020,7 +21047,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7updated___get__(struct 
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":275
+/* "siokcp/_kcp.pyx":295
  *         return self._kcp.updated
  * 
  *     @updated.setter             # <<<<<<<<<<<<<<
@@ -21041,7 +21068,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7updated_3__set__(PyObject *__
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 276, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 296, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -21059,7 +21086,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7updated_3__set__(PyObject *__
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7updated_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":277
+  /* "siokcp/_kcp.pyx":297
  *     @updated.setter
  *     def updated(self, uint32_t value):
  *         self._kcp.updated = value             # <<<<<<<<<<<<<<
@@ -21068,7 +21095,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7updated_2__set__(struct __pyx
 */
   __pyx_v_self->_kcp->updated = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":275
+  /* "siokcp/_kcp.pyx":295
  *         return self._kcp.updated
  * 
  *     @updated.setter             # <<<<<<<<<<<<<<
@@ -21081,7 +21108,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7updated_2__set__(struct __pyx
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":279
+/* "siokcp/_kcp.pyx":299
  *         self._kcp.updated = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -21113,7 +21140,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8ts_probe___get__(struct
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":281
+  /* "siokcp/_kcp.pyx":301
  *     @property
  *     def ts_probe(self):
  *         return self._kcp.ts_probe             # <<<<<<<<<<<<<<
@@ -21121,13 +21148,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8ts_probe___get__(struct
  *     @ts_probe.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->ts_probe); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 281, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->ts_probe); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 301, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":279
+  /* "siokcp/_kcp.pyx":299
  *         self._kcp.updated = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -21146,7 +21173,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8ts_probe___get__(struct
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":283
+/* "siokcp/_kcp.pyx":303
  *         return self._kcp.ts_probe
  * 
  *     @ts_probe.setter             # <<<<<<<<<<<<<<
@@ -21167,7 +21194,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_8ts_probe_3__set__(PyObject *_
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 284, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 304, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -21185,7 +21212,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_8ts_probe_3__set__(PyObject *_
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8ts_probe_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":285
+  /* "siokcp/_kcp.pyx":305
  *     @ts_probe.setter
  *     def ts_probe(self, uint32_t value):
  *         self._kcp.ts_probe = value             # <<<<<<<<<<<<<<
@@ -21194,7 +21221,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8ts_probe_2__set__(struct __py
 */
   __pyx_v_self->_kcp->ts_probe = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":283
+  /* "siokcp/_kcp.pyx":303
  *         return self._kcp.ts_probe
  * 
  *     @ts_probe.setter             # <<<<<<<<<<<<<<
@@ -21207,7 +21234,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_8ts_probe_2__set__(struct __py
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":287
+/* "siokcp/_kcp.pyx":307
  *         self._kcp.ts_probe = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -21239,7 +21266,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_10probe_wait___get__(str
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":289
+  /* "siokcp/_kcp.pyx":309
  *     @property
  *     def probe_wait(self):
  *         return self._kcp.probe_wait             # <<<<<<<<<<<<<<
@@ -21247,13 +21274,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_10probe_wait___get__(str
  *     @probe_wait.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->probe_wait); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->probe_wait); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":287
+  /* "siokcp/_kcp.pyx":307
  *         self._kcp.ts_probe = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -21272,7 +21299,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_10probe_wait___get__(str
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":291
+/* "siokcp/_kcp.pyx":311
  *         return self._kcp.probe_wait
  * 
  *     @probe_wait.setter             # <<<<<<<<<<<<<<
@@ -21293,7 +21320,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_10probe_wait_3__set__(PyObject
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 292, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 312, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -21311,7 +21338,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_10probe_wait_3__set__(PyObject
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_10probe_wait_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":293
+  /* "siokcp/_kcp.pyx":313
  *     @probe_wait.setter
  *     def probe_wait(self, uint32_t value):
  *         self._kcp.probe_wait = value             # <<<<<<<<<<<<<<
@@ -21320,7 +21347,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_10probe_wait_2__set__(struct _
 */
   __pyx_v_self->_kcp->probe_wait = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":291
+  /* "siokcp/_kcp.pyx":311
  *         return self._kcp.probe_wait
  * 
  *     @probe_wait.setter             # <<<<<<<<<<<<<<
@@ -21333,7 +21360,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_10probe_wait_2__set__(struct _
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":295
+/* "siokcp/_kcp.pyx":315
  *         self._kcp.probe_wait = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -21365,7 +21392,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_9dead_link___get__(struc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":297
+  /* "siokcp/_kcp.pyx":317
  *     @property
  *     def dead_link(self):
  *         return self._kcp.dead_link             # <<<<<<<<<<<<<<
@@ -21373,13 +21400,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_9dead_link___get__(struc
  *     @dead_link.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->dead_link); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 297, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->dead_link); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 317, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":295
+  /* "siokcp/_kcp.pyx":315
  *         self._kcp.probe_wait = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -21398,7 +21425,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_9dead_link___get__(struc
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":299
+/* "siokcp/_kcp.pyx":319
  *         return self._kcp.dead_link
  * 
  *     @dead_link.setter             # <<<<<<<<<<<<<<
@@ -21419,7 +21446,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_9dead_link_3__set__(PyObject *
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 300, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 320, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -21437,7 +21464,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_9dead_link_3__set__(PyObject *
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_9dead_link_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":301
+  /* "siokcp/_kcp.pyx":321
  *     @dead_link.setter
  *     def dead_link(self, uint32_t value):
  *         self._kcp.dead_link = value             # <<<<<<<<<<<<<<
@@ -21446,7 +21473,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_9dead_link_2__set__(struct __p
 */
   __pyx_v_self->_kcp->dead_link = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":299
+  /* "siokcp/_kcp.pyx":319
  *         return self._kcp.dead_link
  * 
  *     @dead_link.setter             # <<<<<<<<<<<<<<
@@ -21459,7 +21486,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_9dead_link_2__set__(struct __p
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":303
+/* "siokcp/_kcp.pyx":323
  *         self._kcp.dead_link = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -21491,7 +21518,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_4incr___get__(struct __p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":305
+  /* "siokcp/_kcp.pyx":325
  *     @property
  *     def incr(self):
  *         return self._kcp.incr             # <<<<<<<<<<<<<<
@@ -21499,13 +21526,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_4incr___get__(struct __p
  *     @incr.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->incr); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 305, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_uint32_t(__pyx_v_self->_kcp->incr); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 325, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":303
+  /* "siokcp/_kcp.pyx":323
  *         self._kcp.dead_link = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -21524,7 +21551,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_4incr___get__(struct __p
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":307
+/* "siokcp/_kcp.pyx":327
  *         return self._kcp.incr
  * 
  *     @incr.setter             # <<<<<<<<<<<<<<
@@ -21545,7 +21572,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_4incr_3__set__(PyObject *__pyx
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 308, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_uint32_t(__pyx_arg_value); if (unlikely((__pyx_v_value == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 328, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -21563,7 +21590,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_4incr_3__set__(PyObject *__pyx
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_4incr_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, uint32_t __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":309
+  /* "siokcp/_kcp.pyx":329
  *     @incr.setter
  *     def incr(self, uint32_t value):
  *         self._kcp.incr = value             # <<<<<<<<<<<<<<
@@ -21572,7 +21599,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_4incr_2__set__(struct __pyx_ob
 */
   __pyx_v_self->_kcp->incr = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":307
+  /* "siokcp/_kcp.pyx":327
  *         return self._kcp.incr
  * 
  *     @incr.setter             # <<<<<<<<<<<<<<
@@ -21585,7 +21612,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_4incr_2__set__(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":311
+/* "siokcp/_kcp.pyx":331
  *         self._kcp.incr = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -21617,7 +21644,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_10fastresend___get__(str
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":313
+  /* "siokcp/_kcp.pyx":333
  *     @property
  *     def fastresend(self):
  *         return self._kcp.fastresend             # <<<<<<<<<<<<<<
@@ -21625,13 +21652,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_10fastresend___get__(str
  *     @fastresend.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_int(__pyx_v_self->_kcp->fastresend); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 313, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_int(__pyx_v_self->_kcp->fastresend); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 333, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":311
+  /* "siokcp/_kcp.pyx":331
  *         self._kcp.incr = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -21650,7 +21677,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_10fastresend___get__(str
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":315
+/* "siokcp/_kcp.pyx":335
  *         return self._kcp.fastresend
  * 
  *     @fastresend.setter             # <<<<<<<<<<<<<<
@@ -21671,7 +21698,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_10fastresend_3__set__(PyObject
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_int(__pyx_arg_value); if (unlikely((__pyx_v_value == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 316, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_int(__pyx_arg_value); if (unlikely((__pyx_v_value == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 336, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -21689,7 +21716,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_10fastresend_3__set__(PyObject
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_10fastresend_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, int __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":317
+  /* "siokcp/_kcp.pyx":337
  *     @fastresend.setter
  *     def fastresend(self, int value):
  *         self._kcp.fastresend = value             # <<<<<<<<<<<<<<
@@ -21698,7 +21725,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_10fastresend_2__set__(struct _
 */
   __pyx_v_self->_kcp->fastresend = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":315
+  /* "siokcp/_kcp.pyx":335
  *         return self._kcp.fastresend
  * 
  *     @fastresend.setter             # <<<<<<<<<<<<<<
@@ -21711,7 +21738,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_10fastresend_2__set__(struct _
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":319
+/* "siokcp/_kcp.pyx":339
  *         self._kcp.fastresend = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -21743,7 +21770,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_9fastlimit___get__(struc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":321
+  /* "siokcp/_kcp.pyx":341
  *     @property
  *     def fastlimit(self):
  *         return self._kcp.fastlimit             # <<<<<<<<<<<<<<
@@ -21751,13 +21778,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_9fastlimit___get__(struc
  *     @fastlimit.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_int(__pyx_v_self->_kcp->fastlimit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 321, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_int(__pyx_v_self->_kcp->fastlimit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 341, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":319
+  /* "siokcp/_kcp.pyx":339
  *         self._kcp.fastresend = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -21776,7 +21803,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_9fastlimit___get__(struc
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":323
+/* "siokcp/_kcp.pyx":343
  *         return self._kcp.fastlimit
  * 
  *     @fastlimit.setter             # <<<<<<<<<<<<<<
@@ -21797,7 +21824,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_9fastlimit_3__set__(PyObject *
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_int(__pyx_arg_value); if (unlikely((__pyx_v_value == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 324, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_int(__pyx_arg_value); if (unlikely((__pyx_v_value == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 344, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -21815,7 +21842,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_9fastlimit_3__set__(PyObject *
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_9fastlimit_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, int __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":325
+  /* "siokcp/_kcp.pyx":345
  *     @fastlimit.setter
  *     def fastlimit(self, int value):
  *         self._kcp.fastlimit = value             # <<<<<<<<<<<<<<
@@ -21824,7 +21851,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_9fastlimit_2__set__(struct __p
 */
   __pyx_v_self->_kcp->fastlimit = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":323
+  /* "siokcp/_kcp.pyx":343
  *         return self._kcp.fastlimit
  * 
  *     @fastlimit.setter             # <<<<<<<<<<<<<<
@@ -21837,7 +21864,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_9fastlimit_2__set__(struct __p
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":327
+/* "siokcp/_kcp.pyx":347
  *         self._kcp.fastlimit = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -21869,7 +21896,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_6nocwnd___get__(struct _
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":329
+  /* "siokcp/_kcp.pyx":349
  *     @property
  *     def nocwnd(self):
  *         return self._kcp.nocwnd             # <<<<<<<<<<<<<<
@@ -21877,13 +21904,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_6nocwnd___get__(struct _
  *     @nocwnd.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_int(__pyx_v_self->_kcp->nocwnd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 329, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_int(__pyx_v_self->_kcp->nocwnd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 349, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":327
+  /* "siokcp/_kcp.pyx":347
  *         self._kcp.fastlimit = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -21902,7 +21929,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_6nocwnd___get__(struct _
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":331
+/* "siokcp/_kcp.pyx":351
  *         return self._kcp.nocwnd
  * 
  *     @nocwnd.setter             # <<<<<<<<<<<<<<
@@ -21923,7 +21950,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_6nocwnd_3__set__(PyObject *__p
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_int(__pyx_arg_value); if (unlikely((__pyx_v_value == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 332, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_int(__pyx_arg_value); if (unlikely((__pyx_v_value == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 352, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -21941,7 +21968,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_6nocwnd_3__set__(PyObject *__p
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_6nocwnd_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, int __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":333
+  /* "siokcp/_kcp.pyx":353
  *     @nocwnd.setter
  *     def nocwnd(self, int value):
  *         self._kcp.nocwnd = value             # <<<<<<<<<<<<<<
@@ -21950,7 +21977,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_6nocwnd_2__set__(struct __pyx_
 */
   __pyx_v_self->_kcp->nocwnd = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":331
+  /* "siokcp/_kcp.pyx":351
  *         return self._kcp.nocwnd
  * 
  *     @nocwnd.setter             # <<<<<<<<<<<<<<
@@ -21963,7 +21990,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_6nocwnd_2__set__(struct __pyx_
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":335
+/* "siokcp/_kcp.pyx":355
  *         self._kcp.nocwnd = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -21995,7 +22022,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_6stream___get__(struct _
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":337
+  /* "siokcp/_kcp.pyx":357
  *     @property
  *     def stream(self):
  *         return self._kcp.stream             # <<<<<<<<<<<<<<
@@ -22003,13 +22030,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_6stream___get__(struct _
  *     @stream.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_int(__pyx_v_self->_kcp->stream); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 337, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_int(__pyx_v_self->_kcp->stream); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 357, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":335
+  /* "siokcp/_kcp.pyx":355
  *         self._kcp.nocwnd = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -22028,7 +22055,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_6stream___get__(struct _
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":339
+/* "siokcp/_kcp.pyx":359
  *         return self._kcp.stream
  * 
  *     @stream.setter             # <<<<<<<<<<<<<<
@@ -22049,7 +22076,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_6stream_3__set__(PyObject *__p
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_int(__pyx_arg_value); if (unlikely((__pyx_v_value == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 340, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_int(__pyx_arg_value); if (unlikely((__pyx_v_value == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 360, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -22067,7 +22094,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_6stream_3__set__(PyObject *__p
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_6stream_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, int __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":341
+  /* "siokcp/_kcp.pyx":361
  *     @stream.setter
  *     def stream(self, int value):
  *         self._kcp.stream = value             # <<<<<<<<<<<<<<
@@ -22076,7 +22103,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_6stream_2__set__(struct __pyx_
 */
   __pyx_v_self->_kcp->stream = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":339
+  /* "siokcp/_kcp.pyx":359
  *         return self._kcp.stream
  * 
  *     @stream.setter             # <<<<<<<<<<<<<<
@@ -22089,7 +22116,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_6stream_2__set__(struct __pyx_
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":343
+/* "siokcp/_kcp.pyx":363
  *         self._kcp.stream = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -22121,7 +22148,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7logmask___get__(struct 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "siokcp/_kcp.pyx":345
+  /* "siokcp/_kcp.pyx":365
  *     @property
  *     def logmask(self):
  *         return self._kcp.logmask             # <<<<<<<<<<<<<<
@@ -22129,13 +22156,13 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7logmask___get__(struct 
  *     @logmask.setter
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyLong_From_int(__pyx_v_self->_kcp->logmask); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 345, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_From_int(__pyx_v_self->_kcp->logmask); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 365, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":343
+  /* "siokcp/_kcp.pyx":363
  *         self._kcp.stream = value
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -22154,7 +22181,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7logmask___get__(struct 
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":347
+/* "siokcp/_kcp.pyx":367
  *         return self._kcp.logmask
  * 
  *     @logmask.setter             # <<<<<<<<<<<<<<
@@ -22175,7 +22202,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7logmask_3__set__(PyObject *__
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyLong_As_int(__pyx_arg_value); if (unlikely((__pyx_v_value == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 348, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyLong_As_int(__pyx_arg_value); if (unlikely((__pyx_v_value == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 368, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -22193,7 +22220,7 @@ static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7logmask_3__set__(PyObject *__
 static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7logmask_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, int __pyx_v_value) {
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":349
+  /* "siokcp/_kcp.pyx":369
  *     @logmask.setter
  *     def logmask(self, int value):
  *         self._kcp.logmask = value             # <<<<<<<<<<<<<<
@@ -22202,7 +22229,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7logmask_2__set__(struct __pyx
 */
   __pyx_v_self->_kcp->logmask = __pyx_v_value;
 
-  /* "siokcp/_kcp.pyx":347
+  /* "siokcp/_kcp.pyx":367
  *         return self._kcp.logmask
  * 
  *     @logmask.setter             # <<<<<<<<<<<<<<
@@ -22215,7 +22242,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7logmask_2__set__(struct __pyx
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":351
+/* "siokcp/_kcp.pyx":371
  *         self._kcp.logmask = value
  * 
  *     cpdef inline bytes next_event(self):             # <<<<<<<<<<<<<<
@@ -22244,7 +22271,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_next_event(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("next_event", 0);
 
-  /* "siokcp/_kcp.pyx":357
+  /* "siokcp/_kcp.pyx":377
  *         """
  *         cdef int hr
  *         cdef int size = ikcp_peeksize(self._kcp)             # <<<<<<<<<<<<<<
@@ -22253,7 +22280,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_next_event(
 */
   __pyx_v_size = ikcp_peeksize(__pyx_v_self->_kcp);
 
-  /* "siokcp/_kcp.pyx":358
+  /* "siokcp/_kcp.pyx":378
  *         cdef int hr
  *         cdef int size = ikcp_peeksize(self._kcp)
  *         if size < 0:             # <<<<<<<<<<<<<<
@@ -22263,7 +22290,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_next_event(
   __pyx_t_1 = (__pyx_v_size < 0);
   if (__pyx_t_1) {
 
-    /* "siokcp/_kcp.pyx":359
+    /* "siokcp/_kcp.pyx":379
  *         cdef int size = ikcp_peeksize(self._kcp)
  *         if size < 0:
  *             return None             # <<<<<<<<<<<<<<
@@ -22274,7 +22301,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_next_event(
     __pyx_r = ((PyObject*)Py_None); __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "siokcp/_kcp.pyx":358
+    /* "siokcp/_kcp.pyx":378
  *         cdef int hr
  *         cdef int size = ikcp_peeksize(self._kcp)
  *         if size < 0:             # <<<<<<<<<<<<<<
@@ -22283,19 +22310,19 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_next_event(
 */
   }
 
-  /* "siokcp/_kcp.pyx":360
+  /* "siokcp/_kcp.pyx":380
  *         if size < 0:
  *             return None
  *         cdef bytes out = PyBytes_FromStringAndSize(NULL, <Py_ssize_t>size)             # <<<<<<<<<<<<<<
  *         cdef const char *out_ptr = PyBytes_AS_STRING(out)
  *         with nogil:
 */
-  __pyx_t_2 = PyBytes_FromStringAndSize(NULL, ((Py_ssize_t)__pyx_v_size)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 360, __pyx_L1_error)
+  __pyx_t_2 = PyBytes_FromStringAndSize(NULL, ((Py_ssize_t)__pyx_v_size)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 380, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_out = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "siokcp/_kcp.pyx":361
+  /* "siokcp/_kcp.pyx":381
  *             return None
  *         cdef bytes out = PyBytes_FromStringAndSize(NULL, <Py_ssize_t>size)
  *         cdef const char *out_ptr = PyBytes_AS_STRING(out)             # <<<<<<<<<<<<<<
@@ -22304,7 +22331,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_next_event(
 */
   __pyx_v_out_ptr = PyBytes_AS_STRING(__pyx_v_out);
 
-  /* "siokcp/_kcp.pyx":362
+  /* "siokcp/_kcp.pyx":382
  *         cdef bytes out = PyBytes_FromStringAndSize(NULL, <Py_ssize_t>size)
  *         cdef const char *out_ptr = PyBytes_AS_STRING(out)
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -22318,7 +22345,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_next_event(
       __Pyx_FastGIL_Remember();
       /*try:*/ {
 
-        /* "siokcp/_kcp.pyx":363
+        /* "siokcp/_kcp.pyx":383
  *         cdef const char *out_ptr = PyBytes_AS_STRING(out)
  *         with nogil:
  *             hr = ikcp_recv(self._kcp, <char*>out_ptr, size)             # <<<<<<<<<<<<<<
@@ -22328,7 +22355,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_next_event(
         __pyx_v_hr = ikcp_recv(__pyx_v_self->_kcp, ((char *)__pyx_v_out_ptr), __pyx_v_size);
       }
 
-      /* "siokcp/_kcp.pyx":362
+      /* "siokcp/_kcp.pyx":382
  *         cdef bytes out = PyBytes_FromStringAndSize(NULL, <Py_ssize_t>size)
  *         cdef const char *out_ptr = PyBytes_AS_STRING(out)
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -22345,7 +22372,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_next_event(
       }
   }
 
-  /* "siokcp/_kcp.pyx":364
+  /* "siokcp/_kcp.pyx":384
  *         with nogil:
  *             hr = ikcp_recv(self._kcp, <char*>out_ptr, size)
  *         if hr < 0:             # <<<<<<<<<<<<<<
@@ -22355,7 +22382,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_next_event(
   __pyx_t_1 = (__pyx_v_hr < 0);
   if (__pyx_t_1) {
 
-    /* "siokcp/_kcp.pyx":365
+    /* "siokcp/_kcp.pyx":385
  *             hr = ikcp_recv(self._kcp, <char*>out_ptr, size)
  *         if hr < 0:
  *             return None             # <<<<<<<<<<<<<<
@@ -22366,7 +22393,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_next_event(
     __pyx_r = ((PyObject*)Py_None); __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "siokcp/_kcp.pyx":364
+    /* "siokcp/_kcp.pyx":384
  *         with nogil:
  *             hr = ikcp_recv(self._kcp, <char*>out_ptr, size)
  *         if hr < 0:             # <<<<<<<<<<<<<<
@@ -22375,7 +22402,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_next_event(
 */
   }
 
-  /* "siokcp/_kcp.pyx":366
+  /* "siokcp/_kcp.pyx":386
  *         if hr < 0:
  *             return None
  *         return out             # <<<<<<<<<<<<<<
@@ -22387,7 +22414,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_next_event(
   __pyx_r = __pyx_v_out;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":351
+  /* "siokcp/_kcp.pyx":371
  *         self._kcp.logmask = value
  * 
  *     cpdef inline bytes next_event(self):             # <<<<<<<<<<<<<<
@@ -22458,7 +22485,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_4next_event(struct __pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("next_event", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_next_event(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 351, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_next_event(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 371, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -22475,7 +22502,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_4next_event(struct __pyx
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":368
+/* "siokcp/_kcp.pyx":388
  *         return out
  * 
  *     cpdef inline int next_event_into(self, uint8_t[::1] buffer):             # <<<<<<<<<<<<<<
@@ -22495,7 +22522,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_next_event_into(s
   int __pyx_r;
   Py_ssize_t __pyx_t_1;
 
-  /* "siokcp/_kcp.pyx":374
+  /* "siokcp/_kcp.pyx":394
  *         """
  *         cdef int hr
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -22509,7 +22536,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_next_event_into(s
       __Pyx_FastGIL_Remember();
       /*try:*/ {
 
-        /* "siokcp/_kcp.pyx":375
+        /* "siokcp/_kcp.pyx":395
  *         cdef int hr
  *         with nogil:
  *             hr = ikcp_recv(self._kcp, <char *>&buffer[0], <int> buffer.shape[0])             # <<<<<<<<<<<<<<
@@ -22520,7 +22547,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_next_event_into(s
         __pyx_v_hr = ikcp_recv(__pyx_v_self->_kcp, ((char *)(&(*((uint8_t *) ( /* dim=0 */ ((char *) (((uint8_t *) __pyx_v_buffer.data) + __pyx_t_1)) ))))), ((int)(__pyx_v_buffer.shape[0])));
       }
 
-      /* "siokcp/_kcp.pyx":374
+      /* "siokcp/_kcp.pyx":394
  *         """
  *         cdef int hr
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -22537,7 +22564,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_next_event_into(s
       }
   }
 
-  /* "siokcp/_kcp.pyx":376
+  /* "siokcp/_kcp.pyx":396
  *         with nogil:
  *             hr = ikcp_recv(self._kcp, <char *>&buffer[0], <int> buffer.shape[0])
  *         return hr             # <<<<<<<<<<<<<<
@@ -22547,7 +22574,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_next_event_into(s
   __pyx_r = __pyx_v_hr;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":368
+  /* "siokcp/_kcp.pyx":388
  *         return out
  * 
  *     cpdef inline int next_event_into(self, uint8_t[::1] buffer):             # <<<<<<<<<<<<<<
@@ -22615,23 +22642,23 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 368, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 388, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "next_event_into") < 0)) __PYX_ERR(0, 368, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "next_event_into") < 0)) __PYX_ERR(0, 388, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
     }
-    __pyx_v_buffer = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_buffer.memview)) __PYX_ERR(0, 368, __pyx_L3_error)
+    __pyx_v_buffer = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_buffer.memview)) __PYX_ERR(0, 388, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("next_event_into", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 368, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("next_event_into", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 388, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -22670,9 +22697,9 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_6next_event_into(struct 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("next_event_into", 0);
   __Pyx_XDECREF(__pyx_r);
-  if (unlikely(!__pyx_v_buffer.memview)) { __Pyx_RaiseUnboundLocalError("buffer"); __PYX_ERR(0, 368, __pyx_L1_error) }
-  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_next_event_into(__pyx_v_self, __pyx_v_buffer, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 368, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyLong_From_int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 368, __pyx_L1_error)
+  if (unlikely(!__pyx_v_buffer.memview)) { __Pyx_RaiseUnboundLocalError("buffer"); __PYX_ERR(0, 388, __pyx_L1_error) }
+  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_next_event_into(__pyx_v_self, __pyx_v_buffer, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 388, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyLong_From_int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 388, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -22689,7 +22716,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_6next_event_into(struct 
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":378
+/* "siokcp/_kcp.pyx":398
  *         return hr
  * 
  *     cpdef inline int send(self, const uint8_t[::1] data) except -1:             # <<<<<<<<<<<<<<
@@ -22717,7 +22744,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_send(struct __pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("send", 0);
 
-  /* "siokcp/_kcp.pyx":380
+  /* "siokcp/_kcp.pyx":400
  *     cpdef inline int send(self, const uint8_t[::1] data) except -1:
  *         cdef int ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -22731,7 +22758,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_send(struct __pyx
       __Pyx_FastGIL_Remember();
       /*try:*/ {
 
-        /* "siokcp/_kcp.pyx":381
+        /* "siokcp/_kcp.pyx":401
  *         cdef int ret
  *         with nogil:
  *             ret = ikcp_send(self._kcp, <const char*>&data[0], <int>data.shape[0])             # <<<<<<<<<<<<<<
@@ -22742,7 +22769,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_send(struct __pyx
         __pyx_v_ret = ikcp_send(__pyx_v_self->_kcp, ((char const *)(&(*((uint8_t const  *) ( /* dim=0 */ ((char *) (((uint8_t const  *) __pyx_v_data.data) + __pyx_t_1)) ))))), ((int)(__pyx_v_data.shape[0])));
       }
 
-      /* "siokcp/_kcp.pyx":380
+      /* "siokcp/_kcp.pyx":400
  *     cpdef inline int send(self, const uint8_t[::1] data) except -1:
  *         cdef int ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -22759,7 +22786,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_send(struct __pyx
       }
   }
 
-  /* "siokcp/_kcp.pyx":382
+  /* "siokcp/_kcp.pyx":402
  *         with nogil:
  *             ret = ikcp_send(self._kcp, <const char*>&data[0], <int>data.shape[0])
  *         if ret < 0:             # <<<<<<<<<<<<<<
@@ -22769,26 +22796,26 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_send(struct __pyx
   __pyx_t_2 = (__pyx_v_ret < 0);
   if (unlikely(__pyx_t_2)) {
 
-    /* "siokcp/_kcp.pyx":383
+    /* "siokcp/_kcp.pyx":403
  *             ret = ikcp_send(self._kcp, <const char*>&data[0], <int>data.shape[0])
  *         if ret < 0:
  *             raise ValueError(f"kcp send error: {ret}") # todo             # <<<<<<<<<<<<<<
  *         return ret
  * 
 */
-    __pyx_t_3 = __Pyx_PyUnicode_From_int(__pyx_v_ret, 0, ' ', 'd'); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 383, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyUnicode_From_int(__pyx_v_ret, 0, ' ', 'd'); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 403, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_kcp_send_error, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 383, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_kcp_send_error, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 403, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_ValueError, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 383, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_ValueError, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 403, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 383, __pyx_L1_error)
+    __PYX_ERR(0, 403, __pyx_L1_error)
 
-    /* "siokcp/_kcp.pyx":382
+    /* "siokcp/_kcp.pyx":402
  *         with nogil:
  *             ret = ikcp_send(self._kcp, <const char*>&data[0], <int>data.shape[0])
  *         if ret < 0:             # <<<<<<<<<<<<<<
@@ -22797,7 +22824,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_send(struct __pyx
 */
   }
 
-  /* "siokcp/_kcp.pyx":384
+  /* "siokcp/_kcp.pyx":404
  *         if ret < 0:
  *             raise ValueError(f"kcp send error: {ret}") # todo
  *         return ret             # <<<<<<<<<<<<<<
@@ -22807,7 +22834,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_send(struct __pyx
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":378
+  /* "siokcp/_kcp.pyx":398
  *         return hr
  * 
  *     cpdef inline int send(self, const uint8_t[::1] data) except -1:             # <<<<<<<<<<<<<<
@@ -22881,23 +22908,23 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 378, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 398, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "send") < 0)) __PYX_ERR(0, 378, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "send") < 0)) __PYX_ERR(0, 398, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
     }
-    __pyx_v_data = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t__const__(values[0], 0); if (unlikely(!__pyx_v_data.memview)) __PYX_ERR(0, 378, __pyx_L3_error)
+    __pyx_v_data = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t__const__(values[0], 0); if (unlikely(!__pyx_v_data.memview)) __PYX_ERR(0, 398, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("send", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 378, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("send", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 398, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -22936,9 +22963,9 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8send(struct __pyx_obj_6
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("send", 0);
   __Pyx_XDECREF(__pyx_r);
-  if (unlikely(!__pyx_v_data.memview)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 378, __pyx_L1_error) }
-  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_send(__pyx_v_self, __pyx_v_data, 1); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(0, 378, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyLong_From_int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 378, __pyx_L1_error)
+  if (unlikely(!__pyx_v_data.memview)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 398, __pyx_L1_error) }
+  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_send(__pyx_v_self, __pyx_v_data, 1); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(0, 398, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyLong_From_int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 398, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -22955,7 +22982,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_8send(struct __pyx_obj_6
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":386
+/* "siokcp/_kcp.pyx":406
  *         return ret
  * 
  *     cpdef inline update(self, uint32_t current):             # <<<<<<<<<<<<<<
@@ -22975,7 +23002,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_update(stru
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("update", 0);
 
-  /* "siokcp/_kcp.pyx":387
+  /* "siokcp/_kcp.pyx":407
  * 
  *     cpdef inline update(self, uint32_t current):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -22989,7 +23016,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_update(stru
       __Pyx_FastGIL_Remember();
       /*try:*/ {
 
-        /* "siokcp/_kcp.pyx":388
+        /* "siokcp/_kcp.pyx":408
  *     cpdef inline update(self, uint32_t current):
  *         with nogil:
  *             ikcp_update(self._kcp, current)             # <<<<<<<<<<<<<<
@@ -22999,7 +23026,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_update(stru
         ikcp_update(__pyx_v_self->_kcp, __pyx_v_current);
       }
 
-      /* "siokcp/_kcp.pyx":387
+      /* "siokcp/_kcp.pyx":407
  * 
  *     cpdef inline update(self, uint32_t current):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -23016,7 +23043,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_update(stru
       }
   }
 
-  /* "siokcp/_kcp.pyx":386
+  /* "siokcp/_kcp.pyx":406
  *         return ret
  * 
  *     cpdef inline update(self, uint32_t current):             # <<<<<<<<<<<<<<
@@ -23086,23 +23113,23 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 386, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 406, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "update") < 0)) __PYX_ERR(0, 386, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "update") < 0)) __PYX_ERR(0, 406, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
     }
-    __pyx_v_current = __Pyx_PyLong_As_uint32_t(values[0]); if (unlikely((__pyx_v_current == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 386, __pyx_L3_error)
+    __pyx_v_current = __Pyx_PyLong_As_uint32_t(values[0]); if (unlikely((__pyx_v_current == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 406, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("update", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 386, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("update", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 406, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -23138,7 +23165,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_10update(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("update", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_update(__pyx_v_self, __pyx_v_current, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 386, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_update(__pyx_v_self, __pyx_v_current, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 406, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -23155,7 +23182,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_10update(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":390
+/* "siokcp/_kcp.pyx":410
  *             ikcp_update(self._kcp, current)
  * 
  *     cpdef inline uint32_t check(self, uint32_t current):             # <<<<<<<<<<<<<<
@@ -23174,7 +23201,7 @@ static CYTHON_INLINE uint32_t __pyx_f_6siokcp_4_kcp_13KCPConnection_check(struct
   uint32_t __pyx_v_ret;
   uint32_t __pyx_r;
 
-  /* "siokcp/_kcp.pyx":392
+  /* "siokcp/_kcp.pyx":412
  *     cpdef inline uint32_t check(self, uint32_t current):
  *         cdef uint32_t ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -23188,7 +23215,7 @@ static CYTHON_INLINE uint32_t __pyx_f_6siokcp_4_kcp_13KCPConnection_check(struct
       __Pyx_FastGIL_Remember();
       /*try:*/ {
 
-        /* "siokcp/_kcp.pyx":393
+        /* "siokcp/_kcp.pyx":413
  *         cdef uint32_t ret
  *         with nogil:
  *             ret = ikcp_check(self._kcp, current)             # <<<<<<<<<<<<<<
@@ -23198,7 +23225,7 @@ static CYTHON_INLINE uint32_t __pyx_f_6siokcp_4_kcp_13KCPConnection_check(struct
         __pyx_v_ret = ikcp_check(__pyx_v_self->_kcp, __pyx_v_current);
       }
 
-      /* "siokcp/_kcp.pyx":392
+      /* "siokcp/_kcp.pyx":412
  *     cpdef inline uint32_t check(self, uint32_t current):
  *         cdef uint32_t ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -23215,7 +23242,7 @@ static CYTHON_INLINE uint32_t __pyx_f_6siokcp_4_kcp_13KCPConnection_check(struct
       }
   }
 
-  /* "siokcp/_kcp.pyx":394
+  /* "siokcp/_kcp.pyx":414
  *         with nogil:
  *             ret = ikcp_check(self._kcp, current)
  *         return ret             # <<<<<<<<<<<<<<
@@ -23225,7 +23252,7 @@ static CYTHON_INLINE uint32_t __pyx_f_6siokcp_4_kcp_13KCPConnection_check(struct
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":390
+  /* "siokcp/_kcp.pyx":410
  *             ikcp_update(self._kcp, current)
  * 
  *     cpdef inline uint32_t check(self, uint32_t current):             # <<<<<<<<<<<<<<
@@ -23293,23 +23320,23 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 390, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 410, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "check") < 0)) __PYX_ERR(0, 390, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "check") < 0)) __PYX_ERR(0, 410, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
     }
-    __pyx_v_current = __Pyx_PyLong_As_uint32_t(values[0]); if (unlikely((__pyx_v_current == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 390, __pyx_L3_error)
+    __pyx_v_current = __Pyx_PyLong_As_uint32_t(values[0]); if (unlikely((__pyx_v_current == ((uint32_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 410, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("check", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 390, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("check", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 410, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -23346,8 +23373,8 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_12check(struct __pyx_obj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("check", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_check(__pyx_v_self, __pyx_v_current, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 390, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyLong_From_uint32_t(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 390, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_check(__pyx_v_self, __pyx_v_current, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 410, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyLong_From_uint32_t(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 410, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -23364,7 +23391,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_12check(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":396
+/* "siokcp/_kcp.pyx":416
  *         return ret
  * 
  *     cpdef inline int receive_data(self, const uint8_t[::1] data):             # <<<<<<<<<<<<<<
@@ -23384,7 +23411,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_receive_data(stru
   int __pyx_r;
   Py_ssize_t __pyx_t_1;
 
-  /* "siokcp/_kcp.pyx":398
+  /* "siokcp/_kcp.pyx":418
  *     cpdef inline int receive_data(self, const uint8_t[::1] data):
  *         cdef int ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -23398,7 +23425,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_receive_data(stru
       __Pyx_FastGIL_Remember();
       /*try:*/ {
 
-        /* "siokcp/_kcp.pyx":399
+        /* "siokcp/_kcp.pyx":419
  *         cdef int ret
  *         with nogil:
  *             ret = ikcp_input(self._kcp, <char*>&data[0], <long>data.shape[0])             # <<<<<<<<<<<<<<
@@ -23409,7 +23436,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_receive_data(stru
         __pyx_v_ret = ikcp_input(__pyx_v_self->_kcp, ((char *)(&(*((uint8_t const  *) ( /* dim=0 */ ((char *) (((uint8_t const  *) __pyx_v_data.data) + __pyx_t_1)) ))))), ((long)(__pyx_v_data.shape[0])));
       }
 
-      /* "siokcp/_kcp.pyx":398
+      /* "siokcp/_kcp.pyx":418
  *     cpdef inline int receive_data(self, const uint8_t[::1] data):
  *         cdef int ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -23426,7 +23453,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_receive_data(stru
       }
   }
 
-  /* "siokcp/_kcp.pyx":400
+  /* "siokcp/_kcp.pyx":420
  *         with nogil:
  *             ret = ikcp_input(self._kcp, <char*>&data[0], <long>data.shape[0])
  *         return ret             # <<<<<<<<<<<<<<
@@ -23436,7 +23463,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_receive_data(stru
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":396
+  /* "siokcp/_kcp.pyx":416
  *         return ret
  * 
  *     cpdef inline int receive_data(self, const uint8_t[::1] data):             # <<<<<<<<<<<<<<
@@ -23504,23 +23531,23 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 396, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 416, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "receive_data") < 0)) __PYX_ERR(0, 396, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "receive_data") < 0)) __PYX_ERR(0, 416, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
     }
-    __pyx_v_data = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t__const__(values[0], 0); if (unlikely(!__pyx_v_data.memview)) __PYX_ERR(0, 396, __pyx_L3_error)
+    __pyx_v_data = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t__const__(values[0], 0); if (unlikely(!__pyx_v_data.memview)) __PYX_ERR(0, 416, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("receive_data", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 396, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("receive_data", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 416, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -23559,9 +23586,9 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_14receive_data(struct __
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("receive_data", 0);
   __Pyx_XDECREF(__pyx_r);
-  if (unlikely(!__pyx_v_data.memview)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 396, __pyx_L1_error) }
-  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_receive_data(__pyx_v_self, __pyx_v_data, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 396, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyLong_From_int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 396, __pyx_L1_error)
+  if (unlikely(!__pyx_v_data.memview)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 416, __pyx_L1_error) }
+  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_receive_data(__pyx_v_self, __pyx_v_data, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 416, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyLong_From_int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 416, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -23578,7 +23605,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_14receive_data(struct __
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":402
+/* "siokcp/_kcp.pyx":422
  *         return ret
  * 
  *     cpdef inline flush(self):             # <<<<<<<<<<<<<<
@@ -23598,7 +23625,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_flush(struc
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("flush", 0);
 
-  /* "siokcp/_kcp.pyx":403
+  /* "siokcp/_kcp.pyx":423
  * 
  *     cpdef inline flush(self):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -23612,7 +23639,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_flush(struc
       __Pyx_FastGIL_Remember();
       /*try:*/ {
 
-        /* "siokcp/_kcp.pyx":404
+        /* "siokcp/_kcp.pyx":424
  *     cpdef inline flush(self):
  *         with nogil:
  *             ikcp_flush(self._kcp)             # <<<<<<<<<<<<<<
@@ -23622,7 +23649,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_flush(struc
         ikcp_flush(__pyx_v_self->_kcp);
       }
 
-      /* "siokcp/_kcp.pyx":403
+      /* "siokcp/_kcp.pyx":423
  * 
  *     cpdef inline flush(self):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -23639,7 +23666,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_flush(struc
       }
   }
 
-  /* "siokcp/_kcp.pyx":402
+  /* "siokcp/_kcp.pyx":422
  *         return ret
  * 
  *     cpdef inline flush(self):             # <<<<<<<<<<<<<<
@@ -23705,7 +23732,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_16flush(struct __pyx_obj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("flush", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_flush(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 402, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_flush(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 422, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -23722,7 +23749,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_16flush(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":406
+/* "siokcp/_kcp.pyx":426
  *             ikcp_flush(self._kcp)
  * 
  *     cpdef inline int peeksize(self):             # <<<<<<<<<<<<<<
@@ -23741,7 +23768,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_peeksize(struct _
   int __pyx_v_ret;
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":408
+  /* "siokcp/_kcp.pyx":428
  *     cpdef inline int peeksize(self):
  *         cdef int ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -23755,7 +23782,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_peeksize(struct _
       __Pyx_FastGIL_Remember();
       /*try:*/ {
 
-        /* "siokcp/_kcp.pyx":409
+        /* "siokcp/_kcp.pyx":429
  *         cdef int ret
  *         with nogil:
  *             ret = ikcp_peeksize(self._kcp)             # <<<<<<<<<<<<<<
@@ -23765,7 +23792,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_peeksize(struct _
         __pyx_v_ret = ikcp_peeksize(__pyx_v_self->_kcp);
       }
 
-      /* "siokcp/_kcp.pyx":408
+      /* "siokcp/_kcp.pyx":428
  *     cpdef inline int peeksize(self):
  *         cdef int ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -23782,7 +23809,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_peeksize(struct _
       }
   }
 
-  /* "siokcp/_kcp.pyx":410
+  /* "siokcp/_kcp.pyx":430
  *         with nogil:
  *             ret = ikcp_peeksize(self._kcp)
  *         return ret             # <<<<<<<<<<<<<<
@@ -23792,7 +23819,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_peeksize(struct _
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":406
+  /* "siokcp/_kcp.pyx":426
  *             ikcp_flush(self._kcp)
  * 
  *     cpdef inline int peeksize(self):             # <<<<<<<<<<<<<<
@@ -23857,8 +23884,8 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_18peeksize(struct __pyx_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("peeksize", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_peeksize(__pyx_v_self, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 406, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyLong_From_int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 406, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_peeksize(__pyx_v_self, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 426, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyLong_From_int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 426, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -23875,7 +23902,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_18peeksize(struct __pyx_
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":412
+/* "siokcp/_kcp.pyx":432
  *         return ret
  * 
  *     cpdef inline int setmtu(self, int mtu):             # <<<<<<<<<<<<<<
@@ -23894,7 +23921,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_setmtu(struct __p
   int __pyx_v_ret;
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":414
+  /* "siokcp/_kcp.pyx":434
  *     cpdef inline int setmtu(self, int mtu):
  *         cdef int ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -23908,7 +23935,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_setmtu(struct __p
       __Pyx_FastGIL_Remember();
       /*try:*/ {
 
-        /* "siokcp/_kcp.pyx":415
+        /* "siokcp/_kcp.pyx":435
  *         cdef int ret
  *         with nogil:
  *             ret = ikcp_setmtu(self._kcp, mtu)             # <<<<<<<<<<<<<<
@@ -23918,7 +23945,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_setmtu(struct __p
         __pyx_v_ret = ikcp_setmtu(__pyx_v_self->_kcp, __pyx_v_mtu);
       }
 
-      /* "siokcp/_kcp.pyx":414
+      /* "siokcp/_kcp.pyx":434
  *     cpdef inline int setmtu(self, int mtu):
  *         cdef int ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -23935,7 +23962,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_setmtu(struct __p
       }
   }
 
-  /* "siokcp/_kcp.pyx":416
+  /* "siokcp/_kcp.pyx":436
  *         with nogil:
  *             ret = ikcp_setmtu(self._kcp, mtu)
  *         return ret             # <<<<<<<<<<<<<<
@@ -23945,7 +23972,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_setmtu(struct __p
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":412
+  /* "siokcp/_kcp.pyx":432
  *         return ret
  * 
  *     cpdef inline int setmtu(self, int mtu):             # <<<<<<<<<<<<<<
@@ -24013,23 +24040,23 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 412, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 432, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "setmtu") < 0)) __PYX_ERR(0, 412, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "setmtu") < 0)) __PYX_ERR(0, 432, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
     }
-    __pyx_v_mtu = __Pyx_PyLong_As_int(values[0]); if (unlikely((__pyx_v_mtu == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 412, __pyx_L3_error)
+    __pyx_v_mtu = __Pyx_PyLong_As_int(values[0]); if (unlikely((__pyx_v_mtu == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 432, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("setmtu", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 412, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("setmtu", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 432, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -24066,8 +24093,8 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_20setmtu(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("setmtu", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_setmtu(__pyx_v_self, __pyx_v_mtu, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 412, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyLong_From_int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 412, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_setmtu(__pyx_v_self, __pyx_v_mtu, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 432, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyLong_From_int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 432, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -24084,7 +24111,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_20setmtu(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":418
+/* "siokcp/_kcp.pyx":438
  *         return ret
  * 
  *     cpdef inline int wndsize(self, int sndwnd, int rcvwnd):             # <<<<<<<<<<<<<<
@@ -24103,7 +24130,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_wndsize(struct __
   int __pyx_v_ret;
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":420
+  /* "siokcp/_kcp.pyx":440
  *     cpdef inline int wndsize(self, int sndwnd, int rcvwnd):
  *         cdef int ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -24117,7 +24144,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_wndsize(struct __
       __Pyx_FastGIL_Remember();
       /*try:*/ {
 
-        /* "siokcp/_kcp.pyx":421
+        /* "siokcp/_kcp.pyx":441
  *         cdef int ret
  *         with nogil:
  *             ret = ikcp_wndsize(self._kcp, sndwnd, rcvwnd)             # <<<<<<<<<<<<<<
@@ -24127,7 +24154,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_wndsize(struct __
         __pyx_v_ret = ikcp_wndsize(__pyx_v_self->_kcp, __pyx_v_sndwnd, __pyx_v_rcvwnd);
       }
 
-      /* "siokcp/_kcp.pyx":420
+      /* "siokcp/_kcp.pyx":440
  *     cpdef inline int wndsize(self, int sndwnd, int rcvwnd):
  *         cdef int ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -24144,7 +24171,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_wndsize(struct __
       }
   }
 
-  /* "siokcp/_kcp.pyx":422
+  /* "siokcp/_kcp.pyx":442
  *         with nogil:
  *             ret = ikcp_wndsize(self._kcp, sndwnd, rcvwnd)
  *         return ret             # <<<<<<<<<<<<<<
@@ -24154,7 +24181,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_wndsize(struct __
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":418
+  /* "siokcp/_kcp.pyx":438
  *         return ret
  * 
  *     cpdef inline int wndsize(self, int sndwnd, int rcvwnd):             # <<<<<<<<<<<<<<
@@ -24226,7 +24253,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 418, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 438, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -24234,14 +24261,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 418, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 438, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("wndsize", 1, 2, 2, 1); __PYX_ERR(0, 418, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("wndsize", 1, 2, 2, 1); __PYX_ERR(0, 438, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "wndsize") < 0)) __PYX_ERR(0, 418, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "wndsize") < 0)) __PYX_ERR(0, 438, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -24249,12 +24276,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
       values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
     }
-    __pyx_v_sndwnd = __Pyx_PyLong_As_int(values[0]); if (unlikely((__pyx_v_sndwnd == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 418, __pyx_L3_error)
-    __pyx_v_rcvwnd = __Pyx_PyLong_As_int(values[1]); if (unlikely((__pyx_v_rcvwnd == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 418, __pyx_L3_error)
+    __pyx_v_sndwnd = __Pyx_PyLong_As_int(values[0]); if (unlikely((__pyx_v_sndwnd == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 438, __pyx_L3_error)
+    __pyx_v_rcvwnd = __Pyx_PyLong_As_int(values[1]); if (unlikely((__pyx_v_rcvwnd == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 438, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("wndsize", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 418, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("wndsize", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 438, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -24291,8 +24318,8 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_22wndsize(struct __pyx_o
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("wndsize", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_wndsize(__pyx_v_self, __pyx_v_sndwnd, __pyx_v_rcvwnd, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 418, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyLong_From_int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 418, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_wndsize(__pyx_v_self, __pyx_v_sndwnd, __pyx_v_rcvwnd, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 438, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyLong_From_int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 438, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -24309,7 +24336,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_22wndsize(struct __pyx_o
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":424
+/* "siokcp/_kcp.pyx":444
  *         return ret
  * 
  *     cpdef inline int waitsnd(self):             # <<<<<<<<<<<<<<
@@ -24328,7 +24355,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_waitsnd(struct __
   int __pyx_v_ret;
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":426
+  /* "siokcp/_kcp.pyx":446
  *     cpdef inline int waitsnd(self):
  *         cdef int ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -24342,7 +24369,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_waitsnd(struct __
       __Pyx_FastGIL_Remember();
       /*try:*/ {
 
-        /* "siokcp/_kcp.pyx":427
+        /* "siokcp/_kcp.pyx":447
  *         cdef int ret
  *         with nogil:
  *             ret = ikcp_waitsnd(self._kcp)             # <<<<<<<<<<<<<<
@@ -24352,7 +24379,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_waitsnd(struct __
         __pyx_v_ret = ikcp_waitsnd(__pyx_v_self->_kcp);
       }
 
-      /* "siokcp/_kcp.pyx":426
+      /* "siokcp/_kcp.pyx":446
  *     cpdef inline int waitsnd(self):
  *         cdef int ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -24369,7 +24396,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_waitsnd(struct __
       }
   }
 
-  /* "siokcp/_kcp.pyx":428
+  /* "siokcp/_kcp.pyx":448
  *         with nogil:
  *             ret = ikcp_waitsnd(self._kcp)
  *         return ret             # <<<<<<<<<<<<<<
@@ -24379,7 +24406,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_waitsnd(struct __
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":424
+  /* "siokcp/_kcp.pyx":444
  *         return ret
  * 
  *     cpdef inline int waitsnd(self):             # <<<<<<<<<<<<<<
@@ -24444,8 +24471,8 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_24waitsnd(struct __pyx_o
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("waitsnd", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_waitsnd(__pyx_v_self, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 424, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyLong_From_int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 424, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_waitsnd(__pyx_v_self, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 444, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyLong_From_int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 444, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -24462,7 +24489,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_24waitsnd(struct __pyx_o
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":430
+/* "siokcp/_kcp.pyx":450
  *         return ret
  * 
  *     cpdef inline int nodelay(self, int nodelay, int interval, int resend, int nc):             # <<<<<<<<<<<<<<
@@ -24481,7 +24508,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_nodelay(struct __
   int __pyx_v_ret;
   int __pyx_r;
 
-  /* "siokcp/_kcp.pyx":432
+  /* "siokcp/_kcp.pyx":452
  *     cpdef inline int nodelay(self, int nodelay, int interval, int resend, int nc):
  *         cdef int ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -24495,7 +24522,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_nodelay(struct __
       __Pyx_FastGIL_Remember();
       /*try:*/ {
 
-        /* "siokcp/_kcp.pyx":433
+        /* "siokcp/_kcp.pyx":453
  *         cdef int ret
  *         with nogil:
  *             ret = ikcp_nodelay(self._kcp, nodelay, interval, resend, nc)             # <<<<<<<<<<<<<<
@@ -24505,7 +24532,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_nodelay(struct __
         __pyx_v_ret = ikcp_nodelay(__pyx_v_self->_kcp, __pyx_v_nodelay, __pyx_v_interval, __pyx_v_resend, __pyx_v_nc);
       }
 
-      /* "siokcp/_kcp.pyx":432
+      /* "siokcp/_kcp.pyx":452
  *     cpdef inline int nodelay(self, int nodelay, int interval, int resend, int nc):
  *         cdef int ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -24522,7 +24549,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_nodelay(struct __
       }
   }
 
-  /* "siokcp/_kcp.pyx":434
+  /* "siokcp/_kcp.pyx":454
  *         with nogil:
  *             ret = ikcp_nodelay(self._kcp, nodelay, interval, resend, nc)
  *         return ret             # <<<<<<<<<<<<<<
@@ -24532,7 +24559,7 @@ static CYTHON_INLINE int __pyx_f_6siokcp_4_kcp_13KCPConnection_nodelay(struct __
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":430
+  /* "siokcp/_kcp.pyx":450
  *         return ret
  * 
  *     cpdef inline int nodelay(self, int nodelay, int interval, int resend, int nc):             # <<<<<<<<<<<<<<
@@ -24612,7 +24639,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 430, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 450, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -24620,9 +24647,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 430, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 450, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("nodelay", 1, 4, 4, 1); __PYX_ERR(0, 430, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("nodelay", 1, 4, 4, 1); __PYX_ERR(0, 450, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -24630,9 +24657,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[2]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 430, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 450, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("nodelay", 1, 4, 4, 2); __PYX_ERR(0, 430, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("nodelay", 1, 4, 4, 2); __PYX_ERR(0, 450, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -24640,14 +24667,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[3]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 430, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 450, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("nodelay", 1, 4, 4, 3); __PYX_ERR(0, 430, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("nodelay", 1, 4, 4, 3); __PYX_ERR(0, 450, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "nodelay") < 0)) __PYX_ERR(0, 430, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "nodelay") < 0)) __PYX_ERR(0, 450, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 4)) {
       goto __pyx_L5_argtuple_error;
@@ -24657,14 +24684,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
       values[3] = __Pyx_Arg_FASTCALL(__pyx_args, 3);
     }
-    __pyx_v_nodelay = __Pyx_PyLong_As_int(values[0]); if (unlikely((__pyx_v_nodelay == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 430, __pyx_L3_error)
-    __pyx_v_interval = __Pyx_PyLong_As_int(values[1]); if (unlikely((__pyx_v_interval == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 430, __pyx_L3_error)
-    __pyx_v_resend = __Pyx_PyLong_As_int(values[2]); if (unlikely((__pyx_v_resend == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 430, __pyx_L3_error)
-    __pyx_v_nc = __Pyx_PyLong_As_int(values[3]); if (unlikely((__pyx_v_nc == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 430, __pyx_L3_error)
+    __pyx_v_nodelay = __Pyx_PyLong_As_int(values[0]); if (unlikely((__pyx_v_nodelay == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 450, __pyx_L3_error)
+    __pyx_v_interval = __Pyx_PyLong_As_int(values[1]); if (unlikely((__pyx_v_interval == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 450, __pyx_L3_error)
+    __pyx_v_resend = __Pyx_PyLong_As_int(values[2]); if (unlikely((__pyx_v_resend == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 450, __pyx_L3_error)
+    __pyx_v_nc = __Pyx_PyLong_As_int(values[3]); if (unlikely((__pyx_v_nc == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 450, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("nodelay", 1, 4, 4, __pyx_nargs); __PYX_ERR(0, 430, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("nodelay", 1, 4, 4, __pyx_nargs); __PYX_ERR(0, 450, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -24701,8 +24728,8 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_26nodelay(struct __pyx_o
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("nodelay", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_nodelay(__pyx_v_self, __pyx_v_nodelay, __pyx_v_interval, __pyx_v_resend, __pyx_v_nc, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 430, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyLong_From_int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 430, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_nodelay(__pyx_v_self, __pyx_v_nodelay, __pyx_v_interval, __pyx_v_resend, __pyx_v_nc, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 450, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyLong_From_int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 450, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -24719,7 +24746,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_26nodelay(struct __pyx_o
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":436
+/* "siokcp/_kcp.pyx":456
  *         return ret
  * 
  *     cpdef inline log(self, int mask, str data):             # <<<<<<<<<<<<<<
@@ -24744,17 +24771,17 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_log(struct 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("log", 0);
 
-  /* "siokcp/_kcp.pyx":437
+  /* "siokcp/_kcp.pyx":457
  * 
  *     cpdef inline log(self, int mask, str data):
  *         cdef const char* data_ptr = PyUnicode_AsUTF8(data)             # <<<<<<<<<<<<<<
  *         with nogil:
  *             ikcp_log(self._kcp, mask, data_ptr)
 */
-  __pyx_t_1 = PyUnicode_AsUTF8(__pyx_v_data); if (unlikely(__pyx_t_1 == ((char const *)0))) __PYX_ERR(0, 437, __pyx_L1_error)
+  __pyx_t_1 = PyUnicode_AsUTF8(__pyx_v_data); if (unlikely(__pyx_t_1 == ((char const *)0))) __PYX_ERR(0, 457, __pyx_L1_error)
   __pyx_v_data_ptr = __pyx_t_1;
 
-  /* "siokcp/_kcp.pyx":438
+  /* "siokcp/_kcp.pyx":458
  *     cpdef inline log(self, int mask, str data):
  *         cdef const char* data_ptr = PyUnicode_AsUTF8(data)
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -24768,7 +24795,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_log(struct 
       __Pyx_FastGIL_Remember();
       /*try:*/ {
 
-        /* "siokcp/_kcp.pyx":439
+        /* "siokcp/_kcp.pyx":459
  *         cdef const char* data_ptr = PyUnicode_AsUTF8(data)
  *         with nogil:
  *             ikcp_log(self._kcp, mask, data_ptr)             # <<<<<<<<<<<<<<
@@ -24778,7 +24805,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_log(struct 
         ikcp_log(__pyx_v_self->_kcp, __pyx_v_mask, __pyx_v_data_ptr);
       }
 
-      /* "siokcp/_kcp.pyx":438
+      /* "siokcp/_kcp.pyx":458
  *     cpdef inline log(self, int mask, str data):
  *         cdef const char* data_ptr = PyUnicode_AsUTF8(data)
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -24795,7 +24822,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_log(struct 
       }
   }
 
-  /* "siokcp/_kcp.pyx":436
+  /* "siokcp/_kcp.pyx":456
  *         return ret
  * 
  *     cpdef inline log(self, int mask, str data):             # <<<<<<<<<<<<<<
@@ -24874,7 +24901,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 436, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 456, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -24882,14 +24909,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 436, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 456, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("log", 1, 2, 2, 1); __PYX_ERR(0, 436, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("log", 1, 2, 2, 1); __PYX_ERR(0, 456, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "log") < 0)) __PYX_ERR(0, 436, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "log") < 0)) __PYX_ERR(0, 456, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -24897,12 +24924,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
       values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
     }
-    __pyx_v_mask = __Pyx_PyLong_As_int(values[0]); if (unlikely((__pyx_v_mask == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 436, __pyx_L3_error)
+    __pyx_v_mask = __Pyx_PyLong_As_int(values[0]); if (unlikely((__pyx_v_mask == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 456, __pyx_L3_error)
     __pyx_v_data = ((PyObject*)values[1]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("log", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 436, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("log", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 456, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -24916,7 +24943,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_data), (&PyUnicode_Type), 1, "data", 1))) __PYX_ERR(0, 436, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_data), (&PyUnicode_Type), 1, "data", 1))) __PYX_ERR(0, 456, __pyx_L1_error)
   __pyx_r = __pyx_pf_6siokcp_4_kcp_13KCPConnection_28log(((struct __pyx_obj_6siokcp_4_kcp_KCPConnection *)__pyx_v_self), __pyx_v_mask, __pyx_v_data);
 
   /* function exit code */
@@ -24943,7 +24970,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_28log(struct __pyx_obj_6
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("log", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_log(__pyx_v_self, __pyx_v_mask, __pyx_v_data, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 436, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_13KCPConnection_log(__pyx_v_self, __pyx_v_mask, __pyx_v_data, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 456, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -24956,6 +24983,107 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_28log(struct __pyx_obj_6
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "siokcp/_kcp.pyx":50
+ *     cdef:
+ *         ikcpcb *_kcp
+ *         public object send_cb             # <<<<<<<<<<<<<<
+ *         object log_cb
+ * 
+*/
+
+/* Python wrapper */
+static PyObject *__pyx_pw_6siokcp_4_kcp_13KCPConnection_7send_cb_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_6siokcp_4_kcp_13KCPConnection_7send_cb_1__get__(PyObject *__pyx_v_self) {
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
+  __pyx_r = __pyx_pf_6siokcp_4_kcp_13KCPConnection_7send_cb___get__(((struct __pyx_obj_6siokcp_4_kcp_KCPConnection *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_7send_cb___get__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(__pyx_v_self->send_cb);
+  __pyx_r = __pyx_v_self->send_cb;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7send_cb_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value); /*proto*/
+static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7send_cb_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
+  __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
+  __pyx_r = __pyx_pf_6siokcp_4_kcp_13KCPConnection_7send_cb_2__set__(((struct __pyx_obj_6siokcp_4_kcp_KCPConnection *)__pyx_v_self), ((PyObject *)__pyx_v_value));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7send_cb_2__set__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self, PyObject *__pyx_v_value) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__set__", 0);
+  __Pyx_INCREF(__pyx_v_value);
+  __Pyx_GIVEREF(__pyx_v_value);
+  __Pyx_GOTREF(__pyx_v_self->send_cb);
+  __Pyx_DECREF(__pyx_v_self->send_cb);
+  __pyx_v_self->send_cb = __pyx_v_value;
+
+  /* function exit code */
+  __pyx_r = 0;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7send_cb_5__del__(PyObject *__pyx_v_self); /*proto*/
+static int __pyx_pw_6siokcp_4_kcp_13KCPConnection_7send_cb_5__del__(PyObject *__pyx_v_self) {
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__del__ (wrapper)", 0);
+  __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
+  __pyx_r = __pyx_pf_6siokcp_4_kcp_13KCPConnection_7send_cb_4__del__(((struct __pyx_obj_6siokcp_4_kcp_KCPConnection *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_7send_cb_4__del__(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *__pyx_v_self) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__del__", 0);
+  __Pyx_INCREF(Py_None);
+  __Pyx_GIVEREF(Py_None);
+  __Pyx_GOTREF(__pyx_v_self->send_cb);
+  __Pyx_DECREF(__pyx_v_self->send_cb);
+  __pyx_v_self->send_cb = Py_None;
+
+  /* function exit code */
+  __pyx_r = 0;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
@@ -25177,12 +25305,12 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_32__setstate_cython__(CY
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":444
+/* "siokcp/_kcp.pyx":464
  * ikcp_allocator(PyMem_RawMalloc, PyMem_RawFree)
  * 
  * cpdef inline uint32_t getconv(const uint8_t[::1] data):             # <<<<<<<<<<<<<<
- *     cdef uint32_t ret
- *     with nogil:
+ *     """Get conversation id from raw data
+ *     :param data: raw data read from socket, usually at the beginning of a session
 */
 
 static PyObject *__pyx_pw_6siokcp_4_kcp_1getconv(PyObject *__pyx_self, 
@@ -25197,8 +25325,8 @@ static CYTHON_INLINE uint32_t __pyx_f_6siokcp_4_kcp_getconv(__Pyx_memviewslice _
   uint32_t __pyx_r;
   Py_ssize_t __pyx_t_1;
 
-  /* "siokcp/_kcp.pyx":446
- * cpdef inline uint32_t getconv(const uint8_t[::1] data):
+  /* "siokcp/_kcp.pyx":470
+ *     """
  *     cdef uint32_t ret
  *     with nogil:             # <<<<<<<<<<<<<<
  *         ret = ikcp_getconv(&data[0])
@@ -25211,7 +25339,7 @@ static CYTHON_INLINE uint32_t __pyx_f_6siokcp_4_kcp_getconv(__Pyx_memviewslice _
       __Pyx_FastGIL_Remember();
       /*try:*/ {
 
-        /* "siokcp/_kcp.pyx":447
+        /* "siokcp/_kcp.pyx":471
  *     cdef uint32_t ret
  *     with nogil:
  *         ret = ikcp_getconv(&data[0])             # <<<<<<<<<<<<<<
@@ -25221,8 +25349,8 @@ static CYTHON_INLINE uint32_t __pyx_f_6siokcp_4_kcp_getconv(__Pyx_memviewslice _
         __pyx_v_ret = ikcp_getconv((&(*((uint8_t const  *) ( /* dim=0 */ ((char *) (((uint8_t const  *) __pyx_v_data.data) + __pyx_t_1)) )))));
       }
 
-      /* "siokcp/_kcp.pyx":446
- * cpdef inline uint32_t getconv(const uint8_t[::1] data):
+      /* "siokcp/_kcp.pyx":470
+ *     """
  *     cdef uint32_t ret
  *     with nogil:             # <<<<<<<<<<<<<<
  *         ret = ikcp_getconv(&data[0])
@@ -25238,7 +25366,7 @@ static CYTHON_INLINE uint32_t __pyx_f_6siokcp_4_kcp_getconv(__Pyx_memviewslice _
       }
   }
 
-  /* "siokcp/_kcp.pyx":448
+  /* "siokcp/_kcp.pyx":472
  *     with nogil:
  *         ret = ikcp_getconv(&data[0])
  *     return ret             # <<<<<<<<<<<<<<
@@ -25246,12 +25374,12 @@ static CYTHON_INLINE uint32_t __pyx_f_6siokcp_4_kcp_getconv(__Pyx_memviewslice _
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":444
+  /* "siokcp/_kcp.pyx":464
  * ikcp_allocator(PyMem_RawMalloc, PyMem_RawFree)
  * 
  * cpdef inline uint32_t getconv(const uint8_t[::1] data):             # <<<<<<<<<<<<<<
- *     cdef uint32_t ret
- *     with nogil:
+ *     """Get conversation id from raw data
+ *     :param data: raw data read from socket, usually at the beginning of a session
 */
 
   /* function exit code */
@@ -25267,7 +25395,7 @@ PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_6siokcp_4_kcp_getconv, "getconv(const uint8_t[::1] data) -> uint32_t");
+PyDoc_STRVAR(__pyx_doc_6siokcp_4_kcp_getconv, "getconv(const uint8_t[::1] data) -> uint32_t\nGet conversation id from raw data\n:param data: raw data read from socket, usually at the beginning of a session\n:return: conversation id, aka conv");
 static PyMethodDef __pyx_mdef_6siokcp_4_kcp_1getconv = {"getconv", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6siokcp_4_kcp_1getconv, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6siokcp_4_kcp_getconv};
 static PyObject *__pyx_pw_6siokcp_4_kcp_1getconv(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
@@ -25314,23 +25442,23 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 444, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 464, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "getconv") < 0)) __PYX_ERR(0, 444, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "getconv") < 0)) __PYX_ERR(0, 464, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
     }
-    __pyx_v_data = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t__const__(values[0], 0); if (unlikely(!__pyx_v_data.memview)) __PYX_ERR(0, 444, __pyx_L3_error)
+    __pyx_v_data = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t__const__(values[0], 0); if (unlikely(!__pyx_v_data.memview)) __PYX_ERR(0, 464, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("getconv", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 444, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("getconv", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 464, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -25369,9 +25497,9 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_getconv(CYTHON_UNUSED PyObject *__pyx_se
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("getconv", 0);
   __Pyx_XDECREF(__pyx_r);
-  if (unlikely(!__pyx_v_data.memview)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 444, __pyx_L1_error) }
-  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_getconv(__pyx_v_data, 1); if (unlikely(__pyx_t_1 == ((uint32_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 444, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyLong_From_uint32_t(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 444, __pyx_L1_error)
+  if (unlikely(!__pyx_v_data.memview)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 464, __pyx_L1_error) }
+  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_getconv(__pyx_v_data, 1); if (unlikely(__pyx_t_1 == ((uint32_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 464, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyLong_From_uint32_t(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 464, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -25981,6 +26109,19 @@ static int __pyx_setprop_6siokcp_4_kcp_13KCPConnection_logmask(PyObject *o, PyOb
   }
 }
 
+static PyObject *__pyx_getprop_6siokcp_4_kcp_13KCPConnection_send_cb(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_6siokcp_4_kcp_13KCPConnection_7send_cb_1__get__(o);
+}
+
+static int __pyx_setprop_6siokcp_4_kcp_13KCPConnection_send_cb(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
+  if (v) {
+    return __pyx_pw_6siokcp_4_kcp_13KCPConnection_7send_cb_3__set__(o, v);
+  }
+  else {
+    return __pyx_pw_6siokcp_4_kcp_13KCPConnection_7send_cb_5__del__(o);
+  }
+}
+
 static PyMethodDef __pyx_methods_6siokcp_4_kcp_KCPConnection[] = {
   {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6siokcp_4_kcp_13KCPConnection_31__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6siokcp_4_kcp_13KCPConnection_30__reduce_cython__},
   {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6siokcp_4_kcp_13KCPConnection_33__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6siokcp_4_kcp_13KCPConnection_32__setstate_cython__},
@@ -26026,6 +26167,7 @@ static struct PyGetSetDef __pyx_getsets_6siokcp_4_kcp_KCPConnection[] = {
   {"nocwnd", __pyx_getprop_6siokcp_4_kcp_13KCPConnection_nocwnd, __pyx_setprop_6siokcp_4_kcp_13KCPConnection_nocwnd, 0, 0},
   {"stream", __pyx_getprop_6siokcp_4_kcp_13KCPConnection_stream, __pyx_setprop_6siokcp_4_kcp_13KCPConnection_stream, 0, 0},
   {"logmask", __pyx_getprop_6siokcp_4_kcp_13KCPConnection_logmask, __pyx_setprop_6siokcp_4_kcp_13KCPConnection_logmask, 0, 0},
+  {"send_cb", __pyx_getprop_6siokcp_4_kcp_13KCPConnection_send_cb, __pyx_setprop_6siokcp_4_kcp_13KCPConnection_send_cb, PyDoc_STR("send_cb: object"), 0},
   {0, 0, 0, 0, 0}
 };
 #if CYTHON_USE_TYPE_SPECS
@@ -27088,15 +27230,15 @@ static int __Pyx_modinit_type_init_code(__pyx_mstatetype *__pyx_mstate) {
   __pyx_vtable_6siokcp_4_kcp_KCPConnection.nodelay = (int (*)(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *, int, int, int, int, int __pyx_skip_dispatch))__pyx_f_6siokcp_4_kcp_13KCPConnection_nodelay;
   __pyx_vtable_6siokcp_4_kcp_KCPConnection.log = (PyObject *(*)(struct __pyx_obj_6siokcp_4_kcp_KCPConnection *, int, PyObject *, int __pyx_skip_dispatch))__pyx_f_6siokcp_4_kcp_13KCPConnection_log;
   #if CYTHON_USE_TYPE_SPECS
-  __pyx_mstate->__pyx_ptype_6siokcp_4_kcp_KCPConnection = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_6siokcp_4_kcp_KCPConnection_spec, NULL); if (unlikely(!__pyx_mstate->__pyx_ptype_6siokcp_4_kcp_KCPConnection)) __PYX_ERR(0, 24, __pyx_L1_error)
-  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_6siokcp_4_kcp_KCPConnection_spec, __pyx_mstate->__pyx_ptype_6siokcp_4_kcp_KCPConnection) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_mstate->__pyx_ptype_6siokcp_4_kcp_KCPConnection = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_6siokcp_4_kcp_KCPConnection_spec, NULL); if (unlikely(!__pyx_mstate->__pyx_ptype_6siokcp_4_kcp_KCPConnection)) __PYX_ERR(0, 44, __pyx_L1_error)
+  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_6siokcp_4_kcp_KCPConnection_spec, __pyx_mstate->__pyx_ptype_6siokcp_4_kcp_KCPConnection) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
   #else
   __pyx_mstate->__pyx_ptype_6siokcp_4_kcp_KCPConnection = &__pyx_type_6siokcp_4_kcp_KCPConnection;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
   #endif
   #if !CYTHON_USE_TYPE_SPECS
-  if (__Pyx_PyType_Ready(__pyx_mstate->__pyx_ptype_6siokcp_4_kcp_KCPConnection) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
+  if (__Pyx_PyType_Ready(__pyx_mstate->__pyx_ptype_6siokcp_4_kcp_KCPConnection) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
   #endif
   #if PY_MAJOR_VERSION < 3
   __pyx_mstate->__pyx_ptype_6siokcp_4_kcp_KCPConnection->tp_print = 0;
@@ -27106,10 +27248,10 @@ static int __Pyx_modinit_type_init_code(__pyx_mstatetype *__pyx_mstate) {
     __pyx_mstate->__pyx_ptype_6siokcp_4_kcp_KCPConnection->tp_getattro = PyObject_GenericGetAttr;
   }
   #endif
-  if (__Pyx_SetVtable(__pyx_mstate->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_vtabptr_6siokcp_4_kcp_KCPConnection) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
-  if (__Pyx_MergeVtables(__pyx_mstate->__pyx_ptype_6siokcp_4_kcp_KCPConnection) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_mstate_global->__pyx_n_u_KCPConnection, (PyObject *) __pyx_mstate->__pyx_ptype_6siokcp_4_kcp_KCPConnection) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject *) __pyx_mstate->__pyx_ptype_6siokcp_4_kcp_KCPConnection) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_mstate->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_vtabptr_6siokcp_4_kcp_KCPConnection) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
+  if (__Pyx_MergeVtables(__pyx_mstate->__pyx_ptype_6siokcp_4_kcp_KCPConnection) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_mstate_global->__pyx_n_u_KCPConnection, (PyObject *) __pyx_mstate->__pyx_ptype_6siokcp_4_kcp_KCPConnection) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject *) __pyx_mstate->__pyx_ptype_6siokcp_4_kcp_KCPConnection) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
   __pyx_vtabptr_array = &__pyx_vtable_array;
   __pyx_vtable_array.get_memview = (PyObject *(*)(struct __pyx_array_obj *))__pyx_array_get_memview;
   #if CYTHON_USE_TYPE_SPECS
@@ -28031,160 +28173,304 @@ __Pyx_RefNannySetupContext("PyInit__kcp", 0);
   if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_pyx_unpickle_Enum, __pyx_t_6) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "siokcp/_kcp.pyx":351
+  /* "siokcp/_kcp.pyx":19
+ *                           ikcp_update, ikcpcb)
+ * 
+ * IKCP_LOG_OUTPUT	      =          IKCP_LOG_OUTPUT_C             # <<<<<<<<<<<<<<
+ * IKCP_LOG_INPUT	      =          IKCP_LOG_INPUT_C
+ * IKCP_LOG_SEND	      =          IKCP_LOG_SEND_C
+*/
+  __pyx_t_6 = __Pyx_PyLong_From_int(IKCP_LOG_OUTPUT); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_IKCP_LOG_OUTPUT, __pyx_t_6) < 0) __PYX_ERR(0, 19, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+  /* "siokcp/_kcp.pyx":20
+ * 
+ * IKCP_LOG_OUTPUT	      =          IKCP_LOG_OUTPUT_C
+ * IKCP_LOG_INPUT	      =          IKCP_LOG_INPUT_C             # <<<<<<<<<<<<<<
+ * IKCP_LOG_SEND	      =          IKCP_LOG_SEND_C
+ * IKCP_LOG_RECV	      =          IKCP_LOG_RECV_C
+*/
+  __pyx_t_6 = __Pyx_PyLong_From_int(IKCP_LOG_INPUT); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_IKCP_LOG_INPUT, __pyx_t_6) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+  /* "siokcp/_kcp.pyx":21
+ * IKCP_LOG_OUTPUT	      =          IKCP_LOG_OUTPUT_C
+ * IKCP_LOG_INPUT	      =          IKCP_LOG_INPUT_C
+ * IKCP_LOG_SEND	      =          IKCP_LOG_SEND_C             # <<<<<<<<<<<<<<
+ * IKCP_LOG_RECV	      =          IKCP_LOG_RECV_C
+ * IKCP_LOG_IN_DATA      =          IKCP_LOG_IN_DATA_C
+*/
+  __pyx_t_6 = __Pyx_PyLong_From_int(IKCP_LOG_SEND); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_IKCP_LOG_SEND, __pyx_t_6) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+  /* "siokcp/_kcp.pyx":22
+ * IKCP_LOG_INPUT	      =          IKCP_LOG_INPUT_C
+ * IKCP_LOG_SEND	      =          IKCP_LOG_SEND_C
+ * IKCP_LOG_RECV	      =          IKCP_LOG_RECV_C             # <<<<<<<<<<<<<<
+ * IKCP_LOG_IN_DATA      =          IKCP_LOG_IN_DATA_C
+ * IKCP_LOG_IN_ACK	      =          IKCP_LOG_IN_ACK_C
+*/
+  __pyx_t_6 = __Pyx_PyLong_From_int(IKCP_LOG_RECV); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_IKCP_LOG_RECV, __pyx_t_6) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+  /* "siokcp/_kcp.pyx":23
+ * IKCP_LOG_SEND	      =          IKCP_LOG_SEND_C
+ * IKCP_LOG_RECV	      =          IKCP_LOG_RECV_C
+ * IKCP_LOG_IN_DATA      =          IKCP_LOG_IN_DATA_C             # <<<<<<<<<<<<<<
+ * IKCP_LOG_IN_ACK	      =          IKCP_LOG_IN_ACK_C
+ * IKCP_LOG_IN_PROBE     =           IKCP_LOG_IN_PROBE_C
+*/
+  __pyx_t_6 = __Pyx_PyLong_From_int(IKCP_LOG_IN_DATA); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_IKCP_LOG_IN_DATA, __pyx_t_6) < 0) __PYX_ERR(0, 23, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+  /* "siokcp/_kcp.pyx":24
+ * IKCP_LOG_RECV	      =          IKCP_LOG_RECV_C
+ * IKCP_LOG_IN_DATA      =          IKCP_LOG_IN_DATA_C
+ * IKCP_LOG_IN_ACK	      =          IKCP_LOG_IN_ACK_C             # <<<<<<<<<<<<<<
+ * IKCP_LOG_IN_PROBE     =           IKCP_LOG_IN_PROBE_C
+ * IKCP_LOG_IN_WINS      =          IKCP_LOG_IN_WINS_C
+*/
+  __pyx_t_6 = __Pyx_PyLong_From_int(IKCP_LOG_IN_ACK); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_IKCP_LOG_IN_ACK, __pyx_t_6) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+  /* "siokcp/_kcp.pyx":25
+ * IKCP_LOG_IN_DATA      =          IKCP_LOG_IN_DATA_C
+ * IKCP_LOG_IN_ACK	      =          IKCP_LOG_IN_ACK_C
+ * IKCP_LOG_IN_PROBE     =           IKCP_LOG_IN_PROBE_C             # <<<<<<<<<<<<<<
+ * IKCP_LOG_IN_WINS      =          IKCP_LOG_IN_WINS_C
+ * IKCP_LOG_OUT_DATA     =           IKCP_LOG_OUT_DATA_C
+*/
+  __pyx_t_6 = __Pyx_PyLong_From_int(IKCP_LOG_IN_PROBE); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_IKCP_LOG_IN_PROBE, __pyx_t_6) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+  /* "siokcp/_kcp.pyx":26
+ * IKCP_LOG_IN_ACK	      =          IKCP_LOG_IN_ACK_C
+ * IKCP_LOG_IN_PROBE     =           IKCP_LOG_IN_PROBE_C
+ * IKCP_LOG_IN_WINS      =          IKCP_LOG_IN_WINS_C             # <<<<<<<<<<<<<<
+ * IKCP_LOG_OUT_DATA     =           IKCP_LOG_OUT_DATA_C
+ * IKCP_LOG_OUT_ACK      =          IKCP_LOG_OUT_ACK_C
+*/
+  __pyx_t_6 = __Pyx_PyLong_From_int(IKCP_LOG_IN_WINS); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_IKCP_LOG_IN_WINS, __pyx_t_6) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+  /* "siokcp/_kcp.pyx":27
+ * IKCP_LOG_IN_PROBE     =           IKCP_LOG_IN_PROBE_C
+ * IKCP_LOG_IN_WINS      =          IKCP_LOG_IN_WINS_C
+ * IKCP_LOG_OUT_DATA     =           IKCP_LOG_OUT_DATA_C             # <<<<<<<<<<<<<<
+ * IKCP_LOG_OUT_ACK      =          IKCP_LOG_OUT_ACK_C
+ * IKCP_LOG_OUT_PROBE    =            IKCP_LOG_OUT_PROBE_C
+*/
+  __pyx_t_6 = __Pyx_PyLong_From_int(IKCP_LOG_OUT_DATA); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_IKCP_LOG_OUT_DATA, __pyx_t_6) < 0) __PYX_ERR(0, 27, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+  /* "siokcp/_kcp.pyx":28
+ * IKCP_LOG_IN_WINS      =          IKCP_LOG_IN_WINS_C
+ * IKCP_LOG_OUT_DATA     =           IKCP_LOG_OUT_DATA_C
+ * IKCP_LOG_OUT_ACK      =          IKCP_LOG_OUT_ACK_C             # <<<<<<<<<<<<<<
+ * IKCP_LOG_OUT_PROBE    =            IKCP_LOG_OUT_PROBE_C
+ * IKCP_LOG_OUT_WINS     =           IKCP_LOG_OUT_WINS_C
+*/
+  __pyx_t_6 = __Pyx_PyLong_From_int(IKCP_LOG_OUT_ACK); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 28, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_IKCP_LOG_OUT_ACK, __pyx_t_6) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+  /* "siokcp/_kcp.pyx":29
+ * IKCP_LOG_OUT_DATA     =           IKCP_LOG_OUT_DATA_C
+ * IKCP_LOG_OUT_ACK      =          IKCP_LOG_OUT_ACK_C
+ * IKCP_LOG_OUT_PROBE    =            IKCP_LOG_OUT_PROBE_C             # <<<<<<<<<<<<<<
+ * IKCP_LOG_OUT_WINS     =           IKCP_LOG_OUT_WINS_C
+ * 
+*/
+  __pyx_t_6 = __Pyx_PyLong_From_int(IKCP_LOG_OUT_PROBE); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_IKCP_LOG_OUT_PROBE, __pyx_t_6) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+  /* "siokcp/_kcp.pyx":30
+ * IKCP_LOG_OUT_ACK      =          IKCP_LOG_OUT_ACK_C
+ * IKCP_LOG_OUT_PROBE    =            IKCP_LOG_OUT_PROBE_C
+ * IKCP_LOG_OUT_WINS     =           IKCP_LOG_OUT_WINS_C             # <<<<<<<<<<<<<<
+ * 
+ * 
+*/
+  __pyx_t_6 = __Pyx_PyLong_From_int(IKCP_LOG_OUT_WINS); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_IKCP_LOG_OUT_WINS, __pyx_t_6) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+  /* "siokcp/_kcp.pyx":371
  *         self._kcp.logmask = value
  * 
  *     cpdef inline bytes next_event(self):             # <<<<<<<<<<<<<<
  *         """
  *         Return None for EAGAIN
 */
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_5next_event, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_next_event, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 351, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_5next_event, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_next_event, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 371, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_next_event, __pyx_t_6) < 0) __PYX_ERR(0, 351, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_next_event, __pyx_t_6) < 0) __PYX_ERR(0, 371, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "siokcp/_kcp.pyx":368
+  /* "siokcp/_kcp.pyx":388
  *         return out
  * 
  *     cpdef inline int next_event_into(self, uint8_t[::1] buffer):             # <<<<<<<<<<<<<<
  *         """
  *         you may need to call this multiple times to get all data, until it returns 0
 */
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_7next_event_into, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_next_event_into, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[1])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 368, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_7next_event_into, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_next_event_into, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[1])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 388, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_next_event_into, __pyx_t_6) < 0) __PYX_ERR(0, 368, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_next_event_into, __pyx_t_6) < 0) __PYX_ERR(0, 388, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "siokcp/_kcp.pyx":378
+  /* "siokcp/_kcp.pyx":398
  *         return hr
  * 
  *     cpdef inline int send(self, const uint8_t[::1] data) except -1:             # <<<<<<<<<<<<<<
  *         cdef int ret
  *         with nogil:
 */
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_9send, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_send, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[2])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 378, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_9send, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_send, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[2])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 398, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_send, __pyx_t_6) < 0) __PYX_ERR(0, 378, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_send, __pyx_t_6) < 0) __PYX_ERR(0, 398, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "siokcp/_kcp.pyx":386
+  /* "siokcp/_kcp.pyx":406
  *         return ret
  * 
  *     cpdef inline update(self, uint32_t current):             # <<<<<<<<<<<<<<
  *         with nogil:
  *             ikcp_update(self._kcp, current)
 */
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_11update, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_update, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[3])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 386, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_11update, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_update, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[3])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 406, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_update, __pyx_t_6) < 0) __PYX_ERR(0, 386, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_update, __pyx_t_6) < 0) __PYX_ERR(0, 406, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "siokcp/_kcp.pyx":390
+  /* "siokcp/_kcp.pyx":410
  *             ikcp_update(self._kcp, current)
  * 
  *     cpdef inline uint32_t check(self, uint32_t current):             # <<<<<<<<<<<<<<
  *         cdef uint32_t ret
  *         with nogil:
 */
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_13check, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_check, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[4])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 390, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_13check, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_check, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[4])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 410, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_check, __pyx_t_6) < 0) __PYX_ERR(0, 390, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_check, __pyx_t_6) < 0) __PYX_ERR(0, 410, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "siokcp/_kcp.pyx":396
+  /* "siokcp/_kcp.pyx":416
  *         return ret
  * 
  *     cpdef inline int receive_data(self, const uint8_t[::1] data):             # <<<<<<<<<<<<<<
  *         cdef int ret
  *         with nogil:
 */
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_15receive_data, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_receive_data, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[5])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 396, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_15receive_data, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_receive_data, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[5])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 416, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_receive_data, __pyx_t_6) < 0) __PYX_ERR(0, 396, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_receive_data, __pyx_t_6) < 0) __PYX_ERR(0, 416, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "siokcp/_kcp.pyx":402
+  /* "siokcp/_kcp.pyx":422
  *         return ret
  * 
  *     cpdef inline flush(self):             # <<<<<<<<<<<<<<
  *         with nogil:
  *             ikcp_flush(self._kcp)
 */
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_17flush, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_flush, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[6])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 402, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_17flush, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_flush, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[6])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 422, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_flush, __pyx_t_6) < 0) __PYX_ERR(0, 402, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_flush, __pyx_t_6) < 0) __PYX_ERR(0, 422, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "siokcp/_kcp.pyx":406
+  /* "siokcp/_kcp.pyx":426
  *             ikcp_flush(self._kcp)
  * 
  *     cpdef inline int peeksize(self):             # <<<<<<<<<<<<<<
  *         cdef int ret
  *         with nogil:
 */
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_19peeksize, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_peeksize, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[7])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 406, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_19peeksize, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_peeksize, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[7])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 426, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_peeksize, __pyx_t_6) < 0) __PYX_ERR(0, 406, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_peeksize, __pyx_t_6) < 0) __PYX_ERR(0, 426, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "siokcp/_kcp.pyx":412
+  /* "siokcp/_kcp.pyx":432
  *         return ret
  * 
  *     cpdef inline int setmtu(self, int mtu):             # <<<<<<<<<<<<<<
  *         cdef int ret
  *         with nogil:
 */
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_21setmtu, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_setmtu, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[8])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 412, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_21setmtu, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_setmtu, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[8])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 432, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_setmtu, __pyx_t_6) < 0) __PYX_ERR(0, 412, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_setmtu, __pyx_t_6) < 0) __PYX_ERR(0, 432, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "siokcp/_kcp.pyx":418
+  /* "siokcp/_kcp.pyx":438
  *         return ret
  * 
  *     cpdef inline int wndsize(self, int sndwnd, int rcvwnd):             # <<<<<<<<<<<<<<
  *         cdef int ret
  *         with nogil:
 */
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_23wndsize, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_wndsize, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[9])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 418, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_23wndsize, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_wndsize, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[9])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 438, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_wndsize, __pyx_t_6) < 0) __PYX_ERR(0, 418, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_wndsize, __pyx_t_6) < 0) __PYX_ERR(0, 438, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "siokcp/_kcp.pyx":424
+  /* "siokcp/_kcp.pyx":444
  *         return ret
  * 
  *     cpdef inline int waitsnd(self):             # <<<<<<<<<<<<<<
  *         cdef int ret
  *         with nogil:
 */
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_25waitsnd, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_waitsnd, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[10])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 424, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_25waitsnd, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_waitsnd, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[10])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 444, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_waitsnd, __pyx_t_6) < 0) __PYX_ERR(0, 424, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_waitsnd, __pyx_t_6) < 0) __PYX_ERR(0, 444, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "siokcp/_kcp.pyx":430
+  /* "siokcp/_kcp.pyx":450
  *         return ret
  * 
  *     cpdef inline int nodelay(self, int nodelay, int interval, int resend, int nc):             # <<<<<<<<<<<<<<
  *         cdef int ret
  *         with nogil:
 */
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_27nodelay, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_nodelay, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[11])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 430, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_27nodelay, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_nodelay, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[11])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 450, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_nodelay, __pyx_t_6) < 0) __PYX_ERR(0, 430, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_nodelay, __pyx_t_6) < 0) __PYX_ERR(0, 450, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "siokcp/_kcp.pyx":436
+  /* "siokcp/_kcp.pyx":456
  *         return ret
  * 
  *     cpdef inline log(self, int mask, str data):             # <<<<<<<<<<<<<<
  *         cdef const char* data_ptr = PyUnicode_AsUTF8(data)
  *         with nogil:
 */
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_29log, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_log, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[12])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 436, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_13KCPConnection_29log, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_KCPConnection_log, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[12])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 456, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_log, __pyx_t_6) < 0) __PYX_ERR(0, 436, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_6siokcp_4_kcp_KCPConnection, __pyx_mstate_global->__pyx_n_u_log, __pyx_t_6) < 0) __PYX_ERR(0, 456, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
   /* "(tree fragment)":1
@@ -28208,7 +28494,7 @@ __Pyx_RefNannySetupContext("PyInit__kcp", 0);
   if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_setstate_cython, __pyx_t_6) < 0) __PYX_ERR(1, 3, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "siokcp/_kcp.pyx":442
+  /* "siokcp/_kcp.pyx":462
  * 
  * 
  * ikcp_allocator(PyMem_RawMalloc, PyMem_RawFree)             # <<<<<<<<<<<<<<
@@ -28217,16 +28503,16 @@ __Pyx_RefNannySetupContext("PyInit__kcp", 0);
 */
   ikcp_allocator(PyMem_RawMalloc, PyMem_RawFree);
 
-  /* "siokcp/_kcp.pyx":444
+  /* "siokcp/_kcp.pyx":464
  * ikcp_allocator(PyMem_RawMalloc, PyMem_RawFree)
  * 
  * cpdef inline uint32_t getconv(const uint8_t[::1] data):             # <<<<<<<<<<<<<<
- *     cdef uint32_t ret
- *     with nogil:
+ *     """Get conversation id from raw data
+ *     :param data: raw data read from socket, usually at the beginning of a session
 */
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_1getconv, 0, __pyx_mstate_global->__pyx_n_u_getconv, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[15])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 444, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_1getconv, 0, __pyx_mstate_global->__pyx_n_u_getconv, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[15])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 464, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_getconv, __pyx_t_6) < 0) __PYX_ERR(0, 444, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_getconv, __pyx_t_6) < 0) __PYX_ERR(0, 464, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
   /* "siokcp/_kcp.pyx":1
@@ -28312,6 +28598,18 @@ static const __Pyx_StringTabEntry __pyx_string_tab[] = {
   {__pyx_k_Dimension_d_is_not_direct, sizeof(__pyx_k_Dimension_d_is_not_direct), 0, 1, 0}, /* PyObject cname: __pyx_kp_u_Dimension_d_is_not_direct */
   {__pyx_k_Ellipsis, sizeof(__pyx_k_Ellipsis), 0, 1, 1}, /* PyObject cname: __pyx_n_u_Ellipsis */
   {__pyx_k_Empty_shape_tuple_for_cython_arr, sizeof(__pyx_k_Empty_shape_tuple_for_cython_arr), 0, 1, 0}, /* PyObject cname: __pyx_kp_u_Empty_shape_tuple_for_cython_arr */
+  {__pyx_k_IKCP_LOG_INPUT, sizeof(__pyx_k_IKCP_LOG_INPUT), 0, 1, 1}, /* PyObject cname: __pyx_n_u_IKCP_LOG_INPUT */
+  {__pyx_k_IKCP_LOG_IN_ACK, sizeof(__pyx_k_IKCP_LOG_IN_ACK), 0, 1, 1}, /* PyObject cname: __pyx_n_u_IKCP_LOG_IN_ACK */
+  {__pyx_k_IKCP_LOG_IN_DATA, sizeof(__pyx_k_IKCP_LOG_IN_DATA), 0, 1, 1}, /* PyObject cname: __pyx_n_u_IKCP_LOG_IN_DATA */
+  {__pyx_k_IKCP_LOG_IN_PROBE, sizeof(__pyx_k_IKCP_LOG_IN_PROBE), 0, 1, 1}, /* PyObject cname: __pyx_n_u_IKCP_LOG_IN_PROBE */
+  {__pyx_k_IKCP_LOG_IN_WINS, sizeof(__pyx_k_IKCP_LOG_IN_WINS), 0, 1, 1}, /* PyObject cname: __pyx_n_u_IKCP_LOG_IN_WINS */
+  {__pyx_k_IKCP_LOG_OUTPUT, sizeof(__pyx_k_IKCP_LOG_OUTPUT), 0, 1, 1}, /* PyObject cname: __pyx_n_u_IKCP_LOG_OUTPUT */
+  {__pyx_k_IKCP_LOG_OUT_ACK, sizeof(__pyx_k_IKCP_LOG_OUT_ACK), 0, 1, 1}, /* PyObject cname: __pyx_n_u_IKCP_LOG_OUT_ACK */
+  {__pyx_k_IKCP_LOG_OUT_DATA, sizeof(__pyx_k_IKCP_LOG_OUT_DATA), 0, 1, 1}, /* PyObject cname: __pyx_n_u_IKCP_LOG_OUT_DATA */
+  {__pyx_k_IKCP_LOG_OUT_PROBE, sizeof(__pyx_k_IKCP_LOG_OUT_PROBE), 0, 1, 1}, /* PyObject cname: __pyx_n_u_IKCP_LOG_OUT_PROBE */
+  {__pyx_k_IKCP_LOG_OUT_WINS, sizeof(__pyx_k_IKCP_LOG_OUT_WINS), 0, 1, 1}, /* PyObject cname: __pyx_n_u_IKCP_LOG_OUT_WINS */
+  {__pyx_k_IKCP_LOG_RECV, sizeof(__pyx_k_IKCP_LOG_RECV), 0, 1, 1}, /* PyObject cname: __pyx_n_u_IKCP_LOG_RECV */
+  {__pyx_k_IKCP_LOG_SEND, sizeof(__pyx_k_IKCP_LOG_SEND), 0, 1, 1}, /* PyObject cname: __pyx_n_u_IKCP_LOG_SEND */
   {__pyx_k_Incompatible_checksums_0x_x_vs_0, sizeof(__pyx_k_Incompatible_checksums_0x_x_vs_0), 0, 1, 0}, /* PyObject cname: __pyx_kp_u_Incompatible_checksums_0x_x_vs_0 */
   {__pyx_k_IndexError, sizeof(__pyx_k_IndexError), 0, 1, 1}, /* PyObject cname: __pyx_n_u_IndexError */
   {__pyx_k_Index_out_of_bounds_axis_d, sizeof(__pyx_k_Index_out_of_bounds_axis_d), 0, 1, 0}, /* PyObject cname: __pyx_kp_u_Index_out_of_bounds_axis_d */
@@ -28470,8 +28768,8 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry const *t, PyObject **target, c
 
 static int __Pyx_InitCachedBuiltins(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
-  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 39, __pyx_L1_error)
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 383, __pyx_L1_error)
+  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 403, __pyx_L1_error)
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 2, __pyx_L1_error)
   __pyx_builtin___import__ = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_import); if (!__pyx_builtin___import__) __PYX_ERR(1, 100, __pyx_L1_error)
   __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 156, __pyx_L1_error)
@@ -28639,67 +28937,67 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
   PyObject* tuple_dedup_map = PyDict_New();
   if (unlikely(!tuple_dedup_map)) return -1;
   {
-    __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 351, 92};
+    __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 371, 92};
     PyObject* varnames[] = {__pyx_mstate->__pyx_n_u_self};
     __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_siokcp__kcp_pyx, __pyx_mstate->__pyx_n_u_next_event, __pyx_k_A_Qd_5_1_2_6_Q_4AQ_4wgYa_3b_1_q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
   }
   {
-    __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 368, 43};
+    __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 388, 43};
     PyObject* varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_buffer};
     __pyx_mstate_global->__pyx_codeobj_tab[1] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_siokcp__kcp_pyx, __pyx_mstate->__pyx_n_u_next_event_into, __pyx_k_A_4whavQd_fAQ_q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[1])) goto bad;
   }
   {
-    __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 378, 67};
+    __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 398, 67};
     PyObject* varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_data};
     __pyx_mstate_global->__pyx_codeobj_tab[2] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_siokcp__kcp_pyx, __pyx_mstate->__pyx_n_u_send, __pyx_k_A_1D_AT_e4vQa_4r_AR_31_q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[2])) goto bad;
   }
   {
-    __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 386, 16};
+    __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 406, 16};
     PyObject* varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_current};
     __pyx_mstate_global->__pyx_codeobj_tab[3] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_siokcp__kcp_pyx, __pyx_mstate->__pyx_n_u_update, __pyx_k_A_q_G1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[3])) goto bad;
   }
   {
-    __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 390, 23};
+    __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 410, 23};
     PyObject* varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_current};
     __pyx_mstate_global->__pyx_codeobj_tab[4] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_siokcp__kcp_pyx, __pyx_mstate->__pyx_n_u_check, __pyx_k_A_AT_q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[4])) goto bad;
   }
   {
-    __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 396, 41};
+    __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 416, 41};
     PyObject* varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_data};
     __pyx_mstate_global->__pyx_codeobj_tab[5] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_siokcp__kcp_pyx, __pyx_mstate->__pyx_n_u_receive_data, __pyx_k_A_AT_q_AT_t6_q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[5])) goto bad;
   }
   {
-    __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 402, 14};
+    __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 422, 14};
     PyObject* varnames[] = {__pyx_mstate->__pyx_n_u_self};
     __pyx_mstate_global->__pyx_codeobj_tab[6] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_siokcp__kcp_pyx, __pyx_mstate->__pyx_n_u_flush, __pyx_k_A_at1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[6])) goto bad;
   }
   {
-    __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 406, 21};
+    __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 426, 21};
     PyObject* varnames[] = {__pyx_mstate->__pyx_n_u_self};
     __pyx_mstate_global->__pyx_codeobj_tab[7] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_siokcp__kcp_pyx, __pyx_mstate->__pyx_n_u_peeksize, __pyx_k_A_q_A_q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[7])) goto bad;
   }
   {
-    __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 412, 23};
+    __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 432, 23};
     PyObject* varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_mtu};
     __pyx_mstate_global->__pyx_codeobj_tab[8] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_siokcp__kcp_pyx, __pyx_mstate->__pyx_n_u_setmtu, __pyx_k_A_Qd_q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[8])) goto bad;
   }
   {
-    __Pyx_PyCode_New_function_description descr = {3, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 418, 25};
+    __Pyx_PyCode_New_function_description descr = {3, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 438, 25};
     PyObject* varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_sndwnd, __pyx_mstate->__pyx_n_u_rcvwnd};
     __pyx_mstate_global->__pyx_codeobj_tab[9] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_siokcp__kcp_pyx, __pyx_mstate->__pyx_n_u_wndsize, __pyx_k_A_at7_q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[9])) goto bad;
   }
   {
-    __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 424, 21};
+    __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 444, 21};
     PyObject* varnames[] = {__pyx_mstate->__pyx_n_u_self};
     __pyx_mstate_global->__pyx_codeobj_tab[10] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_siokcp__kcp_pyx, __pyx_mstate->__pyx_n_u_waitsnd, __pyx_k_A_at1_q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[10])) goto bad;
   }
   {
-    __Pyx_PyCode_New_function_description descr = {5, 0, 0, 5, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 430, 29};
+    __Pyx_PyCode_New_function_description descr = {5, 0, 0, 5, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 450, 29};
     PyObject* varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_nodelay, __pyx_mstate->__pyx_n_u_interval, __pyx_mstate->__pyx_n_u_resend, __pyx_mstate->__pyx_n_u_nc};
     __pyx_mstate_global->__pyx_codeobj_tab[11] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_siokcp__kcp_pyx, __pyx_mstate->__pyx_n_u_nodelay, __pyx_k_A_at7_XQ_q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[11])) goto bad;
   }
   {
-    __Pyx_PyCode_New_function_description descr = {3, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 436, 28};
+    __Pyx_PyCode_New_function_description descr = {3, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 456, 28};
     PyObject* varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_mask, __pyx_mstate->__pyx_n_u_data};
     __pyx_mstate_global->__pyx_codeobj_tab[12] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_siokcp__kcp_pyx, __pyx_mstate->__pyx_n_u_log, __pyx_k_A_4AQ_AT_a, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[12])) goto bad;
   }
@@ -28714,7 +29012,7 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
     __pyx_mstate_global->__pyx_codeobj_tab[14] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_setstate_cython, __pyx_k_Q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[14])) goto bad;
   }
   {
-    __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 444, 28};
+    __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 464, 30};
     PyObject* varnames[] = {__pyx_mstate->__pyx_n_u_data};
     __pyx_mstate_global->__pyx_codeobj_tab[15] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_siokcp__kcp_pyx, __pyx_mstate->__pyx_n_u_getconv, __pyx_k_Q_l_1D_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[15])) goto bad;
   }
@@ -34549,6 +34847,109 @@ static CYTHON_INLINE void __Pyx_XCLEAR_MEMVIEW(__Pyx_memviewslice *memslice,
     }
 }
 
+/* PyObjectVectorCallKwBuilder */
+  #if CYTHON_VECTORCALL
+static int __Pyx_VectorcallBuilder_AddArg(PyObject *key, PyObject *value, PyObject *builder, PyObject **args, int n) {
+    (void)__Pyx_PyObject_FastCallDict;
+    if (__Pyx_PyTuple_SET_ITEM(builder, n, key) != (0)) return -1;
+    Py_INCREF(key);
+    args[n] = value;
+    return 0;
+}
+CYTHON_UNUSED static int __Pyx_VectorcallBuilder_AddArg_Check(PyObject *key, PyObject *value, PyObject *builder, PyObject **args, int n) {
+    (void)__Pyx_VectorcallBuilder_AddArgStr;
+    if (unlikely(!PyUnicode_Check(key))) {
+        PyErr_SetString(PyExc_TypeError, "keywords must be strings");
+        return -1;
+    }
+    return __Pyx_VectorcallBuilder_AddArg(key, value, builder, args, n);
+}
+static int __Pyx_VectorcallBuilder_AddArgStr(const char *key, PyObject *value, PyObject *builder, PyObject **args, int n) {
+    PyObject *pyKey = PyUnicode_FromString(key);
+    if (!pyKey) return -1;
+    return __Pyx_VectorcallBuilder_AddArg(pyKey, value, builder, args, n);
+}
+#else // CYTHON_VECTORCALL
+CYTHON_UNUSED static int __Pyx_VectorcallBuilder_AddArg_Check(PyObject *key, PyObject *value, PyObject *builder, CYTHON_UNUSED PyObject **args, CYTHON_UNUSED int n) {
+    if (unlikely(!PyUnicode_Check(key))) {
+        PyErr_SetString(PyExc_TypeError, "keywords must be strings");
+        return -1;
+    }
+    return PyDict_SetItem(builder, key, value);
+}
+#endif
+
+/* CIntToPy */
+  static CYTHON_INLINE PyObject* __Pyx_PyLong_From_int(int value) {
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wconversion"
+#endif
+    const int neg_one = (int) -1, const_zero = (int) 0;
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic pop
+#endif
+    const int is_unsigned = neg_one > const_zero;
+    if (is_unsigned) {
+        if (sizeof(int) < sizeof(long)) {
+            return PyLong_FromLong((long) value);
+        } else if (sizeof(int) <= sizeof(unsigned long)) {
+            return PyLong_FromUnsignedLong((unsigned long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(int) <= sizeof(unsigned PY_LONG_LONG)) {
+            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
+#endif
+        }
+    } else {
+        if (sizeof(int) <= sizeof(long)) {
+            return PyLong_FromLong((long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(int) <= sizeof(PY_LONG_LONG)) {
+            return PyLong_FromLongLong((PY_LONG_LONG) value);
+#endif
+        }
+    }
+    {
+        unsigned char *bytes = (unsigned char *)&value;
+#if !CYTHON_COMPILING_IN_LIMITED_API && PY_VERSION_HEX >= 0x030d00A4
+        if (is_unsigned) {
+            return PyLong_FromUnsignedNativeBytes(bytes, sizeof(value), -1);
+        } else {
+            return PyLong_FromNativeBytes(bytes, sizeof(value), -1);
+        }
+#elif !CYTHON_COMPILING_IN_LIMITED_API && PY_VERSION_HEX < 0x030d0000
+        int one = 1; int little = (int)*(unsigned char *)&one;
+        return _PyLong_FromByteArray(bytes, sizeof(int),
+                                     little, !is_unsigned);
+#else
+        int one = 1; int little = (int)*(unsigned char *)&one;
+        PyObject *from_bytes, *result = NULL, *kwds = NULL;
+        PyObject *py_bytes = NULL, *order_str = NULL;
+        from_bytes = PyObject_GetAttrString((PyObject*)&PyLong_Type, "from_bytes");
+        if (!from_bytes) return NULL;
+        py_bytes = PyBytes_FromStringAndSize((char*)bytes, sizeof(int));
+        if (!py_bytes) goto limited_bad;
+        order_str = PyUnicode_FromString(little ? "little" : "big");
+        if (!order_str) goto limited_bad;
+        {
+            PyObject *args[3+(CYTHON_VECTORCALL ? 1 : 0)] = { NULL, py_bytes, order_str };
+            if (!is_unsigned) {
+                kwds = __Pyx_MakeVectorcallBuilderKwds(1);
+                if (!kwds) goto limited_bad;
+                if (__Pyx_VectorcallBuilder_AddArgStr("signed", __Pyx_NewRef(Py_True), kwds, args+3, 0) < 0) goto limited_bad;
+            }
+            result = __Pyx_Object_Vectorcall_CallFromBuilder(from_bytes, args+1, 2 | __Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET, kwds);
+        }
+        limited_bad:
+        Py_XDECREF(kwds);
+        Py_XDECREF(order_str);
+        Py_XDECREF(py_bytes);
+        Py_XDECREF(from_bytes);
+        return result;
+#endif
+    }
+}
+
 /* CIntFromPy */
   static CYTHON_INLINE uint32_t __Pyx_PyLong_As_uint32_t(PyObject *x) {
 #ifdef __Pyx_HAS_GCC_DIAGNOSTIC
@@ -35057,38 +35458,6 @@ raise_neg_overflow:
     return (int) -1;
 }
 
-/* PyObjectVectorCallKwBuilder */
-  #if CYTHON_VECTORCALL
-static int __Pyx_VectorcallBuilder_AddArg(PyObject *key, PyObject *value, PyObject *builder, PyObject **args, int n) {
-    (void)__Pyx_PyObject_FastCallDict;
-    if (__Pyx_PyTuple_SET_ITEM(builder, n, key) != (0)) return -1;
-    Py_INCREF(key);
-    args[n] = value;
-    return 0;
-}
-CYTHON_UNUSED static int __Pyx_VectorcallBuilder_AddArg_Check(PyObject *key, PyObject *value, PyObject *builder, PyObject **args, int n) {
-    (void)__Pyx_VectorcallBuilder_AddArgStr;
-    if (unlikely(!PyUnicode_Check(key))) {
-        PyErr_SetString(PyExc_TypeError, "keywords must be strings");
-        return -1;
-    }
-    return __Pyx_VectorcallBuilder_AddArg(key, value, builder, args, n);
-}
-static int __Pyx_VectorcallBuilder_AddArgStr(const char *key, PyObject *value, PyObject *builder, PyObject **args, int n) {
-    PyObject *pyKey = PyUnicode_FromString(key);
-    if (!pyKey) return -1;
-    return __Pyx_VectorcallBuilder_AddArg(pyKey, value, builder, args, n);
-}
-#else // CYTHON_VECTORCALL
-CYTHON_UNUSED static int __Pyx_VectorcallBuilder_AddArg_Check(PyObject *key, PyObject *value, PyObject *builder, CYTHON_UNUSED PyObject **args, CYTHON_UNUSED int n) {
-    if (unlikely(!PyUnicode_Check(key))) {
-        PyErr_SetString(PyExc_TypeError, "keywords must be strings");
-        return -1;
-    }
-    return PyDict_SetItem(builder, key, value);
-}
-#endif
-
 /* CIntToPy */
   static CYTHON_INLINE PyObject* __Pyx_PyLong_From_uint32_t(uint32_t value) {
 #ifdef __Pyx_HAS_GCC_DIAGNOSTIC
@@ -35138,77 +35507,6 @@ CYTHON_UNUSED static int __Pyx_VectorcallBuilder_AddArg_Check(PyObject *key, PyO
         from_bytes = PyObject_GetAttrString((PyObject*)&PyLong_Type, "from_bytes");
         if (!from_bytes) return NULL;
         py_bytes = PyBytes_FromStringAndSize((char*)bytes, sizeof(uint32_t));
-        if (!py_bytes) goto limited_bad;
-        order_str = PyUnicode_FromString(little ? "little" : "big");
-        if (!order_str) goto limited_bad;
-        {
-            PyObject *args[3+(CYTHON_VECTORCALL ? 1 : 0)] = { NULL, py_bytes, order_str };
-            if (!is_unsigned) {
-                kwds = __Pyx_MakeVectorcallBuilderKwds(1);
-                if (!kwds) goto limited_bad;
-                if (__Pyx_VectorcallBuilder_AddArgStr("signed", __Pyx_NewRef(Py_True), kwds, args+3, 0) < 0) goto limited_bad;
-            }
-            result = __Pyx_Object_Vectorcall_CallFromBuilder(from_bytes, args+1, 2 | __Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET, kwds);
-        }
-        limited_bad:
-        Py_XDECREF(kwds);
-        Py_XDECREF(order_str);
-        Py_XDECREF(py_bytes);
-        Py_XDECREF(from_bytes);
-        return result;
-#endif
-    }
-}
-
-/* CIntToPy */
-  static CYTHON_INLINE PyObject* __Pyx_PyLong_From_int(int value) {
-#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wconversion"
-#endif
-    const int neg_one = (int) -1, const_zero = (int) 0;
-#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
-#pragma GCC diagnostic pop
-#endif
-    const int is_unsigned = neg_one > const_zero;
-    if (is_unsigned) {
-        if (sizeof(int) < sizeof(long)) {
-            return PyLong_FromLong((long) value);
-        } else if (sizeof(int) <= sizeof(unsigned long)) {
-            return PyLong_FromUnsignedLong((unsigned long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(int) <= sizeof(unsigned PY_LONG_LONG)) {
-            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
-#endif
-        }
-    } else {
-        if (sizeof(int) <= sizeof(long)) {
-            return PyLong_FromLong((long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(int) <= sizeof(PY_LONG_LONG)) {
-            return PyLong_FromLongLong((PY_LONG_LONG) value);
-#endif
-        }
-    }
-    {
-        unsigned char *bytes = (unsigned char *)&value;
-#if !CYTHON_COMPILING_IN_LIMITED_API && PY_VERSION_HEX >= 0x030d00A4
-        if (is_unsigned) {
-            return PyLong_FromUnsignedNativeBytes(bytes, sizeof(value), -1);
-        } else {
-            return PyLong_FromNativeBytes(bytes, sizeof(value), -1);
-        }
-#elif !CYTHON_COMPILING_IN_LIMITED_API && PY_VERSION_HEX < 0x030d0000
-        int one = 1; int little = (int)*(unsigned char *)&one;
-        return _PyLong_FromByteArray(bytes, sizeof(int),
-                                     little, !is_unsigned);
-#else
-        int one = 1; int little = (int)*(unsigned char *)&one;
-        PyObject *from_bytes, *result = NULL, *kwds = NULL;
-        PyObject *py_bytes = NULL, *order_str = NULL;
-        from_bytes = PyObject_GetAttrString((PyObject*)&PyLong_Type, "from_bytes");
-        if (!from_bytes) return NULL;
-        py_bytes = PyBytes_FromStringAndSize((char*)bytes, sizeof(int));
         if (!py_bytes) goto limited_bad;
         order_str = PyUnicode_FromString(little ? "little" : "big");
         if (!order_str) goto limited_bad;

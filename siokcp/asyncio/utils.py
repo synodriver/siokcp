@@ -13,4 +13,3 @@ def feed_protocol(protocol: asyncio.BaseProtocol, connection: KCPConnection):
         buf = protocol.get_buffer(size)
         hr = connection.next_event_into(buf)
         protocol.buffer_updated(hr)
-    connection.flush()

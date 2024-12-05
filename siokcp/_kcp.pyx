@@ -6,9 +6,29 @@ from cpython.mem cimport PyMem_RawFree, PyMem_RawMalloc
 from cpython.unicode cimport PyUnicode_AsUTF8, PyUnicode_FromString
 from libc.stdint cimport uint8_t, uint32_t
 
-from siokcp._kcp cimport (ikcp_check, ikcp_create, ikcp_flush, ikcp_input,
-                          ikcp_peeksize, ikcp_recv, ikcp_release, ikcp_send,
-                          ikcp_setoutput, ikcp_update, ikcpcb)
+from siokcp._kcp cimport (IKCP_LOG_IN_ACK_C, IKCP_LOG_IN_DATA_C,
+                          IKCP_LOG_IN_PROBE_C, IKCP_LOG_IN_WINS_C,
+                          IKCP_LOG_INPUT_C, IKCP_LOG_OUT_ACK_C,
+                          IKCP_LOG_OUT_DATA_C, IKCP_LOG_OUT_PROBE_C,
+                          IKCP_LOG_OUT_WINS_C, IKCP_LOG_OUTPUT_C,
+                          IKCP_LOG_RECV_C, IKCP_LOG_SEND_C, ikcp_check,
+                          ikcp_create, ikcp_flush, ikcp_input, ikcp_peeksize,
+                          ikcp_recv, ikcp_release, ikcp_send, ikcp_setoutput,
+                          ikcp_update, ikcpcb)
+
+IKCP_LOG_OUTPUT	      =          IKCP_LOG_OUTPUT_C
+IKCP_LOG_INPUT	      =          IKCP_LOG_INPUT_C
+IKCP_LOG_SEND	      =          IKCP_LOG_SEND_C
+IKCP_LOG_RECV	      =          IKCP_LOG_RECV_C
+IKCP_LOG_IN_DATA      =          IKCP_LOG_IN_DATA_C
+IKCP_LOG_IN_ACK	      =          IKCP_LOG_IN_ACK_C
+IKCP_LOG_IN_PROBE     =           IKCP_LOG_IN_PROBE_C
+IKCP_LOG_IN_WINS      =          IKCP_LOG_IN_WINS_C
+IKCP_LOG_OUT_DATA     =           IKCP_LOG_OUT_DATA_C
+IKCP_LOG_OUT_ACK      =          IKCP_LOG_OUT_ACK_C
+IKCP_LOG_OUT_PROBE    =            IKCP_LOG_OUT_PROBE_C
+IKCP_LOG_OUT_WINS     =           IKCP_LOG_OUT_WINS_C
+
 
 
 cdef int kcp_output_cb(const char *buf, int len,  ikcpcb *kcp, void *user) with gil:
@@ -27,7 +47,7 @@ cdef void kcp_writelog_cb(const char *log, ikcpcb *kcp, void *user) with gil:
 cdef class KCPConnection:
     cdef:
         ikcpcb *_kcp
-        object send_cb
+        public object send_cb
         object log_cb
 
 
@@ -70,11 +90,11 @@ cdef class KCPConnection:
 
     @property
     def state(self):
-        return self._kcp.state
+        return <int>self._kcp.state # although it's uint32_t, we treat it as int
 
     @state.setter
-    def state(self, uint32_t value):
-        self._kcp.state = value
+    def state(self, int value):
+        self._kcp.state = <uint32_t>value
 
     @property
     def snd_una(self):
