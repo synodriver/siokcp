@@ -9,7 +9,7 @@ from siokcp.asyncio.transport import KCPTransport
 from siokcp.asyncio.utils import feed_protocol
 
 
-# todo 一段时间没活动的connection也需要删除
+# todo 一段时间没活动的connection也需要删除 吗？
 class BaseKCPProtocol(asyncio.DatagramProtocol):
     def __init__(
         self,
@@ -48,7 +48,7 @@ class BaseKCPProtocol(asyncio.DatagramProtocol):
         if self._post_processor is not None:
             data = self._post_processor(data)
         self.transport.sendto(data, addr)
-        return 0 # make lib kcp happy
+        return 0  # make lib kcp happy
 
     # async def send(self, conv: int, data: bytes):
     #     kcp_transport = self.kcp_transports.get(conv, None)
@@ -88,8 +88,9 @@ class KCPUDPServerProtocol(BaseKCPProtocol):
         except AttributeError:
             pass
         for kcp_transport in self.kcp_transports.values():
+            protocol = kcp_transport.get_protocol()
             try:
-                kcp_transport.get_protocol().pause_writing()
+                protocol.pause_writing()
             except (SystemExit, KeyboardInterrupt):
                 raise
             except BaseException as exc:
@@ -97,8 +98,8 @@ class KCPUDPServerProtocol(BaseKCPProtocol):
                     {
                         "message": "protocol.pause_writing() failed",
                         "exception": exc,
-                        "transport": self,
-                        "protocol": self._protocol,
+                        "transport": kcp_transport,
+                        "protocol": protocol,
                     }
                 )
         self._drain_waiter.clear()
@@ -109,8 +110,9 @@ class KCPUDPServerProtocol(BaseKCPProtocol):
         except AttributeError:
             pass
         for kcp_transport in self.kcp_transports.values():
+            protocol = kcp_transport.get_protocol()
             try:
-                kcp_transport.get_protocol().resume_writing()
+                protocol.resume_writing()
             except (SystemExit, KeyboardInterrupt):
                 raise
             except BaseException as exc:
@@ -118,8 +120,8 @@ class KCPUDPServerProtocol(BaseKCPProtocol):
                     {
                         "message": "protocol.resume_writing() failed",
                         "exception": exc,
-                        "transport": self,
-                        "protocol": self._protocol,
+                        "transport": kcp_transport,
+                        "protocol": protocol,
                     }
                 )
         self._drain_waiter.set()
@@ -127,7 +129,7 @@ class KCPUDPServerProtocol(BaseKCPProtocol):
     def datagram_received(self, data: bytes, addr):
         """Called when some datagram is received."""
         conv, data = self._pre_processor(data)
-        # print(f"conv: {conv}")
+        # print(f"conv: {conv}, data: {data}")
         if conv is None:
             return
         if conv not in self.kcp_transports:
@@ -186,18 +188,20 @@ class KCPUDPServerProtocol(BaseKCPProtocol):
 
     async def _update(self, transport: KCPTransport):
         connection = transport.connection
-        while connection.state != -1:
-            now = time.perf_counter_ns() // 1000000  # ms
-            connection.update(
-                now
-            )  # 此处可以检查connection的阻塞状态  调用protocol.resume_writing
-            transport._maybe_resume_protocol()
-            next_call = connection.check(now)
-            # print("next_call", next_call)
-            await asyncio.sleep((next_call - now) / 1000)
-        # print(f"close connection {connection.conv} in _update")
-        transport.get_protocol().connection_lost(None)
-        del self.kcp_transports[connection.conv]
+        try:
+            while connection.state != -1:
+                now = time.perf_counter_ns() // 1000000  # ms
+                connection.update(
+                    now
+                )  # 此处可以检查connection的阻塞状态  调用protocol.resume_writing
+                transport._maybe_resume_protocol()
+                next_call = connection.check(now)
+                # print("next_call", next_call)
+                await asyncio.sleep((next_call - now) / 1000)
+        finally:
+            # print(f"close connection {connection.conv} in _update")
+            transport.get_protocol().connection_lost(None)
+            del self.kcp_transports[connection.conv]
 
 
 class KCPUDPClientProtocol(BaseKCPProtocol):
@@ -248,8 +252,9 @@ class KCPUDPClientProtocol(BaseKCPProtocol):
             self.transport.pause_reading()
         except AttributeError:
             pass
+        protocol = self.kcp_transport.get_protocol()
         try:
-            self.kcp_transport.get_protocol().pause_writing()
+            protocol.pause_writing()
         except (SystemExit, KeyboardInterrupt):
             raise
         except BaseException as exc:
@@ -257,8 +262,8 @@ class KCPUDPClientProtocol(BaseKCPProtocol):
                 {
                     "message": "protocol.pause_writing() failed",
                     "exception": exc,
-                    "transport": self,
-                    "protocol": self._protocol,
+                    "transport": self.kcp_transport,
+                    "protocol": protocol,
                 }
             )
         self._drain_waiter.clear()
@@ -268,8 +273,9 @@ class KCPUDPClientProtocol(BaseKCPProtocol):
             self.transport.resume_reading()
         except AttributeError:
             pass
+        protocol = self.kcp_transport.get_protocol()
         try:
-            self.kcp_transport.get_protocol().resume_writing()
+            protocol.resume_writing()
         except (SystemExit, KeyboardInterrupt):
             raise
         except BaseException as exc:
@@ -277,8 +283,8 @@ class KCPUDPClientProtocol(BaseKCPProtocol):
                 {
                     "message": "protocol.resume_writing() failed",
                     "exception": exc,
-                    "transport": self,
-                    "protocol": self._protocol,
+                    "transport": self.kcp_transport,
+                    "protocol": protocol,
                 }
             )
         self._drain_waiter.set()
@@ -299,16 +305,18 @@ class KCPUDPClientProtocol(BaseKCPProtocol):
 
     async def _update(self):
         connection = self.kcp_transport.connection
-        while connection.state != -1:
-            now = time.perf_counter_ns() // 1000000  # ms
-            connection.update(
-                now
-            )  # 此处可以检查connection的阻塞状态  调用protocol.resume_writing
-            self.kcp_transport._maybe_resume_protocol()
-            next_call = connection.check(now)
-            await asyncio.sleep((next_call - now) / 1000)
-        self.kcp_transport.get_protocol().connection_lost(None)
-        self.kcp_transport = None
+        try:
+            while connection.state != -1:
+                now = time.perf_counter_ns() // 1000000  # ms
+                connection.update(
+                    now
+                )  # 此处可以检查connection的阻塞状态  调用protocol.resume_writing
+                self.kcp_transport._maybe_resume_protocol()
+                next_call = connection.check(now)
+                await asyncio.sleep((next_call - now) / 1000)
+        finally:
+            self.kcp_transport.get_protocol().connection_lost(None)
+            self.kcp_transport = None
 
     async def aclose(self):
         self.kcp_transport.close()
