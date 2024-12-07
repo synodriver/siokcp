@@ -5,8 +5,6 @@ import sys
 sys.path.append(".")
 from unittest import IsolatedAsyncioTestCase
 
-from loguru import logger
-
 from siokcp import getconv
 from siokcp.asyncio import create_kcp_server, open_kcp_connection, start_kcp_server
 

@@ -17837,7 +17837,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_3mss_2__set__(struct __pyx_obj
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def state(self):
- *         return <int>self._kcp.state
+ *         return <int>self._kcp.state # although it's uint32_t, we treat it as int
 */
 
 /* Python wrapper */
@@ -17867,7 +17867,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_5state___get__(struct __
   /* "siokcp/_kcp.pyx":93
  *     @property
  *     def state(self):
- *         return <int>self._kcp.state             # <<<<<<<<<<<<<<
+ *         return <int>self._kcp.state # although it's uint32_t, we treat it as int             # <<<<<<<<<<<<<<
  * 
  *     @state.setter
 */
@@ -17883,7 +17883,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_5state___get__(struct __
  * 
  *     @property             # <<<<<<<<<<<<<<
  *     def state(self):
- *         return <int>self._kcp.state
+ *         return <int>self._kcp.state # although it's uint32_t, we treat it as int
 */
 
   /* function exit code */
@@ -17898,7 +17898,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_5state___get__(struct __
 }
 
 /* "siokcp/_kcp.pyx":95
- *         return <int>self._kcp.state
+ *         return <int>self._kcp.state # although it's uint32_t, we treat it as int
  * 
  *     @state.setter             # <<<<<<<<<<<<<<
  *     def state(self, int value):
@@ -17946,7 +17946,7 @@ static int __pyx_pf_6siokcp_4_kcp_13KCPConnection_5state_2__set__(struct __pyx_o
   __pyx_v_self->_kcp->state = ((uint32_t)__pyx_v_value);
 
   /* "siokcp/_kcp.pyx":95
- *         return <int>self._kcp.state
+ *         return <int>self._kcp.state # although it's uint32_t, we treat it as int
  * 
  *     @state.setter             # <<<<<<<<<<<<<<
  *     def state(self, int value):
