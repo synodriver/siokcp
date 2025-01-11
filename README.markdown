@@ -16,7 +16,7 @@
 ```
 from siokcp import KCPConnection
 
-con = KCPConnection(1, send, print)
+con = KCPConnection(1, send_callback, log_callback)
 con.receive_data(somedata)
 p = con.next_event()
 
