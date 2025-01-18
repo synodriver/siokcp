@@ -4,39 +4,32 @@ cimport cython
 from cpython.bytes cimport PyBytes_AS_STRING, PyBytes_FromStringAndSize
 from cpython.mem cimport PyMem_RawFree, PyMem_RawMalloc
 from cpython.unicode cimport PyUnicode_AsUTF8, PyUnicode_FromString
+from cpython.pycapsule cimport PyCapsule_New
 from libc.stdint cimport uint8_t, uint32_t
 
-from siokcp._kcp cimport (IKCP_LOG_IN_ACK_C, IKCP_LOG_IN_DATA_C,
-                          IKCP_LOG_IN_PROBE_C, IKCP_LOG_IN_WINS_C,
-                          IKCP_LOG_INPUT_C, IKCP_LOG_OUT_ACK_C,
-                          IKCP_LOG_OUT_DATA_C, IKCP_LOG_OUT_PROBE_C,
-                          IKCP_LOG_OUT_WINS_C, IKCP_LOG_OUTPUT_C,
-                          IKCP_LOG_RECV_C, IKCP_LOG_SEND_C, ikcp_check,
-                          ikcp_create, ikcp_flush, ikcp_input, ikcp_peeksize,
-                          ikcp_recv, ikcp_release, ikcp_send, ikcp_setoutput,
-                          ikcp_update, ikcpcb)
+from siokcp cimport kcp
 
-IKCP_LOG_OUTPUT	      =          IKCP_LOG_OUTPUT_C
-IKCP_LOG_INPUT	      =          IKCP_LOG_INPUT_C
-IKCP_LOG_SEND	      =          IKCP_LOG_SEND_C
-IKCP_LOG_RECV	      =          IKCP_LOG_RECV_C
-IKCP_LOG_IN_DATA      =          IKCP_LOG_IN_DATA_C
-IKCP_LOG_IN_ACK	      =          IKCP_LOG_IN_ACK_C
-IKCP_LOG_IN_PROBE     =           IKCP_LOG_IN_PROBE_C
-IKCP_LOG_IN_WINS      =          IKCP_LOG_IN_WINS_C
-IKCP_LOG_OUT_DATA     =           IKCP_LOG_OUT_DATA_C
-IKCP_LOG_OUT_ACK      =          IKCP_LOG_OUT_ACK_C
-IKCP_LOG_OUT_PROBE    =            IKCP_LOG_OUT_PROBE_C
-IKCP_LOG_OUT_WINS     =           IKCP_LOG_OUT_WINS_C
+IKCP_LOG_OUTPUT	      =          kcp.IKCP_LOG_OUTPUT_C
+IKCP_LOG_INPUT	      =          kcp.IKCP_LOG_INPUT_C
+IKCP_LOG_SEND	      =          kcp.IKCP_LOG_SEND_C
+IKCP_LOG_RECV	      =          kcp.IKCP_LOG_RECV_C
+IKCP_LOG_IN_DATA      =          kcp.IKCP_LOG_IN_DATA_C
+IKCP_LOG_IN_ACK	      =          kcp.IKCP_LOG_IN_ACK_C
+IKCP_LOG_IN_PROBE     =           kcp.IKCP_LOG_IN_PROBE_C
+IKCP_LOG_IN_WINS      =          kcp.IKCP_LOG_IN_WINS_C
+IKCP_LOG_OUT_DATA     =           kcp.IKCP_LOG_OUT_DATA_C
+IKCP_LOG_OUT_ACK      =          kcp.IKCP_LOG_OUT_ACK_C
+IKCP_LOG_OUT_PROBE    =            kcp.IKCP_LOG_OUT_PROBE_C
+IKCP_LOG_OUT_WINS     =           kcp.IKCP_LOG_OUT_WINS_C
 
 
 
-cdef int kcp_output_cb(const char *buf, int len,  ikcpcb *kcp, void *user) with gil:
+cdef int kcp_output_cb(const char *buf, int len,  kcp.ikcpcb *kcp, void *user) with gil:
     cdef bytes data = PyBytes_FromStringAndSize(buf, len)
     cdef KCPConnection con = <KCPConnection>user
     return con.send_cb(data)
 
-cdef void kcp_writelog_cb(const char *log, ikcpcb *kcp, void *user) with gil:
+cdef void kcp_writelog_cb(const char *log, kcp.ikcpcb *kcp, void *user) with gil:
     cdef str data = PyUnicode_FromString(log)
     cdef KCPConnection con = <KCPConnection> user
     con.log_cb(data)
@@ -46,7 +39,7 @@ cdef void kcp_writelog_cb(const char *log, ikcpcb *kcp, void *user) with gil:
 @cython.final
 cdef class KCPConnection:
     cdef:
-        ikcpcb *_kcp
+        kcp.ikcpcb *_kcp
         public object send_cb
         object log_cb
 
@@ -54,14 +47,14 @@ cdef class KCPConnection:
     def __cinit__(self, uint32_t conv, object send_cb, object log_cb):
         self.send_cb = send_cb
         self.log_cb = log_cb
-        self._kcp = ikcp_create(conv, <void *>self)
+        self._kcp = kcp.ikcp_create(conv, <void *>self)
         if self._kcp == NULL:
             raise MemoryError
-        ikcp_setoutput(self._kcp, kcp_output_cb)
+        kcp.ikcp_setoutput(self._kcp, kcp_output_cb)
         self._kcp.writelog = kcp_writelog_cb
 
     def __dealloc__(self):
-        ikcp_release(self._kcp)
+        kcp.ikcp_release(self._kcp)
         self._kcp = NULL
 
     @property
@@ -374,13 +367,13 @@ cdef class KCPConnection:
         :return: next packet
         """
         cdef int hr
-        cdef int size = ikcp_peeksize(self._kcp)
+        cdef int size = kcp.ikcp_peeksize(self._kcp)
         if size < 0:
             return None
         cdef bytes out = PyBytes_FromStringAndSize(NULL, <Py_ssize_t>size)
         cdef const char *out_ptr = PyBytes_AS_STRING(out)
         with nogil:
-            hr = ikcp_recv(self._kcp, <char*>out_ptr, size)
+            hr = kcp.ikcp_recv(self._kcp, <char*>out_ptr, size)
         if hr < 0:
             return None
         return out
@@ -392,74 +385,76 @@ cdef class KCPConnection:
         """
         cdef int hr
         with nogil:
-            hr = ikcp_recv(self._kcp, <char *>&buffer[0], <int> buffer.shape[0])
+            hr = kcp.ikcp_recv(self._kcp, <char *>&buffer[0], <int> buffer.shape[0])
         return hr
 
     cpdef inline int send(self, const uint8_t[::1] data) except -1:
         cdef int ret
         with nogil:
-            ret = ikcp_send(self._kcp, <const char*>&data[0], <int>data.shape[0])
+            ret = kcp.ikcp_send(self._kcp, <const char*>&data[0], <int>data.shape[0])
         if ret < 0:
             raise ValueError(f"kcp send error: {ret}") # todo 自定义异常类型
         return ret
 
     cpdef inline update(self, uint32_t current):
         with nogil:
-            ikcp_update(self._kcp, current)
+            kcp.ikcp_update(self._kcp, current)
 
     cpdef inline uint32_t check(self, uint32_t current):
         cdef uint32_t ret
         with nogil:
-            ret = ikcp_check(self._kcp, current)
+            ret = kcp.ikcp_check(self._kcp, current)
         return ret
 
     cpdef inline int receive_data(self, const uint8_t[::1] data):
         cdef int ret
         with nogil:
-            ret = ikcp_input(self._kcp, <char*>&data[0], <long>data.shape[0])
+            ret = kcp.ikcp_input(self._kcp, <char*>&data[0], <long>data.shape[0])
         return ret
 
     cpdef inline flush(self):
         with nogil:
-            ikcp_flush(self._kcp)
+            kcp.ikcp_flush(self._kcp)
 
     cpdef inline int peeksize(self):
         cdef int ret
         with nogil:
-            ret = ikcp_peeksize(self._kcp)
+            ret = kcp.ikcp_peeksize(self._kcp)
         return ret
 
     cpdef inline int setmtu(self, int mtu):
         cdef int ret
         with nogil:
-            ret = ikcp_setmtu(self._kcp, mtu)
+            ret = kcp.ikcp_setmtu(self._kcp, mtu)
         return ret
 
     cpdef inline int wndsize(self, int sndwnd, int rcvwnd):
         cdef int ret
         with nogil:
-            ret = ikcp_wndsize(self._kcp, sndwnd, rcvwnd)
+            ret = kcp.ikcp_wndsize(self._kcp, sndwnd, rcvwnd)
         return ret
 
     cpdef inline int waitsnd(self):
         cdef int ret
         with nogil:
-            ret = ikcp_waitsnd(self._kcp)
+            ret = kcp.ikcp_waitsnd(self._kcp)
         return ret
 
     cpdef inline int nodelay(self, int nodelay, int interval, int resend, int nc):
         cdef int ret
         with nogil:
-            ret = ikcp_nodelay(self._kcp, nodelay, interval, resend, nc)
+            ret = kcp.ikcp_nodelay(self._kcp, nodelay, interval, resend, nc)
         return ret
 
     cpdef inline log(self, int mask, str data):
         cdef const char* data_ptr = PyUnicode_AsUTF8(data)
         with nogil:
-            ikcp_log(self._kcp, mask, data_ptr)
+            kcp.ikcp_log(self._kcp, mask, data_ptr)
 
+    cpdef inline object get_ptr(self):
+        return PyCapsule_New(self._kcp, NULL, NULL) # expose the c ptr
 
-ikcp_allocator(PyMem_RawMalloc, PyMem_RawFree)
+kcp.ikcp_allocator(PyMem_RawMalloc, PyMem_RawFree)
 
 cpdef inline uint32_t getconv(const uint8_t[::1] data):
     """Get conversation id from raw data
@@ -468,5 +463,23 @@ cpdef inline uint32_t getconv(const uint8_t[::1] data):
     """
     cdef uint32_t ret
     with nogil:
-        ret = ikcp_getconv(&data[0])
+        ret = kcp.ikcp_getconv(&data[0])
     return ret
+
+ikcp_create = PyCapsule_New(<void*>kcp.ikcp_create, "ikcp_create", NULL)
+ikcp_release = PyCapsule_New(<void*>kcp.ikcp_release, "ikcp_release", NULL)
+ikcp_setoutput = PyCapsule_New(<void*>kcp.ikcp_setoutput, "ikcp_setoutput", NULL)
+ikcp_recv = PyCapsule_New(<void*>kcp.ikcp_recv, "ikcp_recv", NULL)
+ikcp_send = PyCapsule_New(<void*>kcp.ikcp_send, "ikcp_send", NULL)
+ikcp_update = PyCapsule_New(<void*>kcp.ikcp_update, "ikcp_update", NULL)
+ikcp_check = PyCapsule_New(<void*>kcp.ikcp_check, "ikcp_check", NULL)
+ikcp_input = PyCapsule_New(<void*>kcp.ikcp_input, "ikcp_input", NULL)
+ikcp_flush = PyCapsule_New(<void*>kcp.ikcp_flush, "ikcp_flush", NULL)
+ikcp_peeksize = PyCapsule_New(<void*>kcp.ikcp_peeksize, "ikcp_peeksize", NULL)
+ikcp_setmtu = PyCapsule_New(<void*>kcp.ikcp_setmtu, "ikcp_setmtu", NULL)
+ikcp_wndsize = PyCapsule_New(<void*>kcp.ikcp_wndsize, "ikcp_wndsize", NULL)
+ikcp_waitsnd = PyCapsule_New(<void*>kcp.ikcp_waitsnd, "ikcp_waitsnd", NULL)
+ikcp_nodelay = PyCapsule_New(<void*>kcp.ikcp_nodelay, "ikcp_nodelay", NULL)
+ikcp_log = PyCapsule_New(<void*>kcp.ikcp_log, "ikcp_log", NULL)
+ikcp_allocator = PyCapsule_New(<void*>kcp.ikcp_allocator, "ikcp_allocator", NULL)
+ikcp_getconv = PyCapsule_New(<void*>kcp.ikcp_getconv, "ikcp_getconv", NULL)
