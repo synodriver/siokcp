@@ -17,6 +17,7 @@ class BaseKCPProtocol(asyncio.DatagramProtocol):
         log: Callable[[str], Any],
         pre_processor: Optional[Callable[[bytes], Tuple[int, bytes]]] = None,
         post_processor: Optional[Callable[[bytes], bytes]] = None,
+        timer: Optional[Callable[[], int]] = None,
         loop: Optional[asyncio.AbstractEventLoop] = None,
     ):
         self.protocol_factory = protocol_factory
@@ -28,6 +29,7 @@ class BaseKCPProtocol(asyncio.DatagramProtocol):
                 pre_processor
             )  # type: Callable[[bytes], Tuple[int, bytes]]
         self._post_processor = post_processor  # type: Callable[[bytes], bytes]
+        self._timer = timer or (lambda: time.perf_counter_ns() // 1000000)
         self._loop = loop or asyncio.get_running_loop()
         self._close_waiter = self._loop.create_future()
         self._drain_waiter = asyncio.Event()
@@ -66,9 +68,12 @@ class KCPUDPServerProtocol(BaseKCPProtocol):
         log: Callable[[str], Any],
         pre_processor: Optional[Callable[[bytes], Tuple[int, bytes]]] = None,
         post_processor: Optional[Callable[[bytes], bytes]] = None,
+        timer: Optional[Callable[[], int]] = None,
         loop: Optional[asyncio.AbstractEventLoop] = None,
     ):
-        super().__init__(protocol_factory, log, pre_processor, post_processor, loop)
+        super().__init__(
+            protocol_factory, log, pre_processor, post_processor, timer, loop
+        )
         self.kcp_transports = {}  # type: Dict[int, KCPTransport]
         self._update_tasks = set()  # type: Set[asyncio.Task]
 
@@ -190,7 +195,7 @@ class KCPUDPServerProtocol(BaseKCPProtocol):
         connection = transport.connection
         try:
             while connection.state != -1:
-                now = time.perf_counter_ns() // 1000000  # ms
+                now = self._timer()  # ms
                 connection.update(
                     now
                 )  # 此处可以检查connection的阻塞状态  调用protocol.resume_writing
@@ -214,9 +219,12 @@ class KCPUDPClientProtocol(BaseKCPProtocol):
         log: Callable[[str], Any],
         pre_processor: Optional[Callable[[bytes], Tuple[int, bytes]]] = None,
         post_processor: Optional[Callable[[bytes], bytes]] = None,
+        timer: Optional[Callable[[], int]] = None,
         loop: Optional[asyncio.AbstractEventLoop] = None,
     ):
-        super().__init__(protocol_factory, log, pre_processor, post_processor, loop)
+        super().__init__(
+            protocol_factory, log, pre_processor, post_processor, timer, loop
+        )
         self.conv = conv
         self.kcp_transport = None  # type: KCPTransport
         self._update_task = None
@@ -307,7 +315,7 @@ class KCPUDPClientProtocol(BaseKCPProtocol):
         connection = self.kcp_transport.connection
         try:
             while connection.state != -1:
-                now = time.perf_counter_ns() // 1000000  # ms
+                now = self._timer()  # ms
                 connection.update(
                     now
                 )  # 此处可以检查connection的阻塞状态  调用protocol.resume_writing

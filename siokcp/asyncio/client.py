@@ -13,6 +13,7 @@ async def create_kcp_connection(
     log: Callable[[str], Any],
     pre_processor: Optional[Callable[[bytes], Tuple[int, bytes]]] = None,
     post_processor: Optional[Callable[[bytes], bytes]] = None,
+    timer: Optional[Callable[[], None]] = None,
     local_addr: Optional[Union[Tuple[str, int], str]] = None,
     *,
     family: int = 0,
@@ -24,7 +25,7 @@ async def create_kcp_connection(
 ):
     _, udp_protocol = await loop.create_datagram_endpoint(
         lambda: KCPUDPClientProtocol(
-            protocol_factory, conv, log, pre_processor, post_processor, loop
+            protocol_factory, conv, log, pre_processor, post_processor, timer, loop
         ),
         local_addr,
         remote_addr,
