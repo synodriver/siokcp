@@ -25063,7 +25063,7 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_get_ptr(str
  *     cpdef inline object get_ptr(self):
  *         return PyCapsule_New(self._kcp, NULL, NULL) # expose the c ptr             # <<<<<<<<<<<<<<
  * 
- * 
+ * kcp.ikcp_allocator(PyMem_RawMalloc, PyMem_RawFree)
 */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = PyCapsule_New(__pyx_v_self->_kcp, NULL, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 455, __pyx_L1_error)
@@ -25477,7 +25477,7 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_13KCPConnection_34__setstate_cython__(CY
   return __pyx_r;
 }
 
-/* "siokcp/_kcp.pyx":460
+/* "siokcp/_kcp.pyx":459
  * kcp.ikcp_allocator(PyMem_RawMalloc, PyMem_RawFree)
  * 
  * cpdef inline uint32_t getconv(const uint8_t[::1] data):             # <<<<<<<<<<<<<<
@@ -25497,7 +25497,7 @@ static CYTHON_INLINE uint32_t __pyx_f_6siokcp_4_kcp_getconv(__Pyx_memviewslice _
   uint32_t __pyx_r;
   Py_ssize_t __pyx_t_1;
 
-  /* "siokcp/_kcp.pyx":466
+  /* "siokcp/_kcp.pyx":465
  *     """
  *     cdef uint32_t ret
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -25511,7 +25511,7 @@ static CYTHON_INLINE uint32_t __pyx_f_6siokcp_4_kcp_getconv(__Pyx_memviewslice _
       __Pyx_FastGIL_Remember();
       /*try:*/ {
 
-        /* "siokcp/_kcp.pyx":467
+        /* "siokcp/_kcp.pyx":466
  *     cdef uint32_t ret
  *     with nogil:
  *         ret = kcp.ikcp_getconv(&data[0])             # <<<<<<<<<<<<<<
@@ -25522,7 +25522,7 @@ static CYTHON_INLINE uint32_t __pyx_f_6siokcp_4_kcp_getconv(__Pyx_memviewslice _
         __pyx_v_ret = ikcp_getconv((&(*((uint8_t const  *) ( /* dim=0 */ ((char *) (((uint8_t const  *) __pyx_v_data.data) + __pyx_t_1)) )))));
       }
 
-      /* "siokcp/_kcp.pyx":466
+      /* "siokcp/_kcp.pyx":465
  *     """
  *     cdef uint32_t ret
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -25539,17 +25539,17 @@ static CYTHON_INLINE uint32_t __pyx_f_6siokcp_4_kcp_getconv(__Pyx_memviewslice _
       }
   }
 
-  /* "siokcp/_kcp.pyx":468
+  /* "siokcp/_kcp.pyx":467
  *     with nogil:
  *         ret = kcp.ikcp_getconv(&data[0])
  *     return ret             # <<<<<<<<<<<<<<
  * 
- * ikcp_create = PyCapsule_New(<void*>kcp.ikcp_create, "ikcp_create", NULL)
+ * ikcp_create = PyCapsule_New(<void*>kcp.ikcp_create, "siokcp._kcp.ikcp_create", NULL)
 */
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "siokcp/_kcp.pyx":460
+  /* "siokcp/_kcp.pyx":459
  * kcp.ikcp_allocator(PyMem_RawMalloc, PyMem_RawFree)
  * 
  * cpdef inline uint32_t getconv(const uint8_t[::1] data):             # <<<<<<<<<<<<<<
@@ -25617,23 +25617,23 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 460, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 459, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "getconv") < 0)) __PYX_ERR(0, 460, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "getconv") < 0)) __PYX_ERR(0, 459, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
     }
-    __pyx_v_data = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t__const__(values[0], 0); if (unlikely(!__pyx_v_data.memview)) __PYX_ERR(0, 460, __pyx_L3_error)
+    __pyx_v_data = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t__const__(values[0], 0); if (unlikely(!__pyx_v_data.memview)) __PYX_ERR(0, 459, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("getconv", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 460, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("getconv", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 459, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -25672,9 +25672,9 @@ static PyObject *__pyx_pf_6siokcp_4_kcp_getconv(CYTHON_UNUSED PyObject *__pyx_se
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("getconv", 0);
   __Pyx_XDECREF(__pyx_r);
-  if (unlikely(!__pyx_v_data.memview)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 460, __pyx_L1_error) }
-  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_getconv(__pyx_v_data, 1); if (unlikely(__pyx_t_1 == ((uint32_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 460, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyLong_From_uint32_t(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 460, __pyx_L1_error)
+  if (unlikely(!__pyx_v_data.memview)) { __Pyx_RaiseUnboundLocalError("data"); __PYX_ERR(0, 459, __pyx_L1_error) }
+  __pyx_t_1 = __pyx_f_6siokcp_4_kcp_getconv(__pyx_v_data, 1); if (unlikely(__pyx_t_1 == ((uint32_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 459, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyLong_From_uint32_t(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 459, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -28682,8 +28682,8 @@ __Pyx_RefNannySetupContext("PyInit__kcp", 0);
   if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_setstate_cython, __pyx_t_6) < 0) __PYX_ERR(1, 3, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "siokcp/_kcp.pyx":458
- * 
+  /* "siokcp/_kcp.pyx":457
+ *         return PyCapsule_New(self._kcp, NULL, NULL) # expose the c ptr
  * 
  * kcp.ikcp_allocator(PyMem_RawMalloc, PyMem_RawFree)             # <<<<<<<<<<<<<<
  * 
@@ -28691,217 +28691,217 @@ __Pyx_RefNannySetupContext("PyInit__kcp", 0);
 */
   ikcp_allocator(PyMem_RawMalloc, PyMem_RawFree);
 
-  /* "siokcp/_kcp.pyx":460
+  /* "siokcp/_kcp.pyx":459
  * kcp.ikcp_allocator(PyMem_RawMalloc, PyMem_RawFree)
  * 
  * cpdef inline uint32_t getconv(const uint8_t[::1] data):             # <<<<<<<<<<<<<<
  *     """Get conversation id from raw data
  *     :param data: raw data read from socket, usually at the beginning of a session
 */
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_1getconv, 0, __pyx_mstate_global->__pyx_n_u_getconv, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[16])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 460, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6siokcp_4_kcp_1getconv, 0, __pyx_mstate_global->__pyx_n_u_getconv, NULL, __pyx_mstate_global->__pyx_n_u_siokcp__kcp, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[16])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 459, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_getconv, __pyx_t_6) < 0) __PYX_ERR(0, 460, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_getconv, __pyx_t_6) < 0) __PYX_ERR(0, 459, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+  /* "siokcp/_kcp.pyx":469
+ *     return ret
+ * 
+ * ikcp_create = PyCapsule_New(<void*>kcp.ikcp_create, "siokcp._kcp.ikcp_create", NULL)             # <<<<<<<<<<<<<<
+ * ikcp_release = PyCapsule_New(<void*>kcp.ikcp_release, "siokcp._kcp.ikcp_release", NULL)
+ * ikcp_setoutput = PyCapsule_New(<void*>kcp.ikcp_setoutput, "siokcp._kcp.ikcp_setoutput", NULL)
+*/
+  __pyx_t_6 = PyCapsule_New(((void *)ikcp_create), ((char const *)"siokcp._kcp.ikcp_create"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 469, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_create, __pyx_t_6) < 0) __PYX_ERR(0, 469, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
   /* "siokcp/_kcp.pyx":470
- *     return ret
  * 
- * ikcp_create = PyCapsule_New(<void*>kcp.ikcp_create, "ikcp_create", NULL)             # <<<<<<<<<<<<<<
- * ikcp_release = PyCapsule_New(<void*>kcp.ikcp_release, "ikcp_release", NULL)
- * ikcp_setoutput = PyCapsule_New(<void*>kcp.ikcp_setoutput, "ikcp_setoutput", NULL)
+ * ikcp_create = PyCapsule_New(<void*>kcp.ikcp_create, "siokcp._kcp.ikcp_create", NULL)
+ * ikcp_release = PyCapsule_New(<void*>kcp.ikcp_release, "siokcp._kcp.ikcp_release", NULL)             # <<<<<<<<<<<<<<
+ * ikcp_setoutput = PyCapsule_New(<void*>kcp.ikcp_setoutput, "siokcp._kcp.ikcp_setoutput", NULL)
+ * ikcp_recv = PyCapsule_New(<void*>kcp.ikcp_recv, "siokcp._kcp.ikcp_recv", NULL)
 */
-  __pyx_t_6 = PyCapsule_New(((void *)ikcp_create), ((char const *)"ikcp_create"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 470, __pyx_L1_error)
+  __pyx_t_6 = PyCapsule_New(((void *)ikcp_release), ((char const *)"siokcp._kcp.ikcp_release"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 470, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_create, __pyx_t_6) < 0) __PYX_ERR(0, 470, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_release, __pyx_t_6) < 0) __PYX_ERR(0, 470, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
   /* "siokcp/_kcp.pyx":471
- * 
- * ikcp_create = PyCapsule_New(<void*>kcp.ikcp_create, "ikcp_create", NULL)
- * ikcp_release = PyCapsule_New(<void*>kcp.ikcp_release, "ikcp_release", NULL)             # <<<<<<<<<<<<<<
- * ikcp_setoutput = PyCapsule_New(<void*>kcp.ikcp_setoutput, "ikcp_setoutput", NULL)
- * ikcp_recv = PyCapsule_New(<void*>kcp.ikcp_recv, "ikcp_recv", NULL)
+ * ikcp_create = PyCapsule_New(<void*>kcp.ikcp_create, "siokcp._kcp.ikcp_create", NULL)
+ * ikcp_release = PyCapsule_New(<void*>kcp.ikcp_release, "siokcp._kcp.ikcp_release", NULL)
+ * ikcp_setoutput = PyCapsule_New(<void*>kcp.ikcp_setoutput, "siokcp._kcp.ikcp_setoutput", NULL)             # <<<<<<<<<<<<<<
+ * ikcp_recv = PyCapsule_New(<void*>kcp.ikcp_recv, "siokcp._kcp.ikcp_recv", NULL)
+ * ikcp_send = PyCapsule_New(<void*>kcp.ikcp_send, "siokcp._kcp.ikcp_send", NULL)
 */
-  __pyx_t_6 = PyCapsule_New(((void *)ikcp_release), ((char const *)"ikcp_release"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 471, __pyx_L1_error)
+  __pyx_t_6 = PyCapsule_New(((void *)ikcp_setoutput), ((char const *)"siokcp._kcp.ikcp_setoutput"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 471, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_release, __pyx_t_6) < 0) __PYX_ERR(0, 471, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_setoutput, __pyx_t_6) < 0) __PYX_ERR(0, 471, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
   /* "siokcp/_kcp.pyx":472
- * ikcp_create = PyCapsule_New(<void*>kcp.ikcp_create, "ikcp_create", NULL)
- * ikcp_release = PyCapsule_New(<void*>kcp.ikcp_release, "ikcp_release", NULL)
- * ikcp_setoutput = PyCapsule_New(<void*>kcp.ikcp_setoutput, "ikcp_setoutput", NULL)             # <<<<<<<<<<<<<<
- * ikcp_recv = PyCapsule_New(<void*>kcp.ikcp_recv, "ikcp_recv", NULL)
- * ikcp_send = PyCapsule_New(<void*>kcp.ikcp_send, "ikcp_send", NULL)
+ * ikcp_release = PyCapsule_New(<void*>kcp.ikcp_release, "siokcp._kcp.ikcp_release", NULL)
+ * ikcp_setoutput = PyCapsule_New(<void*>kcp.ikcp_setoutput, "siokcp._kcp.ikcp_setoutput", NULL)
+ * ikcp_recv = PyCapsule_New(<void*>kcp.ikcp_recv, "siokcp._kcp.ikcp_recv", NULL)             # <<<<<<<<<<<<<<
+ * ikcp_send = PyCapsule_New(<void*>kcp.ikcp_send, "siokcp._kcp.ikcp_send", NULL)
+ * ikcp_update = PyCapsule_New(<void*>kcp.ikcp_update, "siokcp._kcp.ikcp_update", NULL)
 */
-  __pyx_t_6 = PyCapsule_New(((void *)ikcp_setoutput), ((char const *)"ikcp_setoutput"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 472, __pyx_L1_error)
+  __pyx_t_6 = PyCapsule_New(((void *)ikcp_recv), ((char const *)"siokcp._kcp.ikcp_recv"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 472, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_setoutput, __pyx_t_6) < 0) __PYX_ERR(0, 472, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_recv, __pyx_t_6) < 0) __PYX_ERR(0, 472, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
   /* "siokcp/_kcp.pyx":473
- * ikcp_release = PyCapsule_New(<void*>kcp.ikcp_release, "ikcp_release", NULL)
- * ikcp_setoutput = PyCapsule_New(<void*>kcp.ikcp_setoutput, "ikcp_setoutput", NULL)
- * ikcp_recv = PyCapsule_New(<void*>kcp.ikcp_recv, "ikcp_recv", NULL)             # <<<<<<<<<<<<<<
- * ikcp_send = PyCapsule_New(<void*>kcp.ikcp_send, "ikcp_send", NULL)
- * ikcp_update = PyCapsule_New(<void*>kcp.ikcp_update, "ikcp_update", NULL)
+ * ikcp_setoutput = PyCapsule_New(<void*>kcp.ikcp_setoutput, "siokcp._kcp.ikcp_setoutput", NULL)
+ * ikcp_recv = PyCapsule_New(<void*>kcp.ikcp_recv, "siokcp._kcp.ikcp_recv", NULL)
+ * ikcp_send = PyCapsule_New(<void*>kcp.ikcp_send, "siokcp._kcp.ikcp_send", NULL)             # <<<<<<<<<<<<<<
+ * ikcp_update = PyCapsule_New(<void*>kcp.ikcp_update, "siokcp._kcp.ikcp_update", NULL)
+ * ikcp_check = PyCapsule_New(<void*>kcp.ikcp_check, "siokcp._kcp.ikcp_check", NULL)
 */
-  __pyx_t_6 = PyCapsule_New(((void *)ikcp_recv), ((char const *)"ikcp_recv"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 473, __pyx_L1_error)
+  __pyx_t_6 = PyCapsule_New(((void *)ikcp_send), ((char const *)"siokcp._kcp.ikcp_send"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 473, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_recv, __pyx_t_6) < 0) __PYX_ERR(0, 473, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_send, __pyx_t_6) < 0) __PYX_ERR(0, 473, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
   /* "siokcp/_kcp.pyx":474
- * ikcp_setoutput = PyCapsule_New(<void*>kcp.ikcp_setoutput, "ikcp_setoutput", NULL)
- * ikcp_recv = PyCapsule_New(<void*>kcp.ikcp_recv, "ikcp_recv", NULL)
- * ikcp_send = PyCapsule_New(<void*>kcp.ikcp_send, "ikcp_send", NULL)             # <<<<<<<<<<<<<<
- * ikcp_update = PyCapsule_New(<void*>kcp.ikcp_update, "ikcp_update", NULL)
- * ikcp_check = PyCapsule_New(<void*>kcp.ikcp_check, "ikcp_check", NULL)
+ * ikcp_recv = PyCapsule_New(<void*>kcp.ikcp_recv, "siokcp._kcp.ikcp_recv", NULL)
+ * ikcp_send = PyCapsule_New(<void*>kcp.ikcp_send, "siokcp._kcp.ikcp_send", NULL)
+ * ikcp_update = PyCapsule_New(<void*>kcp.ikcp_update, "siokcp._kcp.ikcp_update", NULL)             # <<<<<<<<<<<<<<
+ * ikcp_check = PyCapsule_New(<void*>kcp.ikcp_check, "siokcp._kcp.ikcp_check", NULL)
+ * ikcp_input = PyCapsule_New(<void*>kcp.ikcp_input, "siokcp._kcp.ikcp_input", NULL)
 */
-  __pyx_t_6 = PyCapsule_New(((void *)ikcp_send), ((char const *)"ikcp_send"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 474, __pyx_L1_error)
+  __pyx_t_6 = PyCapsule_New(((void *)ikcp_update), ((char const *)"siokcp._kcp.ikcp_update"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 474, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_send, __pyx_t_6) < 0) __PYX_ERR(0, 474, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_update, __pyx_t_6) < 0) __PYX_ERR(0, 474, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
   /* "siokcp/_kcp.pyx":475
- * ikcp_recv = PyCapsule_New(<void*>kcp.ikcp_recv, "ikcp_recv", NULL)
- * ikcp_send = PyCapsule_New(<void*>kcp.ikcp_send, "ikcp_send", NULL)
- * ikcp_update = PyCapsule_New(<void*>kcp.ikcp_update, "ikcp_update", NULL)             # <<<<<<<<<<<<<<
- * ikcp_check = PyCapsule_New(<void*>kcp.ikcp_check, "ikcp_check", NULL)
- * ikcp_input = PyCapsule_New(<void*>kcp.ikcp_input, "ikcp_input", NULL)
+ * ikcp_send = PyCapsule_New(<void*>kcp.ikcp_send, "siokcp._kcp.ikcp_send", NULL)
+ * ikcp_update = PyCapsule_New(<void*>kcp.ikcp_update, "siokcp._kcp.ikcp_update", NULL)
+ * ikcp_check = PyCapsule_New(<void*>kcp.ikcp_check, "siokcp._kcp.ikcp_check", NULL)             # <<<<<<<<<<<<<<
+ * ikcp_input = PyCapsule_New(<void*>kcp.ikcp_input, "siokcp._kcp.ikcp_input", NULL)
+ * ikcp_flush = PyCapsule_New(<void*>kcp.ikcp_flush, "siokcp._kcp.ikcp_flush", NULL)
 */
-  __pyx_t_6 = PyCapsule_New(((void *)ikcp_update), ((char const *)"ikcp_update"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 475, __pyx_L1_error)
+  __pyx_t_6 = PyCapsule_New(((void *)ikcp_check), ((char const *)"siokcp._kcp.ikcp_check"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 475, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_update, __pyx_t_6) < 0) __PYX_ERR(0, 475, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_check, __pyx_t_6) < 0) __PYX_ERR(0, 475, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
   /* "siokcp/_kcp.pyx":476
- * ikcp_send = PyCapsule_New(<void*>kcp.ikcp_send, "ikcp_send", NULL)
- * ikcp_update = PyCapsule_New(<void*>kcp.ikcp_update, "ikcp_update", NULL)
- * ikcp_check = PyCapsule_New(<void*>kcp.ikcp_check, "ikcp_check", NULL)             # <<<<<<<<<<<<<<
- * ikcp_input = PyCapsule_New(<void*>kcp.ikcp_input, "ikcp_input", NULL)
- * ikcp_flush = PyCapsule_New(<void*>kcp.ikcp_flush, "ikcp_flush", NULL)
+ * ikcp_update = PyCapsule_New(<void*>kcp.ikcp_update, "siokcp._kcp.ikcp_update", NULL)
+ * ikcp_check = PyCapsule_New(<void*>kcp.ikcp_check, "siokcp._kcp.ikcp_check", NULL)
+ * ikcp_input = PyCapsule_New(<void*>kcp.ikcp_input, "siokcp._kcp.ikcp_input", NULL)             # <<<<<<<<<<<<<<
+ * ikcp_flush = PyCapsule_New(<void*>kcp.ikcp_flush, "siokcp._kcp.ikcp_flush", NULL)
+ * ikcp_peeksize = PyCapsule_New(<void*>kcp.ikcp_peeksize, "siokcp._kcp.ikcp_peeksize", NULL)
 */
-  __pyx_t_6 = PyCapsule_New(((void *)ikcp_check), ((char const *)"ikcp_check"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 476, __pyx_L1_error)
+  __pyx_t_6 = PyCapsule_New(((void *)ikcp_input), ((char const *)"siokcp._kcp.ikcp_input"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 476, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_check, __pyx_t_6) < 0) __PYX_ERR(0, 476, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_input, __pyx_t_6) < 0) __PYX_ERR(0, 476, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
   /* "siokcp/_kcp.pyx":477
- * ikcp_update = PyCapsule_New(<void*>kcp.ikcp_update, "ikcp_update", NULL)
- * ikcp_check = PyCapsule_New(<void*>kcp.ikcp_check, "ikcp_check", NULL)
- * ikcp_input = PyCapsule_New(<void*>kcp.ikcp_input, "ikcp_input", NULL)             # <<<<<<<<<<<<<<
- * ikcp_flush = PyCapsule_New(<void*>kcp.ikcp_flush, "ikcp_flush", NULL)
- * ikcp_peeksize = PyCapsule_New(<void*>kcp.ikcp_peeksize, "ikcp_peeksize", NULL)
+ * ikcp_check = PyCapsule_New(<void*>kcp.ikcp_check, "siokcp._kcp.ikcp_check", NULL)
+ * ikcp_input = PyCapsule_New(<void*>kcp.ikcp_input, "siokcp._kcp.ikcp_input", NULL)
+ * ikcp_flush = PyCapsule_New(<void*>kcp.ikcp_flush, "siokcp._kcp.ikcp_flush", NULL)             # <<<<<<<<<<<<<<
+ * ikcp_peeksize = PyCapsule_New(<void*>kcp.ikcp_peeksize, "siokcp._kcp.ikcp_peeksize", NULL)
+ * ikcp_setmtu = PyCapsule_New(<void*>kcp.ikcp_setmtu, "siokcp.siokcp._kcp.ikcp_setmtu", NULL)
 */
-  __pyx_t_6 = PyCapsule_New(((void *)ikcp_input), ((char const *)"ikcp_input"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 477, __pyx_L1_error)
+  __pyx_t_6 = PyCapsule_New(((void *)ikcp_flush), ((char const *)"siokcp._kcp.ikcp_flush"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 477, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_input, __pyx_t_6) < 0) __PYX_ERR(0, 477, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_flush, __pyx_t_6) < 0) __PYX_ERR(0, 477, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
   /* "siokcp/_kcp.pyx":478
- * ikcp_check = PyCapsule_New(<void*>kcp.ikcp_check, "ikcp_check", NULL)
- * ikcp_input = PyCapsule_New(<void*>kcp.ikcp_input, "ikcp_input", NULL)
- * ikcp_flush = PyCapsule_New(<void*>kcp.ikcp_flush, "ikcp_flush", NULL)             # <<<<<<<<<<<<<<
- * ikcp_peeksize = PyCapsule_New(<void*>kcp.ikcp_peeksize, "ikcp_peeksize", NULL)
- * ikcp_setmtu = PyCapsule_New(<void*>kcp.ikcp_setmtu, "ikcp_setmtu", NULL)
+ * ikcp_input = PyCapsule_New(<void*>kcp.ikcp_input, "siokcp._kcp.ikcp_input", NULL)
+ * ikcp_flush = PyCapsule_New(<void*>kcp.ikcp_flush, "siokcp._kcp.ikcp_flush", NULL)
+ * ikcp_peeksize = PyCapsule_New(<void*>kcp.ikcp_peeksize, "siokcp._kcp.ikcp_peeksize", NULL)             # <<<<<<<<<<<<<<
+ * ikcp_setmtu = PyCapsule_New(<void*>kcp.ikcp_setmtu, "siokcp.siokcp._kcp.ikcp_setmtu", NULL)
+ * ikcp_wndsize = PyCapsule_New(<void*>kcp.ikcp_wndsize, "siokcp._kcp.ikcp_wndsize", NULL)
 */
-  __pyx_t_6 = PyCapsule_New(((void *)ikcp_flush), ((char const *)"ikcp_flush"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 478, __pyx_L1_error)
+  __pyx_t_6 = PyCapsule_New(((void *)ikcp_peeksize), ((char const *)"siokcp._kcp.ikcp_peeksize"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 478, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_flush, __pyx_t_6) < 0) __PYX_ERR(0, 478, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_peeksize, __pyx_t_6) < 0) __PYX_ERR(0, 478, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
   /* "siokcp/_kcp.pyx":479
- * ikcp_input = PyCapsule_New(<void*>kcp.ikcp_input, "ikcp_input", NULL)
- * ikcp_flush = PyCapsule_New(<void*>kcp.ikcp_flush, "ikcp_flush", NULL)
- * ikcp_peeksize = PyCapsule_New(<void*>kcp.ikcp_peeksize, "ikcp_peeksize", NULL)             # <<<<<<<<<<<<<<
- * ikcp_setmtu = PyCapsule_New(<void*>kcp.ikcp_setmtu, "ikcp_setmtu", NULL)
- * ikcp_wndsize = PyCapsule_New(<void*>kcp.ikcp_wndsize, "ikcp_wndsize", NULL)
+ * ikcp_flush = PyCapsule_New(<void*>kcp.ikcp_flush, "siokcp._kcp.ikcp_flush", NULL)
+ * ikcp_peeksize = PyCapsule_New(<void*>kcp.ikcp_peeksize, "siokcp._kcp.ikcp_peeksize", NULL)
+ * ikcp_setmtu = PyCapsule_New(<void*>kcp.ikcp_setmtu, "siokcp.siokcp._kcp.ikcp_setmtu", NULL)             # <<<<<<<<<<<<<<
+ * ikcp_wndsize = PyCapsule_New(<void*>kcp.ikcp_wndsize, "siokcp._kcp.ikcp_wndsize", NULL)
+ * ikcp_waitsnd = PyCapsule_New(<void*>kcp.ikcp_waitsnd, "siokcp._kcp.ikcp_waitsnd", NULL)
 */
-  __pyx_t_6 = PyCapsule_New(((void *)ikcp_peeksize), ((char const *)"ikcp_peeksize"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 479, __pyx_L1_error)
+  __pyx_t_6 = PyCapsule_New(((void *)ikcp_setmtu), ((char const *)"siokcp.siokcp._kcp.ikcp_setmtu"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 479, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_peeksize, __pyx_t_6) < 0) __PYX_ERR(0, 479, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_setmtu, __pyx_t_6) < 0) __PYX_ERR(0, 479, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
   /* "siokcp/_kcp.pyx":480
- * ikcp_flush = PyCapsule_New(<void*>kcp.ikcp_flush, "ikcp_flush", NULL)
- * ikcp_peeksize = PyCapsule_New(<void*>kcp.ikcp_peeksize, "ikcp_peeksize", NULL)
- * ikcp_setmtu = PyCapsule_New(<void*>kcp.ikcp_setmtu, "ikcp_setmtu", NULL)             # <<<<<<<<<<<<<<
- * ikcp_wndsize = PyCapsule_New(<void*>kcp.ikcp_wndsize, "ikcp_wndsize", NULL)
- * ikcp_waitsnd = PyCapsule_New(<void*>kcp.ikcp_waitsnd, "ikcp_waitsnd", NULL)
+ * ikcp_peeksize = PyCapsule_New(<void*>kcp.ikcp_peeksize, "siokcp._kcp.ikcp_peeksize", NULL)
+ * ikcp_setmtu = PyCapsule_New(<void*>kcp.ikcp_setmtu, "siokcp.siokcp._kcp.ikcp_setmtu", NULL)
+ * ikcp_wndsize = PyCapsule_New(<void*>kcp.ikcp_wndsize, "siokcp._kcp.ikcp_wndsize", NULL)             # <<<<<<<<<<<<<<
+ * ikcp_waitsnd = PyCapsule_New(<void*>kcp.ikcp_waitsnd, "siokcp._kcp.ikcp_waitsnd", NULL)
+ * ikcp_nodelay = PyCapsule_New(<void*>kcp.ikcp_nodelay, "siokcp._kcp.ikcp_nodelay", NULL)
 */
-  __pyx_t_6 = PyCapsule_New(((void *)ikcp_setmtu), ((char const *)"ikcp_setmtu"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 480, __pyx_L1_error)
+  __pyx_t_6 = PyCapsule_New(((void *)ikcp_wndsize), ((char const *)"siokcp._kcp.ikcp_wndsize"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 480, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_setmtu, __pyx_t_6) < 0) __PYX_ERR(0, 480, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_wndsize, __pyx_t_6) < 0) __PYX_ERR(0, 480, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
   /* "siokcp/_kcp.pyx":481
- * ikcp_peeksize = PyCapsule_New(<void*>kcp.ikcp_peeksize, "ikcp_peeksize", NULL)
- * ikcp_setmtu = PyCapsule_New(<void*>kcp.ikcp_setmtu, "ikcp_setmtu", NULL)
- * ikcp_wndsize = PyCapsule_New(<void*>kcp.ikcp_wndsize, "ikcp_wndsize", NULL)             # <<<<<<<<<<<<<<
- * ikcp_waitsnd = PyCapsule_New(<void*>kcp.ikcp_waitsnd, "ikcp_waitsnd", NULL)
- * ikcp_nodelay = PyCapsule_New(<void*>kcp.ikcp_nodelay, "ikcp_nodelay", NULL)
+ * ikcp_setmtu = PyCapsule_New(<void*>kcp.ikcp_setmtu, "siokcp.siokcp._kcp.ikcp_setmtu", NULL)
+ * ikcp_wndsize = PyCapsule_New(<void*>kcp.ikcp_wndsize, "siokcp._kcp.ikcp_wndsize", NULL)
+ * ikcp_waitsnd = PyCapsule_New(<void*>kcp.ikcp_waitsnd, "siokcp._kcp.ikcp_waitsnd", NULL)             # <<<<<<<<<<<<<<
+ * ikcp_nodelay = PyCapsule_New(<void*>kcp.ikcp_nodelay, "siokcp._kcp.ikcp_nodelay", NULL)
+ * ikcp_log = PyCapsule_New(<void*>kcp.ikcp_log, "siokcp._kcp.ikcp_log", NULL)
 */
-  __pyx_t_6 = PyCapsule_New(((void *)ikcp_wndsize), ((char const *)"ikcp_wndsize"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 481, __pyx_L1_error)
+  __pyx_t_6 = PyCapsule_New(((void *)ikcp_waitsnd), ((char const *)"siokcp._kcp.ikcp_waitsnd"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 481, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_wndsize, __pyx_t_6) < 0) __PYX_ERR(0, 481, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_waitsnd, __pyx_t_6) < 0) __PYX_ERR(0, 481, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
   /* "siokcp/_kcp.pyx":482
- * ikcp_setmtu = PyCapsule_New(<void*>kcp.ikcp_setmtu, "ikcp_setmtu", NULL)
- * ikcp_wndsize = PyCapsule_New(<void*>kcp.ikcp_wndsize, "ikcp_wndsize", NULL)
- * ikcp_waitsnd = PyCapsule_New(<void*>kcp.ikcp_waitsnd, "ikcp_waitsnd", NULL)             # <<<<<<<<<<<<<<
- * ikcp_nodelay = PyCapsule_New(<void*>kcp.ikcp_nodelay, "ikcp_nodelay", NULL)
- * ikcp_log = PyCapsule_New(<void*>kcp.ikcp_log, "ikcp_log", NULL)
+ * ikcp_wndsize = PyCapsule_New(<void*>kcp.ikcp_wndsize, "siokcp._kcp.ikcp_wndsize", NULL)
+ * ikcp_waitsnd = PyCapsule_New(<void*>kcp.ikcp_waitsnd, "siokcp._kcp.ikcp_waitsnd", NULL)
+ * ikcp_nodelay = PyCapsule_New(<void*>kcp.ikcp_nodelay, "siokcp._kcp.ikcp_nodelay", NULL)             # <<<<<<<<<<<<<<
+ * ikcp_log = PyCapsule_New(<void*>kcp.ikcp_log, "siokcp._kcp.ikcp_log", NULL)
+ * ikcp_allocator = PyCapsule_New(<void*>kcp.ikcp_allocator, "siokcp._kcp.ikcp_allocator", NULL)
 */
-  __pyx_t_6 = PyCapsule_New(((void *)ikcp_waitsnd), ((char const *)"ikcp_waitsnd"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 482, __pyx_L1_error)
+  __pyx_t_6 = PyCapsule_New(((void *)ikcp_nodelay), ((char const *)"siokcp._kcp.ikcp_nodelay"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 482, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_waitsnd, __pyx_t_6) < 0) __PYX_ERR(0, 482, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_nodelay, __pyx_t_6) < 0) __PYX_ERR(0, 482, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
   /* "siokcp/_kcp.pyx":483
- * ikcp_wndsize = PyCapsule_New(<void*>kcp.ikcp_wndsize, "ikcp_wndsize", NULL)
- * ikcp_waitsnd = PyCapsule_New(<void*>kcp.ikcp_waitsnd, "ikcp_waitsnd", NULL)
- * ikcp_nodelay = PyCapsule_New(<void*>kcp.ikcp_nodelay, "ikcp_nodelay", NULL)             # <<<<<<<<<<<<<<
- * ikcp_log = PyCapsule_New(<void*>kcp.ikcp_log, "ikcp_log", NULL)
- * ikcp_allocator = PyCapsule_New(<void*>kcp.ikcp_allocator, "ikcp_allocator", NULL)
+ * ikcp_waitsnd = PyCapsule_New(<void*>kcp.ikcp_waitsnd, "siokcp._kcp.ikcp_waitsnd", NULL)
+ * ikcp_nodelay = PyCapsule_New(<void*>kcp.ikcp_nodelay, "siokcp._kcp.ikcp_nodelay", NULL)
+ * ikcp_log = PyCapsule_New(<void*>kcp.ikcp_log, "siokcp._kcp.ikcp_log", NULL)             # <<<<<<<<<<<<<<
+ * ikcp_allocator = PyCapsule_New(<void*>kcp.ikcp_allocator, "siokcp._kcp.ikcp_allocator", NULL)
+ * ikcp_getconv = PyCapsule_New(<void*>kcp.ikcp_getconv, "siokcp._kcp.ikcp_getconv", NULL)
 */
-  __pyx_t_6 = PyCapsule_New(((void *)ikcp_nodelay), ((char const *)"ikcp_nodelay"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 483, __pyx_L1_error)
+  __pyx_t_6 = PyCapsule_New(((void *)ikcp_log), ((char const *)"siokcp._kcp.ikcp_log"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 483, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_nodelay, __pyx_t_6) < 0) __PYX_ERR(0, 483, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_log, __pyx_t_6) < 0) __PYX_ERR(0, 483, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
   /* "siokcp/_kcp.pyx":484
- * ikcp_waitsnd = PyCapsule_New(<void*>kcp.ikcp_waitsnd, "ikcp_waitsnd", NULL)
- * ikcp_nodelay = PyCapsule_New(<void*>kcp.ikcp_nodelay, "ikcp_nodelay", NULL)
- * ikcp_log = PyCapsule_New(<void*>kcp.ikcp_log, "ikcp_log", NULL)             # <<<<<<<<<<<<<<
- * ikcp_allocator = PyCapsule_New(<void*>kcp.ikcp_allocator, "ikcp_allocator", NULL)
- * ikcp_getconv = PyCapsule_New(<void*>kcp.ikcp_getconv, "ikcp_getconv", NULL)
+ * ikcp_nodelay = PyCapsule_New(<void*>kcp.ikcp_nodelay, "siokcp._kcp.ikcp_nodelay", NULL)
+ * ikcp_log = PyCapsule_New(<void*>kcp.ikcp_log, "siokcp._kcp.ikcp_log", NULL)
+ * ikcp_allocator = PyCapsule_New(<void*>kcp.ikcp_allocator, "siokcp._kcp.ikcp_allocator", NULL)             # <<<<<<<<<<<<<<
+ * ikcp_getconv = PyCapsule_New(<void*>kcp.ikcp_getconv, "siokcp._kcp.ikcp_getconv", NULL)
 */
-  __pyx_t_6 = PyCapsule_New(((void *)ikcp_log), ((char const *)"ikcp_log"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 484, __pyx_L1_error)
+  __pyx_t_6 = PyCapsule_New(((void *)ikcp_allocator), ((char const *)"siokcp._kcp.ikcp_allocator"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 484, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_log, __pyx_t_6) < 0) __PYX_ERR(0, 484, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_allocator, __pyx_t_6) < 0) __PYX_ERR(0, 484, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
   /* "siokcp/_kcp.pyx":485
- * ikcp_nodelay = PyCapsule_New(<void*>kcp.ikcp_nodelay, "ikcp_nodelay", NULL)
- * ikcp_log = PyCapsule_New(<void*>kcp.ikcp_log, "ikcp_log", NULL)
- * ikcp_allocator = PyCapsule_New(<void*>kcp.ikcp_allocator, "ikcp_allocator", NULL)             # <<<<<<<<<<<<<<
- * ikcp_getconv = PyCapsule_New(<void*>kcp.ikcp_getconv, "ikcp_getconv", NULL)
+ * ikcp_log = PyCapsule_New(<void*>kcp.ikcp_log, "siokcp._kcp.ikcp_log", NULL)
+ * ikcp_allocator = PyCapsule_New(<void*>kcp.ikcp_allocator, "siokcp._kcp.ikcp_allocator", NULL)
+ * ikcp_getconv = PyCapsule_New(<void*>kcp.ikcp_getconv, "siokcp._kcp.ikcp_getconv", NULL)             # <<<<<<<<<<<<<<
 */
-  __pyx_t_6 = PyCapsule_New(((void *)ikcp_allocator), ((char const *)"ikcp_allocator"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 485, __pyx_L1_error)
+  __pyx_t_6 = PyCapsule_New(((void *)ikcp_getconv), ((char const *)"siokcp._kcp.ikcp_getconv"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 485, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_allocator, __pyx_t_6) < 0) __PYX_ERR(0, 485, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-
-  /* "siokcp/_kcp.pyx":486
- * ikcp_log = PyCapsule_New(<void*>kcp.ikcp_log, "ikcp_log", NULL)
- * ikcp_allocator = PyCapsule_New(<void*>kcp.ikcp_allocator, "ikcp_allocator", NULL)
- * ikcp_getconv = PyCapsule_New(<void*>kcp.ikcp_getconv, "ikcp_getconv", NULL)             # <<<<<<<<<<<<<<
-*/
-  __pyx_t_6 = PyCapsule_New(((void *)ikcp_getconv), ((char const *)"ikcp_getconv"), NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 486, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_getconv, __pyx_t_6) < 0) __PYX_ERR(0, 486, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ikcp_getconv, __pyx_t_6) < 0) __PYX_ERR(0, 485, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
   /* "siokcp/_kcp.pyx":1
@@ -29425,7 +29425,7 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
     __pyx_mstate_global->__pyx_codeobj_tab[15] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_setstate_cython, __pyx_k_Q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[15])) goto bad;
   }
   {
-    __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 460, 30};
+    __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 459, 30};
     PyObject* varnames[] = {__pyx_mstate->__pyx_n_u_data};
     __pyx_mstate_global->__pyx_codeobj_tab[16] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_siokcp__kcp_pyx, __pyx_mstate->__pyx_n_u_getconv, __pyx_k_Q_aq_AQ_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[16])) goto bad;
   }
