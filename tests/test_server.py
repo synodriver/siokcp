@@ -94,6 +94,93 @@ class TestServer(IsolatedAsyncioTestCase):
         self.assertEqual(await r.read(100), b"GuGu")
         ev.set()
 
+    async def test_server3_lazy(self):
+        async def serve(event):
+            async def cb(reader: asyncio.StreamReader, writer):
+                while True:
+                    data = await reader.read(1024)
+                    writer.write(data)
+                    await writer.drain()
+
+            tr, pro = await start_kcp_server(
+                cb, ("0.0.0.0", 11000), print, update_policy="lazy"
+            )
+            await event.wait()
+            tr.close()
+
+        ev = asyncio.Event()
+        ev.clear()
+        asyncio.create_task(serve(ev))
+        r, w = await open_kcp_connection(
+            ("127.0.0.1", 11000), 10, print, update_policy="lazy"
+        )
+        w.write(b"Hello, world!")
+        await w.drain()
+        self.assertEqual(await r.read(100), b"Hello, world!")
+        w.write(b"GuGu")
+        await w.drain()
+        self.assertEqual(await r.read(100), b"GuGu")
+        ev.set()
+
+    async def test_server3_normal(self):
+        async def serve(event):
+            async def cb(reader: asyncio.StreamReader, writer):
+                while True:
+                    data = await reader.read(1024)
+                    writer.write(data)
+                    await writer.drain()
+
+            tr, pro = await start_kcp_server(
+                cb, ("0.0.0.0", 11000), print, update_policy="normal"
+            )
+            await event.wait()
+            tr.close()
+
+        ev = asyncio.Event()
+        ev.clear()
+        asyncio.create_task(serve(ev))
+        r, w = await open_kcp_connection(
+            ("127.0.0.1", 11000), 10, print, update_policy="normal"
+        )
+        w.write(b"Hello, world!")
+        await w.drain()
+        self.assertEqual(await r.read(100), b"Hello, world!")
+        w.write(b"GuGu")
+        await w.drain()
+        self.assertEqual(await r.read(100), b"GuGu")
+        ev.set()
+
+    async def test_server3_normal_wait(self):
+        async def serve(event):
+            async def cb(reader: asyncio.StreamReader, writer):
+                while True:
+                    data = await reader.read(1024)
+                    writer.write(data)
+                    await writer.drain()
+
+            tr, pro = await start_kcp_server(
+                cb, ("0.0.0.0", 11000), print, update_policy="normal"
+            )
+            await event.wait()
+            tr.close()
+
+        ev = asyncio.Event()
+        ev.clear()
+        asyncio.create_task(serve(ev))
+        r, w = await open_kcp_connection(
+            ("127.0.0.1", 11000), 10, print, update_policy="normal"
+        )
+        w.write(b"Hello, world!")
+        await w.drain()
+        self.assertEqual(await r.read(100), b"Hello, world!")
+        await asyncio.sleep(0.5)
+        w.write(b"GuGu")
+        await w.drain()
+        self.assertEqual(await r.read(100), b"GuGu")
+        ev.set()
+        w.close()
+        await w.wait_closed()
+
     async def test_protocol_server(self):
         class EchoProtocol(asyncio.Protocol):
             def connection_made(self, transport):
