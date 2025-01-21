@@ -2,11 +2,11 @@
 import asyncio
 import time
 from functools import partial
-from typing import Any, Callable, Dict, Optional, Set, Tuple
+from typing import Any, Callable, Dict, Literal, Optional, Set, Tuple
 
 from siokcp._kcp import KCPConnection, getconv
 from siokcp.asyncio.transport import KCPTransport
-from siokcp.asyncio.utils import feed_protocol
+from siokcp.asyncio.utils import feed_protocol, run_until_first_complete
 
 
 # todo 一段时间没活动的connection也需要删除 吗？
@@ -18,6 +18,7 @@ class BaseKCPProtocol(asyncio.DatagramProtocol):
         pre_processor: Optional[Callable[[bytes], Tuple[int, bytes]]] = None,
         post_processor: Optional[Callable[[bytes], bytes]] = None,
         timer: Optional[Callable[[], int]] = None,
+        update_policy: Literal["normal", "lazy", "eager"] = "eager",
         loop: Optional[asyncio.AbstractEventLoop] = None,
     ):
         self.protocol_factory = protocol_factory
@@ -30,6 +31,7 @@ class BaseKCPProtocol(asyncio.DatagramProtocol):
             )  # type: Callable[[bytes], Tuple[int, bytes]]
         self._post_processor = post_processor  # type: Callable[[bytes], bytes]
         self._timer = timer or (lambda: time.perf_counter_ns() // 1000000)
+        self._update_policy = update_policy
         self._loop = loop or asyncio.get_running_loop()
         self._close_waiter = self._loop.create_future()
         self._drain_waiter = asyncio.Event()
@@ -69,10 +71,17 @@ class KCPUDPServerProtocol(BaseKCPProtocol):
         pre_processor: Optional[Callable[[bytes], Tuple[int, bytes]]] = None,
         post_processor: Optional[Callable[[bytes], bytes]] = None,
         timer: Optional[Callable[[], int]] = None,
+        update_policy: Literal["normal", "lazy", "eager"] = "eager",
         loop: Optional[asyncio.AbstractEventLoop] = None,
     ):
         super().__init__(
-            protocol_factory, log, pre_processor, post_processor, timer, loop
+            protocol_factory,
+            log,
+            pre_processor,
+            post_processor,
+            timer,
+            update_policy,
+            loop,
         )
         self.kcp_transports = {}  # type: Dict[int, KCPTransport]
         self._update_tasks = set()  # type: Set[asyncio.Task]
@@ -168,6 +177,7 @@ class KCPUDPServerProtocol(BaseKCPProtocol):
             return
         # print("receive_data")
         connection.receive_data(data)
+        kcp_transport._should_update.set()
         self._loop.call_soon(feed_protocol, protocol, connection)
         # 同样call_soon，保证先connection_made再data_received，事关asyncio状态机，顺序很重要
 
@@ -191,7 +201,7 @@ class KCPUDPServerProtocol(BaseKCPProtocol):
                 pass
         await super().aclose()
 
-    async def _update(self, transport: KCPTransport):
+    async def _lazy_update(self, transport: KCPTransport):
         connection = transport.connection
         try:
             while connection.state != -1:
@@ -201,12 +211,64 @@ class KCPUDPServerProtocol(BaseKCPProtocol):
                 )  # 此处可以检查connection的阻塞状态  调用protocol.resume_writing
                 transport._maybe_resume_protocol()
                 next_call = connection.check(now)
-                # print("next_call", next_call)
                 await asyncio.sleep((next_call - now) / 1000)
         finally:
             # print(f"close connection {connection.conv} in _update")
             transport.get_protocol().connection_lost(None)
             del self.kcp_transports[connection.conv]
+
+    async def _normal_update(self, transport: KCPTransport):
+        connection = transport.connection
+        try:
+            next_call = 0
+            while connection.state != -1:
+                now = self._timer()  # ms
+                if transport._should_update.is_set():
+                    transport._should_update.clear()
+                    connection.update(now)
+                    transport._maybe_resume_protocol()
+                    next_call = connection.check(now)
+                    # print("next_call sleep and interval", (next_call - now) / 1000, connection.interval / 1000)
+                    continue
+                if now >= next_call:
+                    connection.update(now)
+                    transport._maybe_resume_protocol()
+                    next_call = connection.check(now)
+                await asyncio.sleep(connection.interval / 1000)
+        finally:
+            # print(f"close connection {connection.conv} in _update")
+            transport.get_protocol().connection_lost(None)
+            del self.kcp_transports[connection.conv]
+
+    async def _eager_update(self, transport: KCPTransport):
+        connection = transport.connection
+        try:
+            while connection.state != -1:
+                now = self._timer()  # ms
+                connection.update(now)
+                transport._maybe_resume_protocol()
+                next_call = connection.check(now)
+                # print("next_call sleep and interval", (next_call - now) / 1000, connection.interval / 1000)
+                await run_until_first_complete(
+                    asyncio.sleep((next_call - now) / 1000),
+                    transport._should_update.wait(),
+                )
+                if transport._should_update.is_set():
+                    # print(f"event is set, actually sleeped {self._timer() - now} ms")
+                    transport._should_update.clear()
+                # await asyncio.sleep((next_call - now) / 1000)
+        finally:
+            # print(f"close connection {connection.conv} in _update")
+            transport.get_protocol().connection_lost(None)
+            del self.kcp_transports[connection.conv]
+
+    async def _update(self, transport: KCPTransport):
+        if self._update_policy == "lazy":
+            await self._lazy_update(transport)
+        elif self._update_policy == "normal":
+            await self._normal_update(transport)
+        elif self._update_policy == "eager":
+            await self._eager_update(transport)
 
 
 class KCPUDPClientProtocol(BaseKCPProtocol):
@@ -220,10 +282,17 @@ class KCPUDPClientProtocol(BaseKCPProtocol):
         pre_processor: Optional[Callable[[bytes], Tuple[int, bytes]]] = None,
         post_processor: Optional[Callable[[bytes], bytes]] = None,
         timer: Optional[Callable[[], int]] = None,
+        update_policy: Literal["normal", "lazy", "eager"] = "eager",
         loop: Optional[asyncio.AbstractEventLoop] = None,
     ):
         super().__init__(
-            protocol_factory, log, pre_processor, post_processor, timer, loop
+            protocol_factory,
+            log,
+            pre_processor,
+            post_processor,
+            timer,
+            update_policy,
+            loop,
         )
         self.conv = conv
         self.kcp_transport = None  # type: KCPTransport
@@ -305,13 +374,14 @@ class KCPUDPClientProtocol(BaseKCPProtocol):
         if self.kcp_transport.read_paused:
             return
         self.kcp_transport.connection.receive_data(data)
+        self.kcp_transport._should_update.set()
         self._loop.call_soon(
             feed_protocol,
             self.kcp_transport.get_protocol(),
             self.kcp_transport.connection,
         )
 
-    async def _update(self):
+    async def _lazy_update(self):
         connection = self.kcp_transport.connection
         try:
             while connection.state != -1:
@@ -321,10 +391,62 @@ class KCPUDPClientProtocol(BaseKCPProtocol):
                 )  # 此处可以检查connection的阻塞状态  调用protocol.resume_writing
                 self.kcp_transport._maybe_resume_protocol()
                 next_call = connection.check(now)
+                # print("next_call", next_call)
                 await asyncio.sleep((next_call - now) / 1000)
         finally:
+            # print(f"close connection {connection.conv} in _update")
             self.kcp_transport.get_protocol().connection_lost(None)
             self.kcp_transport = None
+
+    async def _normal_update(self):
+        connection = self.kcp_transport.connection
+        try:
+            next_call = 0
+            while connection.state != -1:
+                now = self._timer()  # ms
+                if self.kcp_transport._should_update.is_set():
+                    self.kcp_transport._should_update.clear()
+                    connection.update(now)
+                    self.kcp_transport._maybe_resume_protocol()
+                    next_call = connection.check(now)
+                    continue
+                if now >= next_call:
+                    connection.update(now)
+                    self.kcp_transport._maybe_resume_protocol()
+                    next_call = connection.check(now)
+                await asyncio.sleep(connection.interval / 1000)
+        finally:
+            # print(f"close connection {connection.conv} in _update")
+            self.kcp_transport.get_protocol().connection_lost(None)
+            self.kcp_transport = None
+
+    async def _eager_update(self):
+        connection = self.kcp_transport.connection
+        try:
+            while connection.state != -1:
+                now = self._timer()  # ms
+                connection.update(now)
+                self.kcp_transport._maybe_resume_protocol()
+                next_call = connection.check(now)
+                await run_until_first_complete(
+                    asyncio.sleep((next_call - now) / 1000),
+                    self.kcp_transport._should_update.wait(),
+                )
+                if self.kcp_transport._should_update.is_set():
+                    self.kcp_transport._should_update.clear()
+                # await asyncio.sleep((next_call - now) / 1000)
+        finally:
+            # print(f"close connection {connection.conv} in _update")
+            self.kcp_transport.get_protocol().connection_lost(None)
+            self.kcp_transport = None
+
+    async def _update(self):
+        if self._update_policy == "lazy":
+            await self._lazy_update()
+        elif self._update_policy == "normal":
+            await self._normal_update()
+        elif self._update_policy == "eager":
+            await self._eager_update()
 
     async def aclose(self):
         self.kcp_transport.close()

@@ -22,6 +22,7 @@ class KCPTransport(asyncio.transports._FlowControlMixin):
         self._loop.call_soon(self._protocol.connection_made, self)
         # 用call_soon是防止connection_made中调用了transport.pause_reading，无论如何先把这次数据读了再说，而且transport还没准备好
         self._closing = False
+        self._should_update = asyncio.Event()
 
     def __getattr__(self, item):
         return getattr(self._transport, item)
@@ -38,6 +39,7 @@ class KCPTransport(asyncio.transports._FlowControlMixin):
     def write(self, data):
         self.connection.send(data)
         self._maybe_pause_protocol()
+        self._should_update.set()
         # 此处可以检查connection的阻塞状态  调用protocol.pause_writing
 
     def get_write_buffer_size(self):

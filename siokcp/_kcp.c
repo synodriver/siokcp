@@ -2638,11 +2638,11 @@ static CYTHON_INLINE PyObject *__pyx_f_6siokcp_4_kcp_13KCPConnection_get_ptr(str
 
 /* Module declarations from "cpython.mem" */
 
+/* Module declarations from "cpython.pycapsule" */
+
 /* Module declarations from "libc.stddef" */
 
 /* Module declarations from "cpython.unicode" */
-
-/* Module declarations from "cpython.pycapsule" */
 
 /* Module declarations from "libc.stdint" */
 

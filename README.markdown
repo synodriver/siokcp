@@ -130,7 +130,7 @@ class KCPConnection:
 ```
 ### siokcp.asyncio
 ```python
-from typing import Callable, Awaitable, Any
+from typing import Callable, Awaitable, Any, Literal
 from socket import socket
 import asyncio
 
@@ -143,6 +143,7 @@ async def create_kcp_connection(
     pre_processor: Callable[[bytes], tuple[int, bytes]] | None = None,
     post_processor: Callable[[bytes], bytes] | None = None,
     timer: Callable[[], None] | None = None,
+    update_policy: Literal["normal", "lazy", "eager"] = "eager",
     local_addr: tuple[str, int] | str | None = None,
     *,
     family: int = 0,
@@ -170,6 +171,7 @@ async def create_kcp_server(
     pre_processor: Callable[[bytes], tuple[int, bytes]] | None = None,
     post_processor: Callable[[bytes], bytes] | None = None,
     timer: Callable[[int], None] | None = None,
+    update_policy: Literal["normal", "lazy", "eager"] = "eager",
     remote_addr: tuple[str, int] | str | None = None,
     *,
     family: int = 0,

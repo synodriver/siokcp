@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import asyncio
-from typing import Any, Awaitable, Callable, Optional, Tuple, Union
+from typing import Any, Awaitable, Callable, Literal, Optional, Tuple, Union
 
 from siokcp.asyncio.protocol import KCPUDPServerProtocol
 
@@ -15,6 +15,7 @@ async def create_kcp_server(
     pre_processor: Optional[Callable[[bytes], Tuple[int, bytes]]] = None,
     post_processor: Optional[Callable[[bytes], bytes]] = None,
     timer: Optional[Callable[[int], None]] = None,
+    update_policy: Literal["normal", "lazy", "eager"] = "eager",
     remote_addr: Optional[Union[Tuple[str, int], str]] = None,
     *,
     family: int = 0,
@@ -26,7 +27,13 @@ async def create_kcp_server(
 ):
     return await loop.create_datagram_endpoint(
         lambda: KCPUDPServerProtocol(
-            protocol_factory, log, pre_processor, post_processor, timer, loop
+            protocol_factory,
+            log,
+            pre_processor,
+            post_processor,
+            timer,
+            update_policy,
+            loop,
         ),
         local_addr,
         remote_addr,

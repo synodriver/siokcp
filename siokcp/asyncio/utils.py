@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import asyncio
+from typing import Awaitable, Callable, Tuple
 
 from siokcp._kcp import KCPConnection
 
@@ -17,3 +18,10 @@ def feed_protocol(protocol: asyncio.BaseProtocol, connection: KCPConnection):
         if hr < 0:
             hr = 0  # EAGAIN
         protocol.buffer_updated(hr)
+
+
+async def run_until_first_complete(*args: Awaitable) -> None:
+    tasks = [asyncio.create_task(coro) for coro in args]
+    (done, pending) = await asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)
+    [task.cancel() for task in pending]
+    [task.result() for task in done]

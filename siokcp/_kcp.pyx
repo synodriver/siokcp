@@ -3,8 +3,8 @@
 cimport cython
 from cpython.bytes cimport PyBytes_AS_STRING, PyBytes_FromStringAndSize
 from cpython.mem cimport PyMem_RawFree, PyMem_RawMalloc
-from cpython.unicode cimport PyUnicode_AsUTF8, PyUnicode_FromString
 from cpython.pycapsule cimport PyCapsule_New
+from cpython.unicode cimport PyUnicode_AsUTF8, PyUnicode_FromString
 from libc.stdint cimport uint8_t, uint32_t
 
 from siokcp cimport kcp
