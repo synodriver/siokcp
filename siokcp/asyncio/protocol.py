@@ -99,7 +99,7 @@ class KCPUDPServerProtocol(BaseKCPProtocol):
     def pause_writing(self) -> None:
         try:
             self.transport.pause_reading()
-        except AttributeError:
+        except NotImplementedError:
             pass
         for kcp_transport in self.kcp_transports.values():
             protocol = kcp_transport.get_protocol()
@@ -121,7 +121,7 @@ class KCPUDPServerProtocol(BaseKCPProtocol):
     def resume_writing(self) -> None:
         try:
             self.transport.resume_reading()
-        except AttributeError:
+        except NotImplementedError:
             pass
         for kcp_transport in self.kcp_transports.values():
             protocol = kcp_transport.get_protocol()
@@ -327,7 +327,7 @@ class KCPUDPClientProtocol(BaseKCPProtocol):
     def pause_writing(self) -> None:
         try:
             self.transport.pause_reading()
-        except AttributeError:
+        except NotImplementedError:
             pass
         protocol = self.kcp_transport.get_protocol()
         try:
@@ -348,7 +348,7 @@ class KCPUDPClientProtocol(BaseKCPProtocol):
     def resume_writing(self) -> None:
         try:
             self.transport.resume_reading()
-        except AttributeError:
+        except NotImplementedError:
             pass
         protocol = self.kcp_transport.get_protocol()
         try:
@@ -371,7 +371,7 @@ class KCPUDPClientProtocol(BaseKCPProtocol):
         conv, data = self._pre_processor(data)
         if conv != self.conv:
             return
-        if self.kcp_transport.read_paused:
+        if self.kcp_transport is None or self.kcp_transport.read_paused:
             return
         self.kcp_transport.connection.receive_data(data)
         self.kcp_transport._should_update.set()
