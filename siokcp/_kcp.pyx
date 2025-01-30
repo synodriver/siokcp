@@ -5,7 +5,7 @@ from cpython.bytes cimport PyBytes_AS_STRING, PyBytes_FromStringAndSize
 from cpython.mem cimport PyMem_RawFree, PyMem_RawMalloc
 from cpython.pycapsule cimport PyCapsule_New
 from cpython.unicode cimport PyUnicode_AsUTF8, PyUnicode_FromString
-from libc.stdint cimport uint8_t, uint32_t
+from libc.stdint cimport uint8_t, uint32_t, uint64_t
 
 from siokcp cimport kcp
 
@@ -396,14 +396,14 @@ cdef class KCPConnection:
             raise ValueError(f"kcp send error: {ret}") # todo 自定义异常类型
         return ret
 
-    cpdef inline update(self, uint32_t current):
+    cpdef inline update(self, uint64_t current):
         with nogil:
-            kcp.ikcp_update(self._kcp, current)
+            kcp.ikcp_update(self._kcp, <uint32_t>current)
 
-    cpdef inline uint32_t check(self, uint32_t current):
+    cpdef inline uint32_t check(self, uint64_t current):
         cdef uint32_t ret
         with nogil:
-            ret = kcp.ikcp_check(self._kcp, current)
+            ret = kcp.ikcp_check(self._kcp, <uint32_t>current)
         return ret
 
     cpdef inline int receive_data(self, const uint8_t[::1] data):
